@@ -20,6 +20,9 @@
     "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "server": "webpack-dev-server --inline --progress --profile --colors --display-error-details --display-cached --port 3000",
+    "server-prod": "http-server ./dist -p $PORT",
+    "express": "node ./examples/server/express-server-example.js",
+    "express-install": "npm install express connect-history-api-fallback morgan body-parser cors --save",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tsconfig-lint",
@@ -27,13 +30,22 @@
     "test": "karma start",
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc  --options typedoc.json  src/**/*.ts",
+    "prod": "npm run build && node ./build.dist.js && npm run server-prod",
     "start": "npm run server"
   },
   "dependencies": {
     "core-js": "^1.2.6",
     "rxjs": "5.0.0-alpha.14",
     "angular2": "2.0.0-alpha.52",
+    "fs-extra": "0.26.0",
+    "http-server": "0.8.5",
+    "object-assign": "4.0.1",
     "reflect-metadata": "0.1.2",
+    "rimraf": "2.4.3",
+    "ts-loader": "0.5.6",
+    "tsd": "^0.6.5",
+    "typescript": "1.6.2",
+    "webpack": "1.12.2",
     "zone.js": "0.5.8"
   },
   "devDependencies": {
