@@ -36,7 +36,8 @@ module.exports = {
       'angular2/router',
       'angular2/http'
     ],
-    'app': './src/app/bootstrap' // our angular app
+    'app': './src/app/bootstrap', // our angular app,
+    'styles': './src/public/styles/_main.scss'
   },
 
   // Config for our build files
@@ -48,7 +49,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['','.ts','.js','.json', '.css', '.html']
+    extensions: ['','.ts','.js','.json', '.scss', '.html']
   },
 
   module: {
@@ -59,8 +60,14 @@ module.exports = {
       // Support for CSS as raw text
       { test: /\.css$/,   loader: 'raw' },
 
+      // **IMPORTANT** This is needed so that each bootstrap js file required by
+      // bootstrap-sass-loader has access to the jQuery object
+      { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] },
+
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw' },
+
+      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: "url" },
 
       // Support for .ts files.
       {

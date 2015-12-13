@@ -1,6 +1,6 @@
 [
   {
     "parameter_key": "TargeEnvironment",
-    "parameter_value": "prod"
+    "parameter_value": prod
   }
 ]
