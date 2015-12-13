@@ -4,6 +4,7 @@
 import {Directive, Component, ElementRef, Renderer} from 'angular2/angular2';
 import {RouteConfig, Router} from 'angular2/router';
 import {Http, Headers} from 'angular2/http';
+import {RegisterComponent} from './register/register.component'
 
 /*
  * Angular Directives
@@ -56,15 +57,16 @@ export class XLarge {
   </header>
 
   <main>
-    Your Content Here
-    <div>
-
-      <input type="text" [value]="title" (input)="title = $event.target.value" autofocus>
-      <!--
-        Rather than wiring up two-way data-binding ourselves
-        we can use Angular's [(ngModel)] syntax
-        <input type="text" [(ngModel)]="title">
-      -->
+   <div class="container">
+      <h1 class="display-4">{{ title }}</h1>
+      <p class="lead">Light-weight and easy to use seed project for Angular 2 apps.</p>
+      <img src="./images/super-fat-heroes.png" width="300px">
+      <hr>
+      <div class="btn-group">
+        <a class="btn btn-primary-outline" [routerLink]="['Register']">Register</a>
+      </div>
+      <hr>
+      <router-outlet></router-outlet>
     </div>
 
     <pre>this.title = {{ title | json }}</pre>
@@ -72,10 +74,13 @@ export class XLarge {
   </main>
 
   <footer x-large>
-    WebPack Angular 2 Starter by <a href="https://twitter.com/AngularClass">@AngularClass</a>
+    Homely
   </footer>
   `
 })
+@RouteConfig([
+  { path: '/register', name: 'Register', component: RegisterComponent, useAsDefault: true }
+])
 export class App {
   // These are member type
   title: string;

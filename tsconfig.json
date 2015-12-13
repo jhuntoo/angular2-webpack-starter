@@ -10,6 +10,7 @@
   "files": [
     "src/app/app.spec.ts",
     "src/app/app.ts",
+    "src/app/register/register.component.ts",
     "src/app/bootstrap.ts"
   ]
 }
