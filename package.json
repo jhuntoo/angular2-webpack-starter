@@ -34,7 +34,6 @@
     "start": "npm run server"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.52",
     "core-js": "^1.2.6",
     "fs-extra": "0.26.0",
     "angular2": "2.0.0-alpha.53",
