@@ -1,0 +1,65 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Description" : "Homely Web Client",
+
+  "Parameters" : {
+    "TargeEnvironment": {
+      "Description": "The environment alias. eg prod",
+      "Default" : "prod",
+      "Type": "String"
+    }
+  },
+
+  "Mappings" :  {
+    "EnvironmentMap" : {
+      "prod" : {
+        "WebsiteDomain" : "app.joinhomely.com",
+        "s3BucketArn" : "arn:aws:s3:::app.joinhomely.com/*"
+      }
+    }
+  },
+
+
+  "Resources" : {
+     "HomelyS3Bucket" : {
+        "Type" : "AWS::S3::Bucket",
+        "Properties" : {
+           "AccessControl" : "PublicRead",
+           "BucketName" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
+           "WebsiteConfiguration" : {
+              "IndexDocument" : "index.html"
+           }
+        },
+        "DeletionPolicy" : "Delete"
+     },
+     "HomelyBucketPolicy" : {
+        "Type" : "AWS::S3::BucketPolicy",
+        "Properties" : {
+          "Bucket" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
+          "PolicyDocument": {
+            "Statement":[
+                {
+                  "Action":["s3:GetObject"],
+                  "Effect":"Allow",
+                  "Resource": { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "s3BucketArn"]},
+                  "Principal":"*"
+                }
+
+            ]
+          }
+        },
+        "DependsOn" : "HomelyS3Bucket"
+      }
+  },
+
+  "Outputs" : {
+     "WebsiteURL" : {
+        "Value" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
+        "Description" : "URL for website hosted on S3"
+     },
+     "BucketName" : {
+        "Value" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
+        "Description" : "URL for website hosted on S3"
+     }
+  }
+}
