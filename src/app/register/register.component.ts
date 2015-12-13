@@ -8,12 +8,12 @@ import {Router} from 'angular2/router';
 
     <form>
         <fieldset class="form-group">
-          <label for="inputId">Email</label>
-          <input [(ngModel)]="email" type="text" class="form-control" id="inputEmail" disabled>
+          <label for="inputEmail">Email</label>
+          <input [(ngModel)]="email" type="text" class="form-control" id="inputEmail" placeholder="email">
         </fieldset>
         <fieldset class="form-group">
-          <label for="inputName">Password</label>
-          <input [(ngModel)]="password" type="password" class="form-control" id="inputPassword">
+          <label for="inputPassword">Password</label>
+          <input [(ngModel)]="password" type="password" class="form-control" id="inputPassword" placeholder="password">
         </fieldset>
       </form>
       <button class="btn btn-success-outline" (click)="submit()">Register</button>

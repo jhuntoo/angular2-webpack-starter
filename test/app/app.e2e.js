@@ -3,10 +3,10 @@
  /*
   * TODO: ES5 for now until I make a webpack plugin for protractor
   */
-describe('App', function() {
+describe('When the register pages loads', function() {
 
   beforeEach(function() {
-    browser.get('/');
+    browser.get('/register');
   });
 
 
@@ -16,22 +16,22 @@ describe('App', function() {
     expect(subject).toEqual(result);
   });
 
-  it('should have <header>', function() {
-    var subject = element(by.deepCss('app /deep/ header')).isPresent();
-    var result  = true;
-    expect(subject).toEqual(result);
-  });
-
-  it('should have <main>', function() {
-    var subject = element(by.deepCss('app /deep/ main')).isPresent();
-    var result  = true;
-    expect(subject).toEqual(result);
-  });
-
-  it('should have <footer>', function() {
-    var subject = element(by.deepCss('app /deep/ footer')).getText();
-    var result  = 'WebPack Angular 2 Starter by @AngularClass';
-    expect(subject).toEqual(result);
-  });
+  //it('should have <header>', function() {
+  //  var subject = element(by.deepCss('app /deep/ header')).isPresent();
+  //  var result  = true;
+  //  expect(subject).toEqual(result);
+  //});
+  //
+  //it('should have <main>', function() {
+  //  var subject = element(by.deepCss('app /deep/ main')).isPresent();
+  //  var result  = true;
+  //  expect(subject).toEqual(result);
+  //});
+  //
+  //it('should have <footer>', function() {
+  //  var subject = element(by.deepCss('app /deep/ footer')).getText();
+  //  var result  = 'WebPack Angular 2 Starter by @AngularClass';
+  //  expect(subject).toEqual(result);
+  //});
 
 });

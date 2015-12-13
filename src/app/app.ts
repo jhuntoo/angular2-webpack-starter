@@ -20,7 +20,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
   selector: '[x-large]' // using [ ] means selecting attributes
 })
 export class XLarge {
-  constructor(element: ElementRef, renderer: Renderer) {
+  constructor(element:ElementRef, renderer:Renderer) {
     // simple DOM manipulation to set font size to x-large
     // `nativeElement` is the direct reference to the DOM element
     // element.nativeElement.style.fontSize = 'x-large';
@@ -41,7 +41,7 @@ export class XLarge {
   selector: 'app', // <app></app>
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
-  directives: [ ROUTER_DIRECTIVES, XLarge ],
+  directives: [ROUTER_DIRECTIVES, XLarge],
   // Our list of styles in our component. We may add more to compose many styles together
   styles: [`
     .title {
@@ -53,15 +53,9 @@ export class XLarge {
   `],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: `
-  <header>
-    <h1 class="title">Hello {{ title }}</h1>
-  </header>
-
   <main>
    <div class="container">
-      <h1 class="display-4">{{ title }}</h1>
-      <p class="lead">Light-weight and easy to use seed project for Angular 2 apps.</p>
-      <img src="./images/super-fat-heroes.png" width="300px">
+
       <hr>
       <div class="btn-group">
         <a class="btn btn-primary-outline" [routerLink]="['Register']">Register</a>
@@ -70,24 +64,19 @@ export class XLarge {
       <router-outlet></router-outlet>
     </div>
 
-    <pre>this.title = {{ title | json }}</pre>
-
   </main>
 
-  <footer x-large>
-    Homely
-  </footer>
   `
 })
 @RouteConfig([
-  { path: '/register', name: 'Register', component: RegisterComponent, useAsDefault: true }
+  {path: '/register', name: 'Register', component: RegisterComponent, useAsDefault: true}
 ])
 export class App {
   // These are member type
-  title: string;
+  title:string;
 
   // TypeScript public modifiers
-  constructor(public http: Http) {
+  constructor(public http:Http) {
     this.title = 'Angular 2';
   }
 

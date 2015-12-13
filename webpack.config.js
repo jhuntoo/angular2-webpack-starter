@@ -36,10 +36,10 @@ module.exports = {
       'angular2/platform/common_dom',
       'angular2/core',
       'angular2/router',
-      'angular2/http'
+      'angular2/http',
+      './src/public/styles/_main.scss'
     ],
-    'app': './src/app/bootstrap', // our angular app,
-    'styles': './src/public/styles/_main.scss'
+    'app': './src/app/bootstrap' // our angular app,
   },
 
   // Config for our build files
@@ -83,7 +83,8 @@ module.exports = {
 
   plugins: [
     new CommonsChunkPlugin({ name: 'angular2', filename: 'angular2.js', minChunks: Infinity }),
-    new CommonsChunkPlugin({ name: 'common',   filename: 'common.js' })
+    new CommonsChunkPlugin({ name: 'common',   filename: 'common.js' }),
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
 };
 
