@@ -12,5 +12,9 @@
     "src/app/app.ts",
     "src/app/register/register.component.ts",
     "src/app/bootstrap.ts"
-  ]
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false
 }
