@@ -20,7 +20,7 @@ module.exports = {
 
   entry: {
     'vendor': './src/vendor.ts',
-    './src/public/styles/_main.scss',
+    //'./src/public/styles/_main.scss',
     'app': './src/bootstrap.ts' // our angular app
   },
 
@@ -63,9 +63,9 @@ module.exports = {
 
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader' },
-      
+
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: "url" },
-      
+
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-sass-loader has access to the jQuery object
       { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] },
