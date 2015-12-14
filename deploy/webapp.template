@@ -27,7 +27,15 @@
            "AccessControl" : "PublicRead",
            "BucketName" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
            "WebsiteConfiguration" : {
-              "IndexDocument" : "index.html"
+              "IndexDocument" : "index.html",
+              "RoutingRules" : [{
+                "RoutingRuleCondition" : {"HttpErrorCodeReturnedEquals" : "404"},
+                "RedirectRule" : {
+                  "HostName" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
+                  "ReplaceKeyPrefixWith" : "#!/"
+                }
+              }]
+
            }
         },
         "DeletionPolicy" : "Delete"
