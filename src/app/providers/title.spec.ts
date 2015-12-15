@@ -15,6 +15,6 @@ describe('Title', () => {
   });
 
   it('should return the list of names', () => {
-    expect(title.value).toEqual('Angular 2');
+    expect(title.value).toEqual('Homely');
   });
 });

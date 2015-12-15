@@ -9,6 +9,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 import {Title} from './providers/title';
 import {XLarge} from './directives/x-large';
 import {Home} from './home/home';
+import {Register} from './register/register';
 
 /*
  * App Component
@@ -38,20 +39,14 @@ import {Home} from './home/home';
   `],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: `
-    <header>
-      <h1 class="title">Hello {{ title.value }}</h1>
-    </header>
-
     <main>
       <router-outlet></router-outlet>
     </main>
-
-    <footer x-large>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-    </footer>
   `
 })
 @RouteConfig([
+  { path: '/', component: Home, name: 'Home' },
+  { path: '/register', component: Register, name: 'Register' }
 ])
 export class App {
   url: string = 'https://twitter.com/AngularClass';

@@ -20,7 +20,7 @@
     "src/app/home/home.ts",
     "src/bootstrap.ts",
     "src/vendor.ts",
-    "src/app/register/register.component.ts",
+    "src/app/register/register.ts"
   ],
   "compileOnSave": false
 }

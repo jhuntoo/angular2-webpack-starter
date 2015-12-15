@@ -4,6 +4,6 @@ import {Injectable} from 'angular2/core';
 export class Title {
   value: string;
   constructor() {
-    this.value = 'Angular 2';
+    this.value = 'Homely';
   }
 }

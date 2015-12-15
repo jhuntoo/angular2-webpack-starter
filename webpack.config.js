@@ -9,6 +9,7 @@ var path = require('path');
 var webpack = require('webpack');
 // Webpack Plugins
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 /*
  * Config
@@ -19,8 +20,8 @@ module.exports = {
   debug: true,
 
   entry: {
-    'vendor': './src/vendor.ts',
-    //'./src/public/styles/_main.scss',
+    'vendor': ['./src/vendor.ts', , "./src/fontAwesome.js"],
+    'bootstrap': "bootstrap-sass!./bootstrap-sass.config.js",
     'app': './src/bootstrap.ts' // our angular app
   },
 
@@ -64,7 +65,13 @@ module.exports = {
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader' },
 
-      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: "url" },
+      //{ test: /\.(png|eot|ttf|svg)$/, loader: "url" },
+
+      // the url-loader uses DataUrls.
+      // the file-loader emits files.
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+
 
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-sass-loader has access to the jQuery object
@@ -74,7 +81,9 @@ module.exports = {
 
   plugins: [
     new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js', minChunks: Infinity }),
-    new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app'] })
+    //new CommonsChunkPlugin({ name: 'bootstrap', filename: 'bootstrap.js', minChunks: Infinity }),
+    new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] }),
+    new ExtractTextPlugin("[name].css", {"omit":1,"extract":true,"remove":true})
   ],
 
   // Other module loader config
