@@ -3,8 +3,6 @@
 /*
  * Helper: root(), and rootDir() are defined at the bottom
  */
-var sliceArgs = Function.prototype.call.bind(Array.prototype.slice);
-var toString  = Function.prototype.call.bind(Object.prototype.toString);
 var path = require('path');
 var webpack = require('webpack');
 // Webpack Plugins
@@ -17,7 +15,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   // for faster builds use 'eval'
   devtool: 'source-map',
-  debug: true,
+  debug: true, // remove in production
 
   entry: {
     'vendor': ['./src/vendor.ts', , "./src/fontAwesome.js"],
@@ -48,12 +46,12 @@ module.exports = {
         query: {
           'ignoreDiagnostics': [
             2403, // 2403 -> Subsequent variable declarations
-            2300, // 2300 Duplicate identifier
+            2300, // 2300 -> Duplicate identifier
             2374, // 2374 -> Duplicate number index signature
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/ ]
+        exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
       },
 
       // Support for *.json files.
@@ -76,14 +74,14 @@ module.exports = {
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-sass-loader has access to the jQuery object
       { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] },
-    ]
+    ],
+    noParse: [ /.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/ ]
   },
 
   plugins: [
     new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js', minChunks: Infinity }),
-    //new CommonsChunkPlugin({ name: 'bootstrap', filename: 'bootstrap.js', minChunks: Infinity }),
-    new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] }),
-    new ExtractTextPlugin("[name].css", {"omit":1,"extract":true,"remove":true})
+    new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] })
+   // include uglify in production
   ],
 
   // Other module loader config
@@ -97,17 +95,16 @@ module.exports = {
     contentBase: 'src/public',
     publicPath: '/__build__'
   }
-
 };
 
 // Helper functions
 
 function root(args) {
-  args = sliceArgs(arguments, 0);
+  args = Array.prototype.slice.call(arguments, 0);
   return path.join.apply(path, [__dirname].concat(args));
 }
 
 function rootNode(args) {
-  args = sliceArgs(arguments, 0);
+  args = Array.prototype.slice.call(arguments, 0);
   return root.apply(path, ['node_modules'].concat(args));
 }

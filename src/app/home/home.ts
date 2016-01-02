@@ -6,9 +6,9 @@ import {Title} from '../providers/title';
 
 @Component({
   selector: 'home',
-  directives: [ FORM_DIRECTIVES ],
+  directives: [ ...FORM_DIRECTIVES ],
   providers: [ Title ],
-  pipes: [],
+  pipes: [ ],
   styles: [ require('./home.css') ],
   template: require('./home.html')
 })

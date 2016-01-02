@@ -16,7 +16,7 @@
 > An Angular 2 starter kit featuring [Angular 2](https://angular.io) ([Router](https://angular.io/docs/js/latest/api/router/), [Forms](https://angular.io/docs/js/latest/api/forms/),
 [Http](https://angular.io/docs/js/latest/api/http/),
 [Services](https://gist.github.com/gdi2290/634101fec1671ee12b3e#_follow_@AngularClass_on_twitter),
-[Tests](https://angular.io/docs/js/latest/api/test/), [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-)), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), [TypeScript](http://www.typescriptlang.org/), [Typings](https://github.com/typings/typings), and [Webpack](http://webpack.github.io/) by [AngularClass](https://angularclass.com).
+[Tests](https://angular.io/docs/js/latest/api/test/), [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-)), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), [Istanbul](https://github.com/gotwarlost/istanbul), [TypeScript](http://www.typescriptlang.org/), [Typings](https://github.com/typings/typings), and [Webpack](http://webpack.github.io/) by [AngularClass](https://angularclass.com).
 
 > If you're looking for Angular 1.x please use [NG6-starter](https://github.com/angularclass/NG6-starter)  
 > If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)
@@ -27,12 +27,13 @@ This seed repo serves as an Angular 2 starter for anyone looking to get up and r
 * Angular 2 examples that are ready to go when experimenting with Angular 2.
 * A great Angular 2 seed repo for anyone who wants to start their project.
 * Testing Angular 2 code with Jasmine and Karma.
-* end-to-end Angular 2 code using Protractor.
-* type manager with Typings
+* Coverage with Istanbul and Karma
+* End-to-end Angular 2 code using Protractor.
+* Type manager with Typings
 
 
 ```coffeescript
-Warning: Angular 2.0 is not production ready yet!
+Warning: Make sure you're using the latest version of Node.js and NPM
 ```
 [Is Angular 2 Ready Yet?](http://splintercode.github.io/is-angular-2-ready/)
 
@@ -41,7 +42,7 @@ Warning: Angular 2.0 is not production ready yet!
 
 ```bash
 # clone our repo
-git clone https://github.com/angularclass/angular2-webpack-starter.git 
+git clone https://github.com/angularclass/angular2-webpack-starter.git
 
 # change directory to our repo
 cd angular2-webpack-starter
@@ -49,8 +50,11 @@ cd angular2-webpack-starter
 # install the repo with npm
 npm install
 
+# install typescript typings
+typings install
+
 # start the server
-npm start 
+npm start
 ```
 go to [http://localhost:3000](http://localhost:3000) in your browser
 
@@ -73,6 +77,8 @@ We use the component approach in our starter. This is the new standard for devel
 angular2-webpack-starter/
  ├──src/                                   * our source files that will be compiled to javascript
  |   ├──bootstrap.ts                       * our entry file for our browser environment
+ │   │
+ |   ├──polyfills.ts                       * our polyfills file for es6, es7, and zone.js
  │   │
  |   ├──vendor.ts                          * our vendor file
  │   │
@@ -118,17 +124,18 @@ Once you have those, you should install these globals with `npm install --global
 * `fork` this repo
 * `clone` your fork
 * `npm install` to install all dependencies
+* `typings install` to install necessary typings
 * `npm run server` to start the dev server in another tab
 
 ## Running the app
 After you have installed all dependencies you can now run the app. Run `npm run server` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://localhost:3000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:3000/`).
- 
+
 ### server
 ```bash
 npm run server # or either webpack-dev-server
 ```
 
-## Other commands 
+## Other commands
 
 ### build files
 ```bash
@@ -140,7 +147,7 @@ npm run build
 npm run watch
 ```
 
-### run tests 
+### run tests
 ```bash
 npm run test
 ```
@@ -189,13 +196,14 @@ We have good experience using these editors:
   * Please use `@Injectable()` for your service for typescript to correctly attach the metadata (this is a typescript beta problem)
 * How do I run protractor with node 0.12.x?
   * please check out this repo to use the old version of protractor https://github.com/AngularClass/angular2-webpack-starter/pull/146/files
-* Where do I write my tests? 
+* Where do I write my tests?
   * You can write your tests anywhere you like in the `/src` directory next to your components or in the  `test/` folder
 * Is Angular 2 production ready yet?
   * No, please visit [Is Angular 2 Ready Yet?](http://splintercode.github.io/is-angular-2-ready/) website.
-* How do I start the app when I get `EACCES` and `EADDRINUSE` errors? 
+* How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
   * The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./__build__/`
-
+* How to use `sass` for css?
+ * `loaders: ['raw-loader','sass-loader']` and `@Component({ styles: [ require('./filename.scss') ] })`
 
 # Support, Questions, or Feedback
 > Contact us anytime for anything about this repo or Angular 2
@@ -218,16 +226,16 @@ We have good experience using these editors:
   * Client only, TypeScript, TSD, Gulp, JSPM, Minimalist
 * [babel-angular2-app (Shuhei Kagawa)](https://github.com/shuhei/babel-angular2-app)
   * Client only, Minimalist, Babel, ES6+, browserify
-  
+
 ___
 
-enjoy — **AngularClass** 
+enjoy — **AngularClass**
 
 <br><br>
 
 [![AngularClass](https://cloud.githubusercontent.com/assets/1016365/9863770/cb0620fc-5af7-11e5-89df-d4b0b2cdfc43.png  "Angular Class")](https://angularclass.com)
 ##[AngularClass](https://angularclass.com)
-> Learn AngularJS, Angular 2, and Modern Web Development form the best.
+> Learn AngularJS, Angular 2, and Modern Web Development from the best.
 > Looking for corporate Angular training, want to host us, or Angular consulting? patrick@angularclass.com
 
 # License
