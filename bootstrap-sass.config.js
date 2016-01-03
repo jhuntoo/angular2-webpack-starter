@@ -10,14 +10,14 @@ module.exports = {
 
   // Use preBootstrapCustomizations to change $brand-primary. Ensure this
   // preBootstrapCustomizations does not depend on other bootstrap variables.
-  preBootstrapCustomizations: './src/public/styles/_pre-bootstrap-customizations.scss',
+  preBootstrapCustomizations: './src/assets/css/_pre-bootstrap-customizations.scss',
 
   // Use bootstrapCustomizations to utilize other sass variables defined in
   // preBootstrapCustomizations or the _variables.scss file. This is useful to set one
   // customization value based on another value.
-  bootstrapCustomizations: './src/public/styles/_bootstrap-customizations.scss',
+  bootstrapCustomizations: './src/assets/css/_bootstrap-customizations.scss',
 
-  mainSass: './src/public/styles/_main.scss',
+  mainSass: './src/assets/css/_main.scss',
 
   // Default for the style loading
   styleLoader: 'style-loader!css-loader!sass-loader',

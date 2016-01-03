@@ -32,19 +32,19 @@ import {Register} from './register/register';
     </main>
 
     <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
+      Homely Footer
     </footer>
 
   `
 })
 @RouteConfig([
   { path: '/', component: Home, name: 'Index' },
-  { path: '/home', component: Home, name: 'Home' }
+  { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: Register, name: 'Register' }
 ])
 export class App {
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+  name = 'Homely';
+  url = 'http://joinhomely.com';
   constructor() {
 
   }

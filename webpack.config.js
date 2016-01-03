@@ -78,7 +78,7 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
 
       //{ test: /\.(png|eot|ttf|svg)$/, loader: "url" },
       // if you add a loader include the resolve file extension above
@@ -90,7 +90,7 @@ module.exports = {
 
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-sass-loader has access to the jQuery object
-      { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] },
+      { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] }
     ]
   },
 
