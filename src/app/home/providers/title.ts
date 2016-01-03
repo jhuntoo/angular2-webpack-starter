@@ -2,8 +2,7 @@ import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class Title {
-  value: string;
+  value = 'Homely';
   constructor() {
-    this.value = 'Homely';
   }
 }

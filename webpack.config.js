@@ -4,6 +4,21 @@
  * Helper: root(), and rootDir() are defined at the bottom
  */
 var path = require('path');
+// Webpack Plugins
+var ProvidePlugin = require('webpack/lib/ProvidePlugin');
+var DefinePlugin  = require('webpack/lib/DefinePlugin');
+var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+var CopyWebpackPlugin  = require('copy-webpack-plugin');
+var HtmlWebpackPlugin  = require('html-webpack-plugin');
+var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
+
+var metadata = {
+  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  baseUrl: '/',
+  host: '0.0.0.0',
+  port: 3000,
+  ENV: ENV
+};
 var webpack = require('webpack');
 // Webpack Plugins
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
@@ -13,20 +28,22 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
  * Config
  */
 module.exports = {
+  // static data for index.html
+  metadata: metadata,
   // for faster builds use 'eval'
   devtool: 'source-map',
-  debug: true, // remove in production
+  debug: true,
 
   entry: {
     'vendor': ['./src/vendor.ts', , "./src/fontAwesome.js"],
     'bootstrap': "bootstrap-sass!./bootstrap-sass.config.js",
-    'app': './src/bootstrap.ts' // our angular app
+    'main': './src/main.ts' // our angular app
   },
 
   // Config for our build files
   output: {
-    path: root('__build__'),
-    filename: '[name].js',
+    path: root('dist'),
+    filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[id].chunk.js'
   },
@@ -37,7 +54,7 @@ module.exports = {
   },
 
   module: {
-    preLoaders: [ { test: /\.ts$/, loader: 'tslint-loader' } ],
+    preLoaders: [{ test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }],
     loaders: [
       // Support for .ts files.
       {
@@ -61,10 +78,10 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' },
+      { test: /\.html$/,  loader: 'raw-loader' }
 
       //{ test: /\.(png|eot|ttf|svg)$/, loader: "url" },
-
+      // if you add a loader include the resolve file extension above
       // the url-loader uses DataUrls.
       // the file-loader emits files.
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
@@ -74,14 +91,22 @@ module.exports = {
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-sass-loader has access to the jQuery object
       { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] },
-    ],
-    noParse: [ /.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/ ]
+    ]
   },
 
   plugins: [
-    new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js', minChunks: Infinity }),
-    new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] })
-   // include uglify in production
+    new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js', minChunks: Infinity }),
+    // static assets
+    new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]),
+    // generating html
+    new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
+    // replace
+    new DefinePlugin({
+      'process.env': {
+        'ENV': JSON.stringify(metadata.ENV),
+        'NODE_ENV': JSON.stringify(metadata.ENV)
+      }
+    })
   ],
 
   // Other module loader config
@@ -91,10 +116,13 @@ module.exports = {
   },
   // our Webpack Development Server config
   devServer: {
+    port: metadata.port,
+    host: metadata.host,
     historyApiFallback: true,
-    contentBase: 'src/public',
-    publicPath: '/__build__'
-  }
+    watchOptions: { aggregateTimeout: 300, poll: 1000 }
+  },
+  // we need this due to problems with es6-shim
+  node: {global: 'window', progress: false, crypto: 'empty', module: false, clearImmediate: false, setImmediate: false}
 };
 
 // Helper functions
