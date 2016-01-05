@@ -40,7 +40,7 @@ import {Register} from './register/register';
 @RouteConfig([
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
-  { path: '/**', redirectTo: ['Index'] }
+  { path: '/**', redirectTo: ['Index'] },
   { path: '/register', component: Register, name: 'Register' }
 ])
 export class App {
