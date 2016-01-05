@@ -14,6 +14,7 @@ var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var WebpackMd5Hash    = require('webpack-md5-hash');
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || '0.0.0.0';
 var PORT = process.env.PORT || 8080;
@@ -44,9 +45,9 @@ module.exports = {
   // Config for our build files
   output: {
     path: root('dist'),
-    filename: '[name].[hash].bundle.js',
-    sourceMapFilename: '[name].[hash].bundle.map',
-    chunkFilename: '[id].[hash].chunk.js'
+    filename: '[name].[chunkhash].bundle.js',
+    sourceMapFilename: '[name].[chunkhash].bundle.map',
+    chunkFilename: '[id].[chunkhash].chunk.js'
   },
 
   resolve: {
@@ -100,19 +101,13 @@ module.exports = {
   },
 
   plugins: [
+    new WebpackMd5Hash(),
+    new DedupePlugin(),
+    new OccurenceOrderPlugin(true),
     new CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.[hash].bundle.js',
+      filename: 'vendor.[chunkhash].bundle.js',
       minChunks: Infinity
-    }),
-    new CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.[hash].bundle.js',
-      minChunks: 2,
-      chunks: [
-        'main', // keep sync with entry
-        'vendor'  // keep sync with entry
-      ]
     }),
     // static assets
     new CopyWebpackPlugin([
@@ -122,8 +117,6 @@ module.exports = {
       }
     ]),
     // generating html
-    new DedupePlugin(),
-    new OccurenceOrderPlugin(true),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
