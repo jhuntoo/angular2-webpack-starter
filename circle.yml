@@ -7,6 +7,10 @@ machine:
   node:
     version: 5.0.0
 
+dependencies:
+  override:
+    - sudo pip install awscli
+
 test:
   pre:
     - npm run server:
@@ -17,3 +21,10 @@ test:
     - sleep 5
   override:
     - npm run e2e
+
+deployment:
+  production:
+    branch: homely
+    commands:
+    - chmod +x ./deploy/deploy.sh
+    - ./deploy/deploy.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY prod
