@@ -28,5 +28,6 @@ import 'rxjs';
 
 // angular2-jwt
 import 'angular2-jwt';
+//import 'ng2-bootstrap/ng2-bootstrap';
 
 // Other vendors for example jQuery, Lodash

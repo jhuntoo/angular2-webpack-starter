@@ -4,7 +4,7 @@
 describe('When the register pages loads', function() {
 
   beforeEach(function() {
-    browser.get('/register');
+    browser.get('/');
   });
 
 

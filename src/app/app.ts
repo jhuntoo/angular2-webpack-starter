@@ -4,13 +4,14 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Http} from 'angular2/http';
-import {FORM_PROVIDERS} from 'angular2/common';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, FORM_PROVIDERS} from 'angular2/common';
 import {AuthHttp, tokenNotExpired, JwtHelper} from 'angular2-jwt';
 
 import {Home} from './home/home';
 import {Register} from './register/register';
 import {PrivateRoute} from './privateroute/privateroute';
 import {PublicRoute} from './publicroute/publicroute';
+import {Alert, Rating} from 'ng2-bootstrap/ng2-bootstrap';
 
 declare var Auth0Lock;
 /*
@@ -20,7 +21,10 @@ declare var Auth0Lock;
 @Component({
   selector: 'app',
   providers: [ ...FORM_PROVIDERS ],
-  directives: [ ...ROUTER_DIRECTIVES ],
+  directives: [ ...ROUTER_DIRECTIVES, Alert,
+    Rating,
+    CORE_DIRECTIVES,
+    FORM_DIRECTIVES],
   pipes: [],
   styles: [],
   template: `
@@ -38,6 +42,14 @@ declare var Auth0Lock;
       <router-outlet class="container"></router-outlet>
     </div>
     <hr>
+    <div></div>
+    <alert type="info">Welcome to Homely Alert</alert>
+    Testing
+    <rating [(ngModel)]="rate"
+            [max]="max"
+            [readonly]="isReadonly"
+            [titles]="['one','two','three']" >
+    </rating>
     <!--<button (click)="getThing()">Get Thing</button>-->
     <!--<button *ngIf="loggedIn()" (click)="tokenSubscription()">
     Show Token from Observable

@@ -36,7 +36,8 @@ module.exports = {
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.e2e\.ts$/, /node_modules/ ]
+        exclude: [ /\.e2e\.ts$/, /node_modules\/(?!(ng2-bootstrap.+))/ ]
+
       },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.html$/, loader: 'raw-loader' },
@@ -80,6 +81,7 @@ module.exports = {
       '__extends': 'ts-helper/extends',
       '__param': 'ts-helper/param',
       'Reflect': 'es7-reflect-metadata/dist/browser'
+
     })
   ],
     // we need this due to problems with es6-shim

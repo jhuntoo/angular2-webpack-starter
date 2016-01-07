@@ -1,0 +1,15 @@
+general:
+  branches:
+    only:
+      - homely
+
+test:
+  pre:
+    - npm run server:
+        background: true
+    - npm run webdriver:update
+    - npm run webdriver:start:
+            background: true
+    - sleep 5
+  override:
+    - npm run e2e

@@ -15,6 +15,7 @@ var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
+var CompressionPlugin = require('compression-webpack-plugin');
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || '0.0.0.0';
 var PORT = process.env.PORT || 8080;
@@ -146,6 +147,13 @@ module.exports = {
       mangle: {
         screw_ie8 : true
       }
+    }),
+    new CompressionPlugin({
+      asset: '{file}.gz',
+      algorithm: 'gzip',
+      regExp: /\.js$|\.html|\.css|.map$/,
+      threshold: 10240,
+      minRatio: 0.8
     })
    // include uglify in production
   ],
