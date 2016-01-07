@@ -26,5 +26,6 @@ deployment:
   production:
     branch: homely
     commands:
+    - npm run build:prod
     - chmod +x ./deploy/deploy.sh
     - ./deploy/deploy.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY prod
