@@ -3,6 +3,10 @@ general:
     only:
       - homely
 
+machine:
+  node:
+    version: 5.0.0
+
 test:
   pre:
     - npm run server:
