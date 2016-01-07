@@ -1,6 +1,5 @@
 // Polyfills
 import 'es6-shim';
-// (these modules are what are in 'angular2/bundles/angular2-polyfills' so don't use that here)
 import 'es6-promise';
 import 'zone.js/lib/browser/zone-microtask';
 
@@ -27,4 +26,7 @@ import 'angular2/core';
 // RxJS
 import 'rxjs';
 
-// Other vendors for example jQuery, Lodash, angular2-jwt
+// angular2-jwt
+import 'angular2-jwt';
+
+// Other vendors for example jQuery, Lodash
