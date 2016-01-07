@@ -35,10 +35,19 @@ exports.config = {
     jasmine.getEnv().addReporter(new SpecReporter({
       displayStacktrace: true}));
     var jasmineReporters = require('jasmine-reporters');
+
+    var savePath = '';
+
+    if(process.env.CIRCLE_TEST_REPORTS) {
+      savePath = process.env.CIRCLE_TEST_REPORTS;
+    } else {
+      savePath = 'test_results';
+    }
+
     jasmine.getEnv().addReporter(new jasmineReporters.
       JUnitXmlReporter({
       consolidateAll: true,
-      savePath: 'test_results',
+      savePath: savePath,
       filePrefix: 'xmloutput'
     }));
   },
