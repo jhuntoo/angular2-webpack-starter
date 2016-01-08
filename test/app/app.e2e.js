@@ -4,12 +4,12 @@
 describe('When the register pages loads', function() {
 
   beforeEach(function() {
-    browser.get('/');
+    browser.get('/', 5000);
   });
 
 
   it('title should be Homely', function() {
-    browser.waitForAngular();
+    browser.sleep(2000);
     var subject = browser.getTitle();
     var result  = 'Homely';
     expect(subject).toEqual(result);
