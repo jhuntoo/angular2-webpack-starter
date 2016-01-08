@@ -1,6 +1,5 @@
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen) [![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](http://badge.fury.io/gh/angular-class%2Fangular2-webpack-starter)
-[![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
+[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen) [![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter) [![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
 [![Issue Stats](http://issuestats.com/github/angularclass/angular2-webpack-starter/badge/pr?style=flat)](http://issuestats.com/github/angularclass/angular2-webpack-starter)
 [![Issue Stats](http://issuestats.com/github/angularclass/angular2-webpack-starter/badge/issue?style=flat)](http://issuestats.com/github/angularclass/angular2-webpack-starter) [![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/angularclass/angular-2-webpack-starter)
 
@@ -51,7 +50,7 @@ npm install
 # start the server
 npm start
 ```
-go to [http://0.0.0.0:3000](http://0.0.0.0:3000) in your browser
+go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http://localhost:3000) in your browser
 
 # Table of Contents
 * [File Structure](#file-structure)
@@ -201,7 +200,7 @@ We have good experience using these editors:
 * How do I run protractor with node 0.12.x?
   * please check out this repo to use the old version of protractor [#146](https://github.com/AngularClass/angular2-webpack-starter/pull/146/files)
 * Where do I write my tests?
-  * You can write your tests next do your component files see [`/src/app/home/home.spec.ts`](/src/app/home/home.spec.ts)
+  * You can write your tests next to your component files. See [`/src/app/home/home.spec.ts`](/src/app/home/home.spec.ts)
 * How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
   * The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./dist/`
 * How to use `sass` for css?
@@ -210,6 +209,10 @@ We have good experience using these editors:
  * See issue [#130](https://github.com/AngularClass/angular2-webpack-starter/issues/130#issuecomment-158872648)
 * How do I add `vscode-chrome-debug` support?
  * The VS Code chrome debug extension support can be done via `launch.json` see issue [#144](https://github.com/AngularClass/angular2-webpack-starter/issues/144#issuecomment-164063790)
+* How do I make the repo work in a virtual machine?
+ * You need to use `0.0.0.0` so revert these changes [#205](https://github.com/AngularClass/angular2-webpack-starter/pull/205/files)
+* What are the naming conventions for Angular 2?
+ * please see issue [#185](https://github.com/AngularClass/angular2-webpack-starter/issues/185) and PR [196](https://github.com/AngularClass/angular2-webpack-starter/pull/196)
 
 # Support, Questions, or Feedback
 > Contact us anytime for anything about this repo or Angular 2
@@ -217,21 +220,6 @@ We have good experience using these editors:
 * [Chat: AngularClass.slack](http://angularclass.com/member-join/)
 * [Twitter: @AngularClass](https://twitter.com/AngularClass)
 * [Gitter: AngularClass/angular2-webpack-starter](https://gitter.im/angularclass/angular2-webpack-starter)
-
-
-# Other Seed/Starter/Example Repos
-* [angular2-webpack-starter (AngularClass)](https://github.com/angularclass/angular2-webpack-starter)
-  * Client/Server, Webpack, TypeScript, TSD, Protractor, Karma, Jasmine
-* [ng2-play (Pawel Kozlowski)](https://github.com/pkozlowski-opensource/ng2-play)
-  * Client only, Minimalist, SystemJS, Gulp, TypeScript
-* [angular2-seed (Minko Gechev)](https://github.com/mgechev/angular2-seed)
-  * Client only, SystemJS, Gulp, TypeScript, TSD, Versioned, Env Dev/Prod
-* [ng2-lab (Roland Groza)](https://github.com/rolandjitsu/ng2-lab)
-  * Client only, ES6, TypeScript, Firebase, Gulp, Ci, TSD, TSLint
-* [ng2-jspm-seed (Rob Wormald)](https://github.com/robwormald/ng2-jspm-seed)
-  * Client only, TypeScript, TSD, Gulp, JSPM, Minimalist
-* [babel-angular2-app (Shuhei Kagawa)](https://github.com/shuhei/babel-angular2-app)
-  * Client only, Minimalist, Babel, ES6+, browserify
 
 ___
 
