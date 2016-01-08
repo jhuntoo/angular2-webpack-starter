@@ -13,6 +13,7 @@ dependencies:
 
 test:
   pre:
+    - npm run postinstall
     - npm run build:prod
     - npm run server:prod:
         background: true
