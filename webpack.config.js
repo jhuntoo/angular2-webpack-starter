@@ -24,6 +24,12 @@ var webpack = require('webpack');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var metadata = {
+  title: 'Homely',
+  baseUrl: '/'
+};
+
+
 /*
  * Config
  */

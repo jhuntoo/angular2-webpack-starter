@@ -13,7 +13,7 @@ dependencies:
 
 test:
   pre:
-    - npm run server:
+    - npm run server:prod:
         background: true
     - npm run webdriver:update
     - npm run webdriver:start:

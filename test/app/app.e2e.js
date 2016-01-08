@@ -8,9 +8,9 @@ describe('When the register pages loads', function() {
   });
 
 
-  it('should have a title', function() {
+  it('title should be Homely', function() {
     var subject = browser.getTitle();
-    var result  = 'Angular2 Webpack Starter by @gdi2990 from @AngularClass';
+    var result  = 'Homely';
     expect(subject).toEqual(result);
   });
 
