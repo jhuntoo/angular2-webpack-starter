@@ -13,6 +13,7 @@ dependencies:
 
 test:
   pre:
+    - npm run build:prod
     - npm run server:prod:
         background: true
     - npm run webdriver:update
@@ -26,6 +27,5 @@ deployment:
   production:
     branch: homely
     commands:
-    - npm run build:prod
     - chmod +x ./deploy/deploy.sh
     - ./deploy/deploy.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY prod
