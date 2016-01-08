@@ -9,10 +9,11 @@ describe('When the register pages loads', function() {
 
 
   it('title should be Homely', function() {
-    browser.sleep(2000);
+    var EC = protractor.ExpectedConditions;
+
+    browser.wait(EC.titleIs('Homely'), 10000);
     var subject = browser.getTitle();
-    var result  = 'Homely';
-    expect(subject).toEqual(result);
+    expect(subject).toEqual('Homely');
   });
 
   //it('should have <header>', function() {
