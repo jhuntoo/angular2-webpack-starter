@@ -9,6 +9,7 @@ describe('When the register pages loads', function() {
 
 
   it('title should be Homely', function() {
+    browser.waitForAngular();
     var subject = browser.getTitle();
     var result  = 'Homely';
     expect(subject).toEqual(result);
