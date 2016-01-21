@@ -4,6 +4,7 @@
  * Helper: root(), and rootDir() are defined at the bottom
  */
 var path = require('path');
+var zlib = require('zlib');
 // Webpack Plugins
 var webpack = require('webpack');
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
@@ -12,6 +13,7 @@ var OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
 var DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+var CompressionPlugin = require('compression-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
@@ -36,7 +38,7 @@ module.exports = {
   metadata: metadata,
   // for faster builds use 'eval'
   devtool: 'source-map',
-  debug: true,
+  debug: false,
 
   entry: {
     'vendor':'./src/vendor.ts',
@@ -77,13 +79,7 @@ module.exports = {
           'compilerOptions': {
             'removeComments': true,
             'noEmitHelpers': true,
-          },
-          'ignoreDiagnostics': [
-            2403, // 2403 -> Subsequent variable declarations
-            2300, // 2300 -> Duplicate identifier
-            2374, // 2374 -> Duplicate number index signature
-            2375  // 2375 -> Duplicate string index signature
-          ]
+          }
         },
         exclude: [ /\.(spec|e2e)\.ts$/ ]
       },
@@ -138,32 +134,29 @@ module.exports = {
       'Reflect': 'es7-reflect-metadata/dist/browser'
     }),
     new UglifyJsPlugin({
-      // beautify: true,
-      // mangle: false,
+      beautify: true,
+      mangle: false,
       comments: false,
       compress : {
         screw_ie8 : true
       },
-      mangle: {
-        screw_ie8 : true
-      }
+      // TODO(gdi2290): uncomment in beta.2
+      //mangle: {
+      //  screw_ie8 : true
+      //}
     }),
-    new CompressionPlugin({
-      asset: '{file}.gz',
-      algorithm: 'gzip',
-      regExp: /\.js$|\.html|\.css|.map$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
    // include uglify in production
+    new CompressionPlugin({
+      algorithm: gzipMaxLevel,
+      regExp: /\.css$|\.html$|\.js$|\.map$/,
+      threshold: 2 * 1024
+    })
   ],
-
-  postcss: [
+   postcss: [
     autoprefixer({
       browsers: ['last 2 versions']
     })
   ],
-
   // Other module loader config
   tslint: {
     emitErrors: true,
@@ -192,4 +185,8 @@ function root(args) {
 function rootNode(args) {
   args = Array.prototype.slice.call(arguments, 0);
   return root.apply(path, ['node_modules'].concat(args));
+}
+
+function gzipMaxLevel(buffer, callback) {
+  return zlib['gzip'](buffer, {level: 9}, callback)
 }
