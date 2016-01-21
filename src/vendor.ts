@@ -26,6 +26,16 @@ import 'angular2/core';
 // RxJS
 import 'rxjs';
 
+import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.css';
+
+import 'font-awesome/css/font-awesome.css';
+
+import './assets/styles/plugins.scss';
+import './assets/styles/styles.scss';
+import './assets/styles/themes/theme-1.scss';
+
+
 // angular2-jwt
 import 'angular2-jwt';
 //import 'ng2-bootstrap/ng2-bootstrap';

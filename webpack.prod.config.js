@@ -157,6 +157,13 @@ module.exports = {
     })
    // include uglify in production
   ],
+
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions']
+    })
+  ],
+
   // Other module loader config
   tslint: {
     emitErrors: true,

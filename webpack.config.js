@@ -13,7 +13,7 @@ var HtmlWebpackPlugin  = require('html-webpack-plugin');
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'Homely',
   baseUrl: '/',
   host: 'localhost',
   port: 3000,
@@ -24,10 +24,11 @@ var webpack = require('webpack');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var metadata = {
-  title: 'Homely',
-  baseUrl: '/'
-};
+//var metadata = {
+
+//  title: 'Homely',
+//  baseUrl: '/'
+//};
 
 
 /*
@@ -42,13 +43,14 @@ module.exports = {
 
   entry: {
     'vendor': ['./src/vendor.ts', , "./src/fontAwesome.js"],
-    'bootstrap': "bootstrap-sass!./bootstrap-sass.config.js",
+    'bootstrap': "./src/bootstrap.js",
     'main': './src/main.ts' // our angular app
   },
 
   // Config for our build files
   output: {
     path: root('dist'),
+    //publicPath : root('dist'),
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[id].chunk.js'
@@ -56,7 +58,12 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['','.ts','.js','.json', '.css', '.scss', '.html']
+    extensions: ['','.ts', '.config.js', '.js','.json', '.css', '.scss', '.html']
+
+  },
+
+  loader: {
+    configEnvironment: 'development'
   },
 
   module: {
@@ -80,8 +87,12 @@ module.exports = {
       // Support for *.json files.
       { test: /\.json$/,  loader: 'json-loader' },
 
-      // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+      },
+
+
 
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader' },
@@ -91,12 +102,28 @@ module.exports = {
       // the url-loader uses DataUrls.
       // the file-loader emits files.
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      { test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+      { test: /\.(ttf|eot|svg|png|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
 
 
       // **IMPORTANT** This is needed so that each bootstrap js file required by
       // bootstrap-sass-loader has access to the jQuery object
-      { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] }
+      { test: /\.scss$/, loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"] },
+
+      { test: /[\\\/]bower_components[\\\/]modernizr[\\\/]modernizr.custom.js$/,
+        loader: "imports?this=>window!exports?window.Modernizr" },
+      ,
+      {
+        test:   /jquery\..*\.js/,
+        loader: "imports?$=jquery,jQuery=jquery,this=>window"
+      },
+      {
+        test:   /blank.js/,
+        loader: "imports?$=jquery,jQuery=jquery,this=>window"
+      },
+      {
+        test:   /bootstrap.js/,
+        loader: "imports?$=jquery,jQuery=jquery,this=>window"
+      }
     ]
   },
 
@@ -112,7 +139,8 @@ module.exports = {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
       }
-    })
+    }),
+    new ExtractTextPlugin("[name].css")
   ],
 
   // Other module loader config

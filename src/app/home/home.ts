@@ -7,7 +7,7 @@ import {XLarge} from './directives/x-large';
 
 @Component({
   selector: 'home',  // <home></home>
-  providers: [ Title   ],
+  providers: [ Title  ],
   directives: [
     ...FORM_DIRECTIVES,
     XLarge

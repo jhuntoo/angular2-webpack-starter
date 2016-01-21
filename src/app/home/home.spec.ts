@@ -30,7 +30,7 @@ describe('Home', () => {
   ]);
 
   it('should have a title', inject([ Home ], (home) => {
-    expect(home.title.value).toEqual('Angular 2');
+    expect(home.title.value).toEqual('Homely');
   }));
 
   it('should have a http', inject([ Home ], (home) => {

@@ -1,0 +1,41 @@
+@mixin transition( $value ) {
+  -webkit-transition: $value !important; // important to override bootstrap
+  -moz-transition: $value !important;
+  -ms-transition: $value !important;
+  -o-transition: $value !important;
+  transition: $value !important;
+}
+
+
+
+
+@mixin transform( $value ) {
+  @include prefix( transform, $value );
+}
+
+@mixin prefix ( $property, $value ) {
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  -o-#{$property}: $value;
+  #{$property}: $value;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin box-shadow($horizontal: 0px, $vertical: 1px, $blur: 2px, $color: #CCC) {
+  -webkit-box-shadow: $horizontal $vertical $blur $color;
+  -moz-box-shadow: $horizontal $vertical $blur $color;
+  box-shadow: $horizontal $vertical $blur $color;
+}

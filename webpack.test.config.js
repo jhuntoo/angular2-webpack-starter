@@ -19,6 +19,12 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   module: {
+    output: {
+      path: 'tmp',
+      filename: '[name].[chunkhash].bundle.js',
+      sourceMapFilename: '[name].[chunkhash].bundle.map',
+      chunkFilename: '[id].[chunkhash].chunk.js'
+    },
     loaders: [
       {
         test: /\.ts$/,
@@ -36,7 +42,7 @@ module.exports = {
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.e2e\.ts$/, /node_modules\/(?!(ng2-bootstrap.+))/ ]
+        exclude: [ /\.e2e\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
 
       },
       { test: /\.json$/, loader: 'json-loader' },
@@ -68,11 +74,11 @@ module.exports = {
       'process.env': {
         'ENV': JSON.stringify(ENV),
         'NODE_ENV': JSON.stringify(ENV)
-      },
-      'global': 'window',
+      }
+      //'global': 'window',
       // TypeScript helpers
-      '__metadata': 'Reflect.metadata',
-      '__decorate': 'Reflect.decorate'
+      //'__metadata': 'Reflect.metadata',
+      //'__decorate': 'Reflect.decorate'
     }),
     new ProvidePlugin({
        '__metadata': 'ts-helper/metadata',
