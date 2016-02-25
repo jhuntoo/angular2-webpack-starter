@@ -1,0 +1,29 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-sdk (2.1.35)
+      aws-sdk-resources (= 2.1.35)
+    aws-sdk-core (2.1.35)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.1.35)
+      aws-sdk-core (= 2.1.35)
+    clamp (1.0.0)
+    console_logger (1.0.0)
+    diffy (3.0.7)
+    jmespath (1.1.3)
+    multi_json (1.11.2)
+    stackup (0.6.0)
+      aws-sdk (~> 2.0)
+      clamp (~> 1.0)
+      console_logger
+      diffy (~> 3.0.5)
+      multi_json
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  stackup (~> 0.6.0)
+
+BUNDLED WITH
+   1.10.6

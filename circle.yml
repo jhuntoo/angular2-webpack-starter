@@ -1,0 +1,32 @@
+general:
+  branches:
+    only:
+      - mustrace
+
+machine:
+  node:
+    version: 5.0.0
+
+dependencies:
+  override:
+    - sudo pip install awscli
+
+test:
+  pre:
+    - npm run postinstall
+    - npm run build:prod
+    - npm run server:prod:
+        background: true
+    - npm run webdriver:update
+    - npm run webdriver:start:
+            background: true
+    - sleep 5
+  override:
+    - npm run e2e
+deployment:
+  production:
+    branch: homely
+    commands:
+      - "chmod +x ./deploy/deploy.sh"
+      - "./deploy/deploy.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY prod"
+
