@@ -1,7 +1,7 @@
 // @AngularClass
 
 exports.config = {
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'http://localhost:8080/',
 
   // use `npm run e2e`
   specs: [
