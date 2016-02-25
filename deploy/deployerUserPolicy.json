@@ -18,7 +18,7 @@
         "cloudformation:UpdateStack"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:cloudformation:*:*:stack/homely-web-client/*"
+      "Resource": "arn:aws:cloudformation:*:*:stack/mustrace-frontend/*"
     },
     {
       "Action": [

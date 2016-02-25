@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
-  "Description" : "Homely Web Client",
+  "Description" : "MustRace.com Frontend",
 
   "Parameters" : {
     "TargeEnvironment": {

@@ -9,7 +9,7 @@ export AWS_ACCESS_KEY_ID=$1
 export AWS_SECRET_ACCESS_KEY=$2
 export AWS_DEFAULT_REGION=eu-west-1
 
-STACK_NAME=homely-web-client
+STACK_NAME=mustrace-frontend
 TARGET_ENVIRONMENT_ALIAS=$3
 
 
