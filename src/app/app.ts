@@ -7,6 +7,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 
 import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
+import {Navbar} from './navbar/navbar';
 
 /*
  * App Component
@@ -15,7 +16,7 @@ import {Home} from './home/home';
 @Component({
   selector: 'app',
   providers: [ ...FORM_PROVIDERS ],
-  directives: [ ...ROUTER_DIRECTIVES, RouterActive ],
+  directives: [ ...ROUTER_DIRECTIVES, RouterActive, Navbar ],
   pipes: [],
   styles: [`
     nav ul {
@@ -33,33 +34,29 @@ import {Home} from './home/home';
     }
   `],
   template: `
-    <header>
-      <nav>
-        <h1>Hello {{ name }}</h1>
-        <ul>
-          <li router-active>
-            <a [routerLink]=" ['Index'] ">Index</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['Home'] ">Home</a>
-          </li>
-          <li router-active>
-            <a [routerLink]=" ['About'] ">About</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <!--<header>-->
+      <!--<nav>-->
+        <!--<h1>Hello {{ name }}</h1>-->
+        <!--<ul>-->
+          <!--<li router-active>-->
+            <!--<a [routerLink]=" ['Index'] ">Index</a>-->
+          <!--</li>-->
+          <!--<li router-active>-->
+            <!--<a [routerLink]=" ['Home'] ">Home</a>-->
+          <!--</li>-->
+          <!--<li router-active>-->
+            <!--<a [routerLink]=" ['About'] ">About</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</nav>-->
+    <!--</header>-->
+    <navbar></navbar>
+
 
     <main>
       <router-outlet></router-outlet>
     </main>
 
-    <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-      <div>
-        <img [src]="angularclassLogo" width="10%">
-      </div>
-    </footer>
   `
 })
 @RouteConfig([
@@ -70,9 +67,8 @@ import {Home} from './home/home';
   { path: '/**', redirectTo: ['Index'] }
 ])
 export class App {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+  name = 'MustRace';
+  url = 'https://mustrace.com';
   constructor() {
 
   }

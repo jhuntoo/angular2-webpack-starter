@@ -17,12 +17,13 @@ var CompressionPlugin = require('compression-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || 'localhost';
 var PORT = process.env.PORT || 8080;
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'MustRace',
   baseUrl: '/',
   host: HOST,
   port: PORT,
@@ -41,7 +42,8 @@ module.exports = {
 
   entry: {
     'polyfills':'./src/polyfills.ts',
-    'main':'./src/main.ts' // our angular app
+    'main':'./src/main.ts', // our angular app
+    'bootstrap' : 'bootstrap-loader'
   },
 
   // Config for our build files
@@ -55,7 +57,7 @@ module.exports = {
   resolve: {
     cache: false,
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async') // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html', '.woff', '.ttf', '.eot', '.svg', '.jpg', '.less', '.scss'], '.async') // ensure .async.ts etc also works
   },
 
   module: {
@@ -100,12 +102,29 @@ module.exports = {
       { test: /\.json$/,  loader: 'json-loader' },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+
+      { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },
+
+      { test: /\.less$/,     loader: 'style!css!less'},
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader', exclude: [ root('src/index.html') ] }
+      { test: /\.html$/,  loader: 'raw-loader', exclude: [ root('src/index.html') ] },
 
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+
+      { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' },
       // if you add a loader include the file extension
+
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false&progressive=true'
+        ]
+      }
+
     ]
   },
 
@@ -141,7 +160,9 @@ module.exports = {
       '__awaiter': 'ts-helper/awaiter',
       '__extends': 'ts-helper/extends',
       '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/src/global/browser'
+      'Reflect': 'es7-reflect-metadata/src/global/browser',
+      '$': 'jquery',
+      'jQuery': 'jquery'
     }),
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
@@ -168,7 +189,8 @@ module.exports = {
       algorithm: gzipMaxLevel,
       regExp: /\.css$|\.html$|\.js$|\.map$/,
       threshold: 2 * 1024
-    })
+    }),
+    new ExtractTextPlugin("styles.css")
   ],
   // Other module loader config
   tslint: {

@@ -1,0 +1,126 @@
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Nav bar, search, and nav
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+#navigation-bar {
+    position: relative;
+    height: 60px;
+    padding-left: 60px;
+}
+#search {
+    width:100%;
+    z-index:1;
+    background-color:white;
+    position: relative;
+    float: left;
+    height: 90px;
+    margin-top:-19px;
+}
+#label {
+    width: 93px;
+    height: 84px;
+    z-index: 20;
+}
+
+
+#label label {
+    width: 93px;
+    height: 84px;
+    background: url("../images/search.png") 0 0;
+    background-repeat:no-repeat;
+    margin-top:0px;
+    font-size: 0;
+    color: rgba(0, 0, 0, 0);
+    text-indent: -9999px;
+    cursor: pointer;
+}
+#label label:hover {
+    background: url("../images/search.png") 0px 0
+    background-color:white;
+        background-repeat:no-repeat;
+
+}
+#label.active label {
+    background: url("../images/search.png") -60px 0
+        background-repeat:no-repeat;
+
+}
+#input {
+    position: absolute;
+    top: 0;
+    right: 98px;
+    width: 800%;
+    height: 84px;
+    z-index: 5;
+    overflow: hidden;
+}
+#input input {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 800%;
+    width: 800%;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+    -webkit-backface-visibility: none;
+    -moz-backface-visibility: none;
+    -ms-backface-visibility: none;
+    backface-visibility: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-transition: right 0;
+    -moz-transition: right 0;
+    -ms-transition: right 0;
+    -o-transition: right 0;
+    transition: right 0;
+}
+#input input:focus {
+    outline: none
+}
+#input.focus {
+    z-index: 20
+}
+#input.focus input {
+    right: 0;
+    -webkit-transition: left 0.3s;
+    -moz-transition: right 0.3s;
+    -ms-transition: right 0.3s;
+    -o-transition: right 0.3s;
+    transition: right 0.3s;
+}
+nav {
+    width: 100%;
+    float: left;
+    padding-left: 10px;
+    position: relative;
+    z-index: 10;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+nav li {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    font-size: 24px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+nav a {
+    display: block;
+    padding: 0 15px;
+    color: #c8c8c8;
+}
+nav a:hover {
+    color: #3296c8
+}

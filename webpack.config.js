@@ -7,10 +7,11 @@ var path = require('path');
 var webpack = require('webpack');
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'MustRace',
   baseUrl: '/',
   host: 'localhost',
   port: 3000,
@@ -28,7 +29,7 @@ module.exports = {
   // cache: false,
 
   // our angular app
-  entry: { 'polyfills': './src/polyfills.ts', 'main': './src/main.ts' },
+  entry: { 'polyfills': './src/polyfills.ts', 'main': './src/main.ts' , 'bootstrap' : 'bootstrap-loader' },
 
   // Config for our build files
   output: {
@@ -40,7 +41,7 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async') // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html', '.woff', '.ttf', '.eot', '.svg', '.jpg', '.less', '.scss'], '.async') // ensure .async.ts etc also works
   },
 
   module: {
@@ -60,12 +61,26 @@ module.exports = {
       { test: /\.json$/,  loader: 'json-loader' },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      //{ test: /\.css$/,   loader: ExtractTextPlugin.extract('raw') },
+
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+      },
+
+
+      { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },
+
+      { test: /\.less$/,     loader: 'style!css!less'},
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader', exclude: [ root('src/index.html') ] }
+      { test: /\.html$/,  loader: 'raw-loader', exclude: [ root('src/index.html') ] },
 
       // if you add a loader include the resolve file extension above
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+
+      { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' },
     ]
   },
 
@@ -81,8 +96,11 @@ module.exports = {
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
-      }
-    })
+      },
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new ExtractTextPlugin("styles.css")
   ],
 
   // Other module loader config

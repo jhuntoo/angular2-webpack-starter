@@ -66,3 +66,11 @@ if ('development' === process.env.ENV) {
   document.addEventListener('DOMContentLoaded', main);
 }
 
+
+//import './assets/css/component.css';
+//import './assets/css/cssparallax.css';
+//import './assets/css/reset.css';
+//import './assets/css/responsivemobile.css';
+import './assets/css/style.css';
+import 'jquery';
+import 'font-awesome-webpack!../font-awesome.config.js';
