@@ -29,7 +29,7 @@ module.exports = {
   // cache: false,
 
   // our angular app
-  entry: { 'polyfills': './src/polyfills.ts', 'main': './src/main.ts' , 'bootstrap' : 'bootstrap-loader' },
+  entry: { 'polyfills': './src/polyfills.ts', 'main': './src/main.ts' },
 
   // Config for our build files
   output: {
@@ -78,9 +78,9 @@ module.exports = {
 
       // if you add a loader include the resolve file extension above
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
 
-      { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' },
+      //{ test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' },
     ]
   },
 
@@ -96,9 +96,9 @@ module.exports = {
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
-      },
-      $: "jquery",
-      jQuery: "jquery"
+      }
+      //$: "jquery",
+      //jQuery: "jquery"
     }),
     new ExtractTextPlugin("styles.css")
   ],

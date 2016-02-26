@@ -8,6 +8,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
+import {RegisterForm} from './register/register';
 
 /*
  * App Component
@@ -62,6 +63,7 @@ import {Navbar} from './navbar/navbar';
 @RouteConfig([
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
+  { path: '/register', component: RegisterForm, name: 'Register' },
   // Async load a component using Webpack's require with es6-promise-loader
   { path: '/about', loader: () => require('./about/about')('About'), name: 'About' },
   { path: '/**', redirectTo: ['Index'] }

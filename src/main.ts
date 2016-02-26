@@ -71,6 +71,5 @@ if ('development' === process.env.ENV) {
 //import './assets/css/cssparallax.css';
 //import './assets/css/reset.css';
 //import './assets/css/responsivemobile.css';
-import './assets/css/style.css';
-import 'jquery';
+//import './assets/css/style.css';
 import 'font-awesome-webpack!../font-awesome.config.js';
