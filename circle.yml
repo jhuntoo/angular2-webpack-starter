@@ -8,8 +8,15 @@ machine:
     version: 5.0.0
 
 dependencies:
+  cache_directories:
+    - node_modules
+    - /home/ubuntu/nvm/versions/node/5.0.0/bin
+    - /home/ubuntu/nvm/versions/node/5.0.0/lib/node_modules
+  pre:
+    - npm install -g npm
   override:
     - sudo pip install awscli
+
 
 test:
   pre:
