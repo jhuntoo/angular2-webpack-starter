@@ -15,7 +15,7 @@ dependencies:
   pre:
     - npm install -g npm
   override:
-    - sudo pip install awscli
+    - sudo pip install -r requirements.txt
 
 
 test:
