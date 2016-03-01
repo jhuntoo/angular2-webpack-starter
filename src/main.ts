@@ -1,7 +1,7 @@
 /*
  * Providers provided by Angular
  */
-import * as ng from 'angular2/core';
+import * as ngCore from 'angular2/core';
 import * as browser from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, PathLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
@@ -19,7 +19,7 @@ let options = {
 const ENV_PROVIDERS = [];
 
 if ('production' === process.env.ENV) {
-  ng.enableProdMode();
+  ngCore.enableProdMode();
   ENV_PROVIDERS.push(browser.ELEMENT_PROBE_PROVIDERS_PROD_MODE);
 } else {
   ENV_PROVIDERS.push(browser.ELEMENT_PROBE_PROVIDERS);
@@ -40,11 +40,12 @@ export function main() {
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-    ng.provide(LocationStrategy, { useClass: PathLocationStrategy }),
-    ng.provide(ToastOptions, { useValue: new ToastOptions(options)})
+    ngCore.provide(LocationStrategy, { useClass: PathLocationStrategy }),
+    ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)})
   ])
   .catch(err => console.error(err));
 }
+
 
 /*
  * Vendors
@@ -57,22 +58,27 @@ export function main() {
  * Hot Module Reload
  * experimental version by @gdi2290
  */
+
+function bootstrapDomReady() {
+  // bootstrap after document is ready
+  return document.addEventListener('DOMContentLoaded', main);
+}
+
 if ('development' === process.env.ENV) {
   // activate hot module reload
-  if ('hot' in module) {
+  if (process.env.HMR) {
     if (document.readyState === 'complete') {
       main();
     } else {
-      document.addEventListener('DOMContentLoaded', main);
+      bootstrapDomReady();
     }
     module.hot.accept();
+  } else {
+    bootstrapDomReady();
   }
-
 } else {
-  // bootstrap after document is ready
-  document.addEventListener('DOMContentLoaded', main);
+  bootstrapDomReady();
 }
-
 
 //import './assets/css/component.css';
 //import './assets/css/cssparallax.css';
