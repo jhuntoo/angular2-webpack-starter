@@ -9,6 +9,7 @@ import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';
+import {VerifyEmail} from './verifyemail/verifyemail';
 
 /*
  * App Component
@@ -64,6 +65,7 @@ import {RegisterForm} from './register/register';
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: RegisterForm, name: 'Register' },
+  { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
   // Async load a component using Webpack's require with es6-promise-loader
   { path: '/about', loader: () => require('./about/about')('About'), name: 'About' },
   { path: '/**', redirectTo: ['Index'] }

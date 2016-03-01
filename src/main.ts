@@ -3,8 +3,14 @@
  */
 import * as ng from 'angular2/core';
 import * as browser from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {ROUTER_PROVIDERS, LocationStrategy, PathLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
+import {ToastOptions} from "ng2-toastr/ng2-toastr";
+
+let options = {
+  autoDismiss: false,
+  positionClass: 'toast-bottom-right',
+};
 
 /*
  * App Environment Providers
@@ -34,7 +40,8 @@ export function main() {
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-    ng.provide(LocationStrategy, { useClass: HashLocationStrategy })
+    ng.provide(LocationStrategy, { useClass: PathLocationStrategy }),
+    ng.provide(ToastOptions, { useValue: new ToastOptions(options)})
   ])
   .catch(err => console.error(err));
 }
@@ -72,4 +79,6 @@ if ('development' === process.env.ENV) {
 //import './assets/css/reset.css';
 //import './assets/css/responsivemobile.css';
 //import './assets/css/style.css';
+import 'ng2-toastr/ng2-toastr.js';
+import 'ng2-toastr/ng2-toastr.css';
 import 'font-awesome-webpack!../font-awesome.config.js';
