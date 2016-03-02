@@ -32,7 +32,7 @@
                 "RoutingRuleCondition" : {"HttpErrorCodeReturnedEquals" : "404"},
                 "RedirectRule" : {
                   "HostName" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
-                  "ReplaceKeyPrefixWith" : "#!/"
+                  "ReplaceKeyPrefixWith" : "#/"
                 }
               }]
 
