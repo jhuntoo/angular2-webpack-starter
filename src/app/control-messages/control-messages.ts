@@ -1,10 +1,10 @@
 import {Component, Host} from 'angular2/core';
 import {NgFormModel} from 'angular2/common';
 import {ValidationService} from '../validation/ValidationService';
-import {NgControlGroup} from "angular2/common";
-import {ControlArray} from "angular2/common";
-import {ControlGroup} from "angular2/common";
-import {Control} from "angular2/common";
+import {NgControlGroup} from 'angular2/common';
+import {ControlArray} from 'angular2/common';
+import {ControlGroup} from 'angular2/common';
+import {Control} from 'angular2/common';
 
 @Component({
   selector: 'control-messages',

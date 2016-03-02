@@ -5,7 +5,7 @@ import * as ngCore from 'angular2/core';
 import * as browser from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, PathLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {ToastOptions} from "ng2-toastr/ng2-toastr";
+import {ToastOptions} from 'ng2-toastr/ng2-toastr';
 
 let options = {
   autoDismiss: false,

@@ -11,7 +11,7 @@ import {ROUTER_DIRECTIVES, RouteParams, RouteConfig} from 'angular2/router';
   directives: [ROUTER_DIRECTIVES]
 })
 export class VerifyEmail {
-  code:string;
+  code: string;
 
   constructor(params: RouteParams) {
     this.code = params.get('code');

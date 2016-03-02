@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core';
-import {Validators, FormBuilder,Control, ControlGroup} from 'angular2/common';
+import {Validators, FormBuilder, Control, ControlGroup} from 'angular2/common';
 import {Alert, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {ControlMessages} from '../control-messages/control-messages';
-import {AbstractControl} from "angular2/common";
-import {ValidationService} from "../validation/ValidationService";
+import {AbstractControl} from 'angular2/common';
+import {ValidationService} from '../validation/ValidationService';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
-import {Response} from "angular2/http";
+import {Response} from 'angular2/http';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
@@ -24,9 +24,15 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class RegisterForm {
   form: ControlGroup;
-  email: Control = new Control("", Validators.compose([Validators.required, ValidationService.emailValidator]));
-  password: Control = new Control("", Validators.compose([Validators.required, ValidationService.passwordValidator]));
-  confirmPassword = new Control("", Validators.required);
+  email: Control = new Control('',
+    Validators.compose([
+      Validators.required,
+      ValidationService.emailValidator]));
+  password: Control = new Control('',
+    Validators.compose([
+      Validators.required,
+      ValidationService.passwordValidator]));
+  confirmPassword = new Control('', Validators.required);
 
   constructor(fb: FormBuilder, private http: Http, public toastr: ToastsManager) {
     this.form = fb.group({

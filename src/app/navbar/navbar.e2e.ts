@@ -38,7 +38,7 @@ import WebElement = protractor.WebElement;
        expect(emailLinkElement.getAttribute('href')).toBe('mailto:contact@mustrace.com?Subject=Hello%20again');
      });
      it('should contain the font awesome envelope icon', () => {
-       expect(emailLinkElement.findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-envelope fa-3x');
+       expect(emailLinkElement.findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-envelope fa-2x');
      });
    });
 
@@ -54,7 +54,7 @@ import WebElement = protractor.WebElement;
        expect(twitterLinkElement.getAttribute('href')).toBe('https://twitter.com/Must_Race_Com');
      });
      it('should contain the font awesome twitter icon', () => {
-       expect(twitterLinkElement.findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-twitter fa-3x');
+       expect(twitterLinkElement.findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-twitter fa-2x');
      });
    });
 
@@ -70,7 +70,7 @@ import WebElement = protractor.WebElement;
        expect(facebookLinkElement.getAttribute('href')).toBe('https://www.facebook.com/mustracecom/?fref=ts');
      });
      it('should contain the font awesome facebook-official icon', () => {
-       expect(facebookLinkElement.findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-facebook-official fa-3x');
+       expect(facebookLinkElement.findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-facebook-official fa-2x');
      });
    });
 

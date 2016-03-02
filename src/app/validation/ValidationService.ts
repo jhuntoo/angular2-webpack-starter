@@ -1,4 +1,4 @@
-import {ControlGroup} from "angular2/common";
+import {ControlGroup} from 'angular2/common';
 export class ValidationService {
 
   static getValidatorErrorMessage(code: string) {
@@ -19,7 +19,7 @@ export class ValidationService {
     let valid = true;
     for (name in group.controls) {
       if (val === undefined) {
-        val = group.controls[name].value
+        val = group.controls[name].value;
       } else {
         if (val !== group.controls[name].value) {
           valid = false;
