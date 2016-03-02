@@ -194,7 +194,7 @@ module.exports = helpers.validate({
   // Other module loader config
   tslint: {
     emitErrors: true,
-    failOnHint: true,
+    failOnHint: false,
     resourcePath: 'src',
   },
 
