@@ -20,9 +20,11 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || 'localhost';
 var PORT = process.env.PORT || 8080;
+var BUILD_NUMBER = process.env.CIRCLE_BUILD_NUM || '';
 
 var metadata = {
   title: 'MustRace',
+  version: BUILD_NUMBER,
   baseUrl: '/',
   host: HOST,
   port: PORT,
