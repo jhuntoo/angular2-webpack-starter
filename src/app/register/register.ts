@@ -74,7 +74,7 @@ export class RegisterForm {
 
   onSubmit() {
      let request = { email : this.email.value, password: this.password.value};
-     this.http.post('http://localhost:9000/api/v1/auth/register', JSON.stringify(request))
+     this.http.post('http://52.50.10.205/api/v1/auth/register', JSON.stringify(request))
        .map((res: Response) => res.json())
        .subscribe(
          data => console.log(`Response: ${data}`),

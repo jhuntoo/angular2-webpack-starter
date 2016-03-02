@@ -42,8 +42,8 @@ module.exports = helpers.validate({
 
   entry: {
     'polyfills':'./src/polyfills.ts',
-    'main':'./src/main.ts', // our angular app
-    'bootstrap' : 'bootstrap-loader'
+    'main':'./src/main.ts' // our angular app
+    //'bootstrap' : 'bootstrap-loader'
   },
 
   // Config for our build files
