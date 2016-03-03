@@ -28,6 +28,8 @@ test:
     - npm run webdriver:start:
             background: true
     - sleep 5
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
     - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
   override:
     - npm run e2e
