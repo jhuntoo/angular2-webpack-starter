@@ -15,10 +15,10 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   providers: [ToastsManager],
   directives: [
 
-      Alert, DATEPICKER_DIRECTIVES, ControlMessages
+    Alert, DATEPICKER_DIRECTIVES, ControlMessages
   ],
   // Our list of styles in our component. We may add more to compose many styles together
-  styles: [ require('./register.css').toString()],
+  styles: [require('./register.css').toString()],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./register.html')
 })
@@ -28,13 +28,14 @@ export class RegisterForm {
     Validators.compose([
       Validators.required,
       ValidationService.emailValidator]));
-  password: Control = new Control('',
+  password:Control = new Control('',
     Validators.compose([
       Validators.required,
       ValidationService.passwordValidator]));
   confirmPassword = new Control('', Validators.required);
+  emailTaken:boolean = false;
 
-  constructor(fb: FormBuilder, private http: Http, public toastr: ToastsManager) {
+  constructor(fb:FormBuilder, private http:Http, public toastr:ToastsManager) {
     this.form = fb.group({
       email: this.email,
       matchingPassword: fb.group({
@@ -68,9 +69,7 @@ export class RegisterForm {
     //);
 
 
-
   }
-
 
 
   ngOnInit() {
@@ -79,14 +78,24 @@ export class RegisterForm {
   }
 
   onSubmit() {
-     let request = { email : this.email.value, password: this.password.value};
-     this.http.post('http://52.50.10.205/api/v1/auth/register', JSON.stringify(request))
-       .map((res: Response) => res.json())
-       .subscribe(
-         data => console.log(`Response: ${data}`),
-         err => this.toastr.error(JSON.stringify(err)),
-         () => console.log('Random Quote Complete')
-       );
+    let request = {email: this.email.value, password: this.password.value};
+    this.http.post('http://52.50.10.205/api/v1/auth/register', JSON.stringify(request))
+      .map((res:Response) => res.json())
+      .subscribe(
+        data => this.applyReponse(data),
+        err => this.toastr.error(JSON.stringify(err)),
+        () => console.log('Random Quote Complete')
+      );
+  }
+
+  applyReponse(data) {
+    if (data.success) {
+
+    } else {
+      if (data.exists) {
+        this.emailTaken = true;
+      }
+    }
   }
 
 }

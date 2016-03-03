@@ -1,34 +1,57 @@
-import {
-  it,
-  inject,
-  injectAsync,
-  describe,
-  beforeEachProviders,
-  TestComponentBuilder
-} from 'angular2/testing';
-
-import {Component, provide} from 'angular2/core';
-import {BaseRequestOptions, Http} from 'angular2/http';
-import {MockBackend} from 'angular2/http/testing';
-
-// Load the implementations that should be tested
-import {ControlMessages} from './control-messages';
-
-describe('control-messages conponent', () => {
-  // Create a test component to test directives
-  @Component({
-    template: '',
-    directives: [ ControlMessages ]
-  })
-  class TestComponent {}
-
-  it('should sent font-size to x-large', injectAsync([TestComponentBuilder], (tcb) => {
-    return tcb.overrideTemplate(TestComponent, '<div x-large>Content</div>')
-      .createAsync(TestComponent).then((fixture: any) => {
-        fixture.detectChanges();
-        let compiled = fixture.debugElement.nativeElement.children[0];
-        expect(compiled.style.fontSize).toBe('x-large');
-      });
-  }));
-
-});
+//import {
+//  it,
+//  injectAsync,
+//  fdescribe,
+//  beforeEachProviders,
+//  TestComponentBuilder,
+//
+//
+//} from 'angular2/testing';
+//
+//import {BrowserDomAdapter} from "angular2/src/platform/browser/browser_adapter";
+//BrowserDomAdapter.makeCurrent();
+//
+//import {Component, provide} from 'angular2/core';
+//
+//// Load the implementations that should be tested
+//import {ControlMessages} from './control-messages';
+//import {ComponentFixture} from 'angular2/testing';
+//
+//let validTemplate = ` <form [ngFormModel]="form" (ngSubmit)="onSubmit()">
+//           <input id="email" type="email" ngControl="email">
+//           <control-messages control="email"></control-messages>
+//           <div ngControlGroup="matchingPassword">
+//            <input id="password" type="password" ngControl="password">
+//            <control-messages control="matchingPassword/password"></control-messages>
+//            <input id="confirmPassword" type="password" ngControl="confirmPassword">
+//            <control-messages control="matchingPassword/confirmPassword"></control-messages>
+//          </div>
+//          <control-messages control="matchingPassword"></control-messages>
+//        </form>`;
+//
+//// Create a test component to test directives
+//@Component({
+//  selector: "irrelevant",
+//  template : validTemplate,
+//  directives: [ ControlMessages ]
+//})
+//class ValidComponent { message = "Irrelevant"; }
+//
+//
+//fdescribe('control-messages conponent', () => {
+//
+//  fdescribe('given a valid <form> template', () => {
+//    fdescribe('and no elements have been touched', () => {
+//      skip ('should not display any messages', injectAsync([TestComponentBuilder], (tcb) => {
+//        return tcb.createAsync(ValidComponent).then((fixture) => {
+//            fixture.detectChanges();
+//          //console.log(`fixure: ${JSON.stringify(fixture)}`)
+//          //  let nativeElement = fixture.nativeElement;
+//          //  expect(nativeElement.querySelector('#validation-error').toBe(null));
+//          });
+//      }));
+//    });
+//
+//  });
+//
+//});

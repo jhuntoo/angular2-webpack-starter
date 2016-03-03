@@ -38,7 +38,8 @@ export class ControlMessages {
 
     for (let propertyName in messageControl.errors) {
       if (messageControl.errors.hasOwnProperty(propertyName) && shouldReportError) {
-        return ValidationService.getValidatorErrorMessage(propertyName);
+        if (propertyName === 'required') return 'Required';
+        return messageControl.errors[propertyName];
       }
     }
     return null;
