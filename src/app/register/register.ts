@@ -4,15 +4,18 @@ import {Alert, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {ControlMessages} from '../control-messages/control-messages';
 import {AbstractControl} from 'angular2/common';
 import {ValidationService} from '../validation/ValidationService';
+import {EmailCheckResult} from './models/EmailCheckResult';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {Response} from 'angular2/http';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import {Subject} from "rxjs/Subject";
+import {RegistrationService} from './services/registration.service';
 
 @Component({
 
   selector: 'register',
   viewProviders: [HTTP_PROVIDERS],
-  providers: [ToastsManager],
+  providers: [ToastsManager, RegistrationService],
   directives: [
 
     Alert, DATEPICKER_DIRECTIVES, ControlMessages
@@ -23,8 +26,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   template: require('./register.html')
 })
 export class RegisterForm {
-  form: ControlGroup;
-  email: Control = new Control('',
+  form:ControlGroup;
+  email:Control = new Control('',
     Validators.compose([
       Validators.required,
       ValidationService.emailValidator]));
@@ -33,9 +36,11 @@ export class RegisterForm {
       Validators.required,
       ValidationService.passwordValidator]));
   confirmPassword = new Control('', Validators.required);
-  emailTaken:boolean = false;
+  checkingEmail:boolean = false;
+  emailCheckResult:EmailCheckResult = null;
+  startEmailCheck$:Subject<string>;
 
-  constructor(fb:FormBuilder, private http:Http, public toastr:ToastsManager) {
+  constructor(fb:FormBuilder, private http:Http, public toastr:ToastsManager, private registrationService: RegistrationService) {
     this.form = fb.group({
       email: this.email,
       matchingPassword: fb.group({
@@ -43,32 +48,6 @@ export class RegisterForm {
         confirmPassword: this.confirmPassword
       }, {validator: ValidationService.passwordsDoNotMatch})
     });
-
-
-    //this.email.valueChanges.subscribe(
-    //  (value: string) => {
-    //    console.log('email changed to: ', value);
-    //  }
-    //);
-    //this.password.valueChanges.subscribe(
-    //  (value: string) => {
-    //    console.log('password changed to: ', value);
-    //  }
-    //);
-    //
-    //this.confirmPassword.valueChanges.subscribe(
-    //  (value: string) => {
-    //    console.log('confirmPassword changed to: ', value);
-    //  }
-    //);
-    //
-    //this.form.valueChanges.subscribe(
-    //  (value: string) => {
-    //    console.log('form changed to: ', value);
-    //  }
-    //);
-
-
   }
 
 
@@ -93,9 +72,36 @@ export class RegisterForm {
 
     } else {
       if (data.exists) {
-        this.emailTaken = true;
       }
     }
+  }
+
+  emailTakenValidator(control:Control) {
+    if (!this.isAValidEmail(control)) {
+      this.emailCheckResult = null;
+      return null;
+    }
+    this.startEmailCheck$.next(control.value);
+
+  }
+
+  checkEmail(email:string) {
+    this.checkingEmail = true;
+
+    this.registrationService.checkEmail(email)
+      .subscribe(
+        result => this.applyResult(result),
+        err => {this.toastr.error(JSON.stringify(err)); this.applyResult()},
+        () => console.log('checkEmail Finished')
+      );
+  }
+
+  applyResult(result?:EmailCheckResult) {
+    this.emailCheckResult = result;
+  }
+
+  isAValidEmail(control:Control) {
+    return ValidationService.emailValidator(control) == null;
   }
 
 }

@@ -12,6 +12,7 @@ import {Component, provide, DynamicComponentLoader, ApplicationRef} from 'angula
 
 // Load the implementations that should be tested
 import {RegisterForm} from './register';
+import {RegistrationService, MockRegistrationService} from './services/registration.service';
 import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 
@@ -31,6 +32,7 @@ describe('RegisterForm', () => {
       deps: [MockBackend, BaseRequestOptions]
     }),
     provide(ToastOptions, { useValue: new ToastOptions({})}),
+    provide(RegistrationService, { useValue: new MockRegistrationService()}),
     ToastsManager,
     RegisterForm
   ]);
@@ -38,8 +40,8 @@ describe('RegisterForm', () => {
 
 
   describe('when loaded', () => {
-    it('should default emailTaken to false', inject([ RegisterForm ], (form) => {
-      expect(form.emailTaken).toBeFalsy();
+    it('should default emailCheckResult to null', inject([ RegisterForm ], (form) => {
+      expect(form.emailTaken).toBeUndefined();
     }));
 
     describe('email', () => {
