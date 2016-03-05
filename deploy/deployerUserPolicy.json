@@ -35,8 +35,8 @@
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::app.joinhomely.com",
-        "arn:aws:s3:::app.joinhomely.com/*"
+        "arn:aws:s3:::beta.mustrace.com",
+        "arn:aws:s3:::beta.mustrace.com/*"
       ]
     }
   ]

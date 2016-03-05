@@ -13,15 +13,15 @@
   "Mappings" :  {
     "EnvironmentMap" : {
       "prod" : {
-        "WebsiteDomain" : "app.joinhomely.com",
-        "s3BucketArn" : "arn:aws:s3:::app.joinhomely.com/*"
+        "WebsiteDomain" : "beta.mustrace.com",
+        "s3BucketArn" : "arn:aws:s3:::beta.mustrace.com/*"
       }
     }
   },
 
 
   "Resources" : {
-     "HomelyS3Bucket" : {
+     "MustRaceS3Bucket" : {
         "Type" : "AWS::S3::Bucket",
         "Properties" : {
            "AccessControl" : "PublicRead",
@@ -40,7 +40,7 @@
         },
         "DeletionPolicy" : "Delete"
      },
-     "HomelyBucketPolicy" : {
+     "MustRaceBucketPolicy" : {
         "Type" : "AWS::S3::BucketPolicy",
         "Properties" : {
           "Bucket" : { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
@@ -56,8 +56,50 @@
             ]
           }
         },
-        "DependsOn" : "HomelyS3Bucket"
+        "DependsOn" : "MustRaceS3Bucket"
+     },
+    "WWWBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": {
+          "Fn::Join": ["", ["www.", { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]}]]
+        },
+        "AccessControl": "BucketOwnerFullControl",
+        "WebsiteConfiguration": {
+          "RedirectAllRequestsTo": {
+            "HostName": {"Ref": "MustRaceS3Bucket"}
+          }
+        }
       }
+    },
+    "DNS": {
+      "Type": "AWS::Route53::RecordSetGroup",
+      "Properties": {
+        "HostedZoneName": "mustrace.com.",
+        "Comment": "Zone apex alias.",
+        "RecordSets": [
+          {
+            "Name": { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]},
+            "Type": "CNAME",
+            "TTL" : "300",
+            "ResourceRecords" : [
+              {"Fn::GetAtt":["MustRaceS3Bucket", "DomainName"]}
+            ]
+          },
+          {
+            "Name": {
+              "Fn::Join": ["", ["www.", { "Fn::FindInMap" : ["EnvironmentMap", { "Ref" : "TargeEnvironment"}, "WebsiteDomain"]}]]
+            },
+            "Type": "CNAME",
+            "TTL" : "300",
+            "ResourceRecords" : [
+              {"Fn::GetAtt":["WWWBucket", "DomainName"]}
+            ]
+          }
+        ]
+      }
+    }
+
   },
 
   "Outputs" : {
