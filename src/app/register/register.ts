@@ -9,6 +9,7 @@ import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {Response} from 'angular2/http';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Subject} from "rxjs/Subject";
+
 import {RegistrationService} from './services/registration.service';
 
 @Component({
@@ -30,7 +31,8 @@ export class RegisterForm {
   email:Control = new Control('',
     Validators.compose([
       Validators.required,
-      ValidationService.emailValidator]));
+      ValidationService.emailValidator,
+      this.emailTakenValidator.bind(this)]));
   password:Control = new Control('',
     Validators.compose([
       Validators.required,
@@ -48,6 +50,20 @@ export class RegisterForm {
         confirmPassword: this.confirmPassword
       }, {validator: ValidationService.passwordsDoNotMatch})
     });
+
+    //this.startEmailCheck$ = new Subject();
+    //this.email.valueChanges
+    //    //.debounceTime(200)
+    //    //.distinctUntilChanged()
+    //    .flatMap((email:string) => this.registrationService.checkEmail(email))
+    //      .subscribe(
+    //        (result: EmailCheckResult) => this.applyResult(result),
+    //        err => {this.toastr.error(JSON.stringify(err)); },
+    //        () => console.log('checkEmail Finished')
+    //      );
+         //.subscribe((email: string) => {this.checkEmail(email);},
+         //     error => console.log('Error startEmailCheck$'));
+
   }
 
 
@@ -77,6 +93,7 @@ export class RegisterForm {
   }
 
   emailTakenValidator(control:Control) {
+    console.log('emailTakenValidator');
     if (!this.isAValidEmail(control)) {
       this.emailCheckResult = null;
       return null;
@@ -85,18 +102,20 @@ export class RegisterForm {
 
   }
 
-  checkEmail(email:string) {
-    this.checkingEmail = true;
-
-    this.registrationService.checkEmail(email)
-      .subscribe(
-        result => this.applyResult(result),
-        err => {this.toastr.error(JSON.stringify(err)); this.applyResult()},
-        () => console.log('checkEmail Finished')
-      );
-  }
+  //checkEmail(email:string) {
+  //  console.log('checkEmail called');
+  //  this.checkingEmail = true;
+  //
+  //  this.registrationService.checkEmail(email)
+  //    .subscribe(
+  //      result => this.applyResult(result),
+  //      err => {this.toastr.error(JSON.stringify(err)); this.applyResult()},
+  //      () => console.log('checkEmail Finished')
+  //    );
+  //}
 
   applyResult(result?:EmailCheckResult) {
+    console.log('applyResult');
     this.emailCheckResult = result;
   }
 

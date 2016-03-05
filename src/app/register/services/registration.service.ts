@@ -5,6 +5,7 @@ import {Subject} from "rxjs/Subject";
 import {Response} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 import {EmailCheckResult} from "./../models/emailCheckResult";
+import {inject} from "angular2/testing";
 
 
 @Injectable()
@@ -12,10 +13,11 @@ export class RegistrationService {
   public   emailCheckResult$:Subject<EmailCheckResult>;
 
   constructor(private http:Http, private config:Config) {
+    console.log(`BaseUrl: ${config.apiBaseUrl}`)
   }
 
   public checkEmail(email:string):Observable<EmailCheckResult> {
-    return this.http.get(`${this.config.apiBaseUrl}/checkemail`)
+    return this.http.get(`${this.config.apiBaseUrl}/auth/checkemail`)
       .map((response:Response):EmailCheckResult => {
         return this._toEmailCheckResult(response)
       });

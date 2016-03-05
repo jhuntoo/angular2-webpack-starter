@@ -62,7 +62,7 @@ import {VerifyEmail} from './verifyemail/verifyemail';
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' },
+  { path: "/", component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: RegisterForm, name: 'Register' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },

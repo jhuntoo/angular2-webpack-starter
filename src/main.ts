@@ -6,6 +6,7 @@ import * as browser from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {ToastOptions} from 'ng2-toastr/ng2-toastr';
+import {Config} from './config/config';
 
 let options = {
   autoDismiss: false,
@@ -36,12 +37,15 @@ import {App} from './app/app';
  * our Services and Providers into Angular's dependency injection
  */
 export function main() {
+  let config = ('production' === process.env.ENV)  ? require('./config/production.ts').config : require('./config/dev.ts').config;
+  console.log(`config: ${JSON.stringify(config)}`);
   return browser.bootstrap(App, [
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
     ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy }),
-    ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)})
+    ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)}),
+    ngCore.provide(Config, { useValue: config})
   ])
   .catch(err => console.error(err));
 }
