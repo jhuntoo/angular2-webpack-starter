@@ -4,7 +4,7 @@ import {Config} from '../../../config/config';
 import {Subject} from 'rxjs/Subject';
 import {Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {EmailCheckResult} from './../models/emailCheckResult';
+import {EmailCheckResult} from '../models/emailCheckResult';
 import {inject} from 'angular2/testing';
 
 
