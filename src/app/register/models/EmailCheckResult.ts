@@ -4,15 +4,15 @@ export class EmailCheckResult {
   }
 
   static error():EmailCheckResult {
-    return new EmailCheckResult(false, true)
+    return new EmailCheckResult(false, true);
   }
 
   static taken():EmailCheckResult {
-    return new EmailCheckResult(false, false)
+    return new EmailCheckResult(false, false);
   }
 
   static available():EmailCheckResult {
-    return new EmailCheckResult(true, false)
+    return new EmailCheckResult(true, false);
   }
 
 }

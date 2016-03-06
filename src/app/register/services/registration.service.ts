@@ -1,11 +1,11 @@
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {Config} from "../../../config/config";
-import {Subject} from "rxjs/Subject";
-import {Response} from "angular2/http";
-import {Observable} from "rxjs/Observable";
-import {EmailCheckResult} from "./../models/emailCheckResult";
-import {inject} from "angular2/testing";
+import {Config} from '../../../config/config';
+import {Subject} from 'rxjs/Subject';
+import {Response} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import {EmailCheckResult} from './../models/emailCheckResult';
+import {inject} from 'angular2/testing';
 
 
 @Injectable()
@@ -13,20 +13,22 @@ export class RegistrationService {
   public   emailCheckResult$:Subject<EmailCheckResult>;
 
   constructor(private http:Http, private config:Config) {
-    console.log(`BaseUrl: ${config.apiBaseUrl}`)
+    console.log(`BaseUrl: ${config.apiBaseUrl}`);
   }
 
   public checkEmail(email:string):Observable<EmailCheckResult> {
     return this.http.get(`${this.config.apiBaseUrl}/auth/checkemail`)
       .map((response:Response):EmailCheckResult => {
-        return this._toEmailCheckResult(response)
+        return this._toEmailCheckResult(response);
       });
   }
 
   private _toEmailCheckResult(response:Response):EmailCheckResult {
-    if (response.status != 200) return EmailCheckResult.error();
-    if (response.json().available) return EmailCheckResult.available();
-    else return EmailCheckResult.taken();
+    if (response.status !== 200) return EmailCheckResult.error();
+    if (response.json().available) {
+      return EmailCheckResult.available();
+    }
+    return EmailCheckResult.taken();
   }
 }
 
