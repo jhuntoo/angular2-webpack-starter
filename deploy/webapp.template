@@ -83,7 +83,7 @@
             "Type": "CNAME",
             "TTL" : "300",
             "ResourceRecords" : [
-              {"Fn::GetAtt":["MustRaceS3Bucket", "DomainName"]}
+              "beta.mustrace.com.s3-website-eu-west-1.amazonaws.com"
             ]
           },
           {
@@ -93,7 +93,7 @@
             "Type": "CNAME",
             "TTL" : "300",
             "ResourceRecords" : [
-              {"Fn::GetAtt":["WWWBucket", "DomainName"]}
+              "www.beta.mustrace.com.s3-website-eu-west-1.amazonaws.com"
             ]
           }
         ]

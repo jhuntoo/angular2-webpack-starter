@@ -36,8 +36,25 @@
       ],
       "Resource": [
         "arn:aws:s3:::beta.mustrace.com",
-        "arn:aws:s3:::beta.mustrace.com/*"
+        "arn:aws:s3:::beta.mustrace.com/*",
+        "arn:aws:s3:::www.beta.mustrace.com",
+        "arn:aws:s3:::www.beta.mustrace.com/*"
       ]
+    },
+    {
+      "Effect":"Allow",
+      "Action":["route53:ListHostedZones"],
+      "Resource":"*"
+    },
+    {
+      "Effect":"Allow",
+      "Action":["route53:ChangeResourceRecordSets"],
+      "Resource":"arn:aws:route53:::hostedzone/Z2GMIABC1G5SUV"
+    },
+    {
+      "Effect":"Allow",
+      "Action":["route53:GetChange"],
+      "Resource":"arn:aws:route53:::change/*"
     }
   ]
 }
