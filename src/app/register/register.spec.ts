@@ -17,6 +17,7 @@ import {RegisterForm} from './register';
 import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegistrationService, MockRegistrationService} from './services/registration.service';
 import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import {LoggingService} from "../common/log";
 
 
 let mockedServiceEmailAvailable = MockRegistrationService.withMocked(EmailCheckResult.available())
@@ -37,6 +38,7 @@ describe('RegisterForm', () => {
     }),
     provide(ToastOptions, { useValue: new ToastOptions({})}),
     provide(RegistrationService, { useValue: new MockRegistrationService()}),
+    provide(LoggingService, { useValue: new LoggingService()}),
     ToastsManager,
     RegisterForm
   ]);
@@ -48,8 +50,15 @@ describe('RegisterForm', () => {
       expect(form.emailTaken).toBeUndefined();
     }));
 
-    it('should default checkingEmail to false', inject([ RegisterForm ], (form) => {
-      expect(form.checkingEmail).toBeFalsy();
+    it('should default isCheckingEmail to false', inject([ RegisterForm ], (form) => {
+      expect(form.isCheckingEmail).toBeFalsy();
+    }));
+
+    it('should default isSubmitting to false', inject([ RegisterForm ], (form) => {
+      expect(form.isSubmitting).toBeFalsy();
+    }));
+    it('should default isNetworkError to false', inject([ RegisterForm ], (form) => {
+      expect(form.isNetworkError).toBeFalsy();
     }));
 
     describe('email', () => {

@@ -22,6 +22,8 @@ require('zone.js/dist/jasmine-patch.js');
 var testing = require('angular2/testing');
 var browser = require('angular2/platform/testing/browser');
 
+require('rxjs/Rx');
+
 testing.setBaseTestProviders(
   browser.TEST_BROWSER_PLATFORM_PROVIDERS,
   browser.TEST_BROWSER_APPLICATION_PROVIDERS);

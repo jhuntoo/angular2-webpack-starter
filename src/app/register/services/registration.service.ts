@@ -28,8 +28,8 @@ export class RegistrationService {
   public register(email :string, password :string):Observable<RegisterResponse> {
     let request = {email: email, password: password};
     return this.http.post(`${this.config.apiBaseUrl}/auth/register`, JSON.stringify(request))
-      .timeout(5000, "/register timed out")
-      .retry(3)
+      //.timeout(5000, "/register timed out")
+      //.retry(3)
       .map((res:Response): RegisterResponse => {
         return this._toRegisterResponse(res);
       });

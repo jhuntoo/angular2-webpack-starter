@@ -13,16 +13,14 @@ import {Subject} from 'rxjs/Subject';
 
 import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from "../common/log";
+import {SpinnerComponent} from '../common/spinner/spinner';
 
 @Component({
 
   selector: 'register',
   viewProviders: [HTTP_PROVIDERS],
   providers: [ToastsManager, RegistrationService, LoggingService],
-  directives: [
-
-    Alert, DATEPICKER_DIRECTIVES, ControlMessages
-  ],
+  directives: [ Alert, DATEPICKER_DIRECTIVES, ControlMessages, SpinnerComponent],
   // Our list of styles in our component. We may add more to compose many styles together
   styles: [require('./register.css').toString()],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
@@ -41,7 +39,10 @@ export class RegisterForm {
       Validators.required,
       ValidationService.passwordValidator]));
   confirmPassword = new Control('', Validators.required);
-  checkingEmail:boolean = false;
+  isCheckingEmail:boolean = false;
+  isSubmitting:boolean = false;
+  isNetworkError:boolean = false;
+
   emailCheckResult:EmailCheckResult = null;
   startEmailCheck$:Subject<string>;
 
@@ -60,8 +61,8 @@ export class RegisterForm {
 
     this.startEmailCheck$ = new Subject();
     this.startEmailCheck$
-    //    //.debounceTime(200)
-    //    //.distinctUntilChanged()
+            .debounceTime(200)
+           .distinctUntilChanged()
           .flatMap((email:string) => this.registrationService.checkEmail(email))
           .subscribe(
             (result: EmailCheckResult) => this.applyResult(result),
@@ -80,16 +81,18 @@ export class RegisterForm {
   }
 
   onSubmit() {
+    this.isSubmitting = true;
     this.log.debug('calling the register endpoint');
     this.registrationService.register(this.email.value, this.password.value)
       .subscribe(
         (response: RegisterResponse) => this.applyRegisterReponse(response),
-        err => this.log.error(JSON.stringify(err)),
+        err => this.applyRegisterError(err),
         () => this.log.debug('Random Quote Complete')
       );
   }
 
   applyRegisterReponse(response: RegisterResponse) {
+    this.isSubmitting = false;
     if (response.success) {
       this.log.debug('success');
     } else {
@@ -97,6 +100,12 @@ export class RegisterForm {
         this.log.debug('exists');
       }
     }
+  }
+
+  applyRegisterError(err) {
+    this.log.error('/register endpoint unreachable');
+    this.isSubmitting = false;
+    this.isNetworkError = true;
   }
 
   emailTakenValidator(control:Control) {
@@ -111,7 +120,7 @@ export class RegisterForm {
 
   //checkEmail(email:string) {
   //  console.log('checkEmail called');
-  //  this.checkingEmail = true;
+  //  this.isCheckingEmail = true;
   //
   //  this.registrationService.checkEmail(email)
   //    .subscribe(
