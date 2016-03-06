@@ -7,6 +7,7 @@ import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {Config} from './config/config';
+import {LoggingService, Level} from './app/common/log';
 
 let options = {
   autoDismiss: false,
@@ -45,7 +46,8 @@ export function main() {
     ...ROUTER_PROVIDERS,
     ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)}),
-    ngCore.provide(Config, { useValue: config})
+    ngCore.provide(Config, { useValue: config}),
+    ngCore.provide(LoggingService, { useValue: new LoggingService()})
   ])
   .catch(err => console.error(err));
 }

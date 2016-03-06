@@ -6,6 +6,7 @@ import {Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {EmailCheckResult} from '../models/EmailCheckResult';
 import {inject} from 'angular2/testing';
+import {RegisterResponse} from "../models/registerResponse";
 
 
 @Injectable()
@@ -18,9 +19,30 @@ export class RegistrationService {
 
   public checkEmail(email:string):Observable<EmailCheckResult> {
     return this.http.get(`${this.config.apiBaseUrl}/auth/checkemail`)
+      .timeout(1000, '/checkemail timed out')
       .map((response:Response):EmailCheckResult => {
         return this._toEmailCheckResult(response);
       });
+  }
+
+  public register(email :string, password :string):Observable<RegisterResponse> {
+    let request = {email: email, password: password};
+    return this.http.post(`${this.config.apiBaseUrl}/auth/register`, JSON.stringify(request))
+      .timeout(5000, "/register timed out")
+      .retry(3)
+      .map((res:Response): RegisterResponse => {
+        return this._toRegisterResponse(res);
+      });
+  }
+  private _toRegisterResponse(response:Response):RegisterResponse {
+    if (response.status !== 200) return RegisterResponse.error('http status is not 200');
+    var body = response.json();
+    if (body.success) {
+      return RegisterResponse.success();
+    } else if (body.exists) {
+      return RegisterResponse.alreadyExists();
+    }
+    return RegisterResponse.error("response cannot be parsed");
   }
 
   private _toEmailCheckResult(response:Response):EmailCheckResult {

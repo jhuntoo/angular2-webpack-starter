@@ -5,18 +5,20 @@ import {ControlMessages} from '../control-messages/control-messages';
 import {AbstractControl} from 'angular2/common';
 import {ValidationService} from '../validation/ValidationService';
 import {EmailCheckResult} from './models/EmailCheckResult';
+import {RegisterResponse} from './models/registerResponse';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {Response} from 'angular2/http';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Subject} from 'rxjs/Subject';
 
 import {RegistrationService} from './services/registration.service';
+import {Logger, LoggingService} from "../common/log";
 
 @Component({
 
   selector: 'register',
   viewProviders: [HTTP_PROVIDERS],
-  providers: [ToastsManager, RegistrationService],
+  providers: [ToastsManager, RegistrationService, LoggingService],
   directives: [
 
     Alert, DATEPICKER_DIRECTIVES, ControlMessages
@@ -27,6 +29,7 @@ import {RegistrationService} from './services/registration.service';
   template: require('./register.html')
 })
 export class RegisterForm {
+  log:Logger
   form:ControlGroup;
   email:Control = new Control('',
     Validators.compose([
@@ -42,7 +45,11 @@ export class RegisterForm {
   emailCheckResult:EmailCheckResult = null;
   startEmailCheck$:Subject<string>;
 
-  constructor(fb:FormBuilder, private http:Http, public toastr:ToastsManager, private registrationService: RegistrationService) {
+  constructor(fb:FormBuilder, private http:Http, public toastr:ToastsManager, private registrationService: RegistrationService, logginService: LoggingService) {
+    let log : Logger = logginService.getLogger('RegisterForm');
+
+    this.log = log;
+
     this.form = fb.group({
       email: this.email,
       matchingPassword: fb.group({
@@ -51,16 +58,16 @@ export class RegisterForm {
       }, {validator: ValidationService.passwordsDoNotMatch})
     });
 
-    //this.startEmailCheck$ = new Subject();
-    //this.email.valueChanges
+    this.startEmailCheck$ = new Subject();
+    this.startEmailCheck$
     //    //.debounceTime(200)
     //    //.distinctUntilChanged()
-    //    .flatMap((email:string) => this.registrationService.checkEmail(email))
-    //      .subscribe(
-    //        (result: EmailCheckResult) => this.applyResult(result),
-    //        err => {this.toastr.error(JSON.stringify(err)); },
-    //        () => console.log('checkEmail Finished')
-    //      );
+          .flatMap((email:string) => this.registrationService.checkEmail(email))
+          .subscribe(
+            (result: EmailCheckResult) => this.applyResult(result),
+            err => {log.error(JSON.stringify(err)); },
+            () => log.debug('checkEmail Finished')
+          );
          //.subscribe((email: string) => {this.checkEmail(email);},
          //     error => console.log('Error startEmailCheck$'));
 
@@ -68,32 +75,32 @@ export class RegisterForm {
 
 
   ngOnInit() {
-    console.log('hello `register` component');
+    this.log.debug('hello `register` component');
     // this.title.getData().subscribe(data => this.data = data);
   }
 
   onSubmit() {
-    let request = {email: this.email.value, password: this.password.value};
-    this.http.post('http://52.50.10.205/api/v1/auth/register', JSON.stringify(request))
-      .map((res:Response) => res.json())
+    this.log.debug('calling the register endpoint');
+    this.registrationService.register(this.email.value, this.password.value)
       .subscribe(
-        data => this.applyReponse(data),
-        err => this.toastr.error(JSON.stringify(err)),
-        () => console.log('Random Quote Complete')
+        (response: RegisterResponse) => this.applyRegisterReponse(response),
+        err => this.log.error(JSON.stringify(err)),
+        () => this.log.debug('Random Quote Complete')
       );
   }
 
-  applyReponse(data) {
-    if (data.success) {
-
+  applyRegisterReponse(response: RegisterResponse) {
+    if (response.success) {
+      this.log.debug('success');
     } else {
-      if (data.exists) {
+      if (response.alreadyExists) {
+        this.log.debug('exists');
       }
     }
   }
 
   emailTakenValidator(control:Control) {
-    console.log('emailTakenValidator');
+    //this.log.debug('emailTakenValidator');
     if (!this.isAValidEmail(control)) {
       this.emailCheckResult = null;
       return null;
@@ -115,7 +122,7 @@ export class RegisterForm {
   //}
 
   applyResult(result?:EmailCheckResult) {
-    console.log('applyResult');
+    this.log.debug('applyResult');
     this.emailCheckResult = result;
   }
 
