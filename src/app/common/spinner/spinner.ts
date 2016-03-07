@@ -1,5 +1,4 @@
-'use strict';
-
+// <reference path="node_modules/typescript/lib/lib.d.ts" />
 import {Component, Input, OnDestroy} from 'angular2/core';
 
 @Component({
@@ -28,7 +27,7 @@ export class SpinnerComponent implements OnDestroy {
       return;
     }
 
-    this.currentTimeout = setTimeout(() => {
+    this.currentTimeout = window.setTimeout(() => {
       this.isDelayedRunning = value;
       this.cancelTimeout();
     }, this.delay);

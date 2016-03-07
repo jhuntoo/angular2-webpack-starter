@@ -10,6 +10,8 @@ import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {Response} from 'angular2/http';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from '../common/log';

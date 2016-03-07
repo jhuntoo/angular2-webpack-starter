@@ -26,6 +26,7 @@
               <i class="fa fa-envelope"></i>
               <input id="email" ngControl="email" class="form-control" type="text">
             </div>
+            <i class="fa fa-check"  *ngIf="emailCheckResult != null && emailCheckResult.available"></i>
             <div *ngIf="email.dirty && emailTaken" class="alert alert-danger">
               <p *ngIf="mailAddress.errors.incorrectMailFormat">Taken</p>
             </div>
