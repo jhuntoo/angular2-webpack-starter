@@ -3,14 +3,14 @@ import {
   inject,
   beforeEach
 } from 'angular2/testing';
-import {EmailCheckResult} from "./emailCheckResult";
+import {EmailCheckResult} from './emailCheckResult';
 
 describe('EmailCheckResult', () => {
   describe('error()', () => {
     let result:EmailCheckResult;
     beforeEach(() => {
       result = EmailCheckResult.error();
-    })
+    });
     it('should return available as false', () => {
       expect(result.available).toBeFalsy();
     });
@@ -23,7 +23,7 @@ describe('EmailCheckResult', () => {
     let result:EmailCheckResult;
     beforeEach(() => {
       result = EmailCheckResult.taken();
-    })
+    });
     it('should return available as false', () => {
       expect(result.available).toBeFalsy();
     });
@@ -36,7 +36,7 @@ describe('EmailCheckResult', () => {
     let result:EmailCheckResult;
     beforeEach(() => {
       result = EmailCheckResult.available();
-    })
+    });
     it('should return available as true', () => {
       expect(result.available).toBeTruthy();
     });

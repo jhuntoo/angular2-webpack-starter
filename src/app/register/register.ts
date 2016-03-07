@@ -12,7 +12,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Subject} from 'rxjs/Subject';
 
 import {RegistrationService} from './services/registration.service';
-import {Logger, LoggingService} from "../common/log";
+import {Logger, LoggingService} from '../common/log';
 import {SpinnerComponent} from '../common/spinner/spinner';
 
 @Component({
@@ -27,7 +27,7 @@ import {SpinnerComponent} from '../common/spinner/spinner';
   template: require('./register.html')
 })
 export class RegisterForm {
-  log:Logger
+  log:Logger;
   form:ControlGroup;
   email:Control = new Control('',
     Validators.compose([

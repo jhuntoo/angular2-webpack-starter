@@ -17,10 +17,10 @@ import {RegisterForm} from './register';
 import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegistrationService, MockRegistrationService} from './services/registration.service';
 import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
-import {LoggingService} from "../common/log";
+import {LoggingService} from '../common/log';
 
 
-let mockedServiceEmailAvailable = MockRegistrationService.withMocked(EmailCheckResult.available())
+let mockedServiceEmailAvailable = MockRegistrationService.withMocked(EmailCheckResult.available());
 
 
 describe('RegisterForm', () => {
@@ -63,7 +63,7 @@ describe('RegisterForm', () => {
 
     describe('email', () => {
       it('should be blank', inject([ RegisterForm ], (form) => {
-        expect(form.email.value).toBe("");
+        expect(form.email.value).toBe('');
       }));
       it('should not be valid', inject([ RegisterForm ], (form) => {
         expect(form.email.valid).toBeFalsy();
@@ -81,7 +81,7 @@ describe('RegisterForm', () => {
 
     describe('password', () => {
       it('should be blank', inject([ RegisterForm ], (form) => {
-        expect(form.password.value).toBe("");
+        expect(form.password.value).toBe('');
       }));
       it('should not be valid', inject([ RegisterForm ], (form) => {
         expect(form.password.valid).toBeFalsy();
@@ -98,7 +98,7 @@ describe('RegisterForm', () => {
     });
     describe('confirmPassword', () => {
       it('should be blank', inject([ RegisterForm ], (form) => {
-        expect(form.confirmPassword.value).toBe("");
+        expect(form.confirmPassword.value).toBe('');
       }));
       it('should not be valid', inject([ RegisterForm ], (form) => {
         expect(form.confirmPassword.valid).toBeFalsy();

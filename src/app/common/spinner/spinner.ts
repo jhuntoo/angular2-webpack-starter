@@ -8,17 +8,19 @@ import {Component, Input, OnDestroy} from 'angular2/core';
   styles :[require('./spinner.css').toString()]
 })
 export class SpinnerComponent implements OnDestroy {
+  @Input()
+  public delay: number = 300;
+
   private currentTimeout: number;
   private isDelayedRunning: boolean = false;
 
-  @Input()
-  public delay: number = 300;
+
 
   @Input()
   public set isRunning(value: boolean) {
     if (!value) {
       this.cancelTimeout();
-      this.isDelayedRunning = false
+      this.isDelayedRunning = false;
       return;
     }
 
@@ -32,12 +34,14 @@ export class SpinnerComponent implements OnDestroy {
     }, this.delay);
   }
 
+  ngOnDestroy(): any {
+    this.cancelTimeout();
+  }
+
   private cancelTimeout(): void {
     clearTimeout(this.currentTimeout);
     this.currentTimeout = undefined;
   }
 
-  ngOnDestroy(): any {
-    this.cancelTimeout();
-  }
+
 }

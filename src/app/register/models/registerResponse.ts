@@ -9,7 +9,7 @@ export class RegisterResponse {
   }
 
   static alreadyExists() : RegisterResponse {
-    return new RegisterResponse(true, true, null);
+    return new RegisterResponse(false, true, null);
   }
 
   static error(msg : string = null) : RegisterResponse {

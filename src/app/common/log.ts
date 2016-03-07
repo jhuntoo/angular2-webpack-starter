@@ -1,18 +1,16 @@
-
-
-import {Injectable} from "angular2/core";
+import {Injectable} from 'angular2/core';
 export var Level = {
   debug: 1,
   info: 2,
   warning: 3,
   error: 4,
   mute:5
-}
+};
 
 @Injectable()
 export class LoggingService {
   public level: number = Level.debug;
-  getLogger(name: string) : Logger{
+  getLogger(name: string) : Logger {
     return new Logger(name, this.level);
   }
 }
@@ -31,7 +29,7 @@ export class Logger {
       return;
     }
 
-    var t = ["%s | %cDebug: ", this.name, "color:green"];
+    var t = ['%s | %cDebug: ', this.name, 'color:green'];
     t.push(...args);
     console.log.apply(console, t);
   }
@@ -41,7 +39,7 @@ export class Logger {
       return;
     }
 
-    var t = ["%s | %cInfo: ", this.name, "color:blue"];
+    var t = ['%s | %cInfo: ', this.name, 'color:blue'];
     t.push(...args);
     console.log.apply(console, t);
   }
@@ -51,7 +49,7 @@ export class Logger {
       return;
     }
 
-    var t = ["%s | %cWarning: ", this.name, "color:orange"];
+    var t = ['%s | %cWarning: ', this.name, 'color:orange'];
     t.push(...args);
     console.log.apply(console, t);
     // Publish an event
@@ -62,7 +60,7 @@ export class Logger {
       return;
     }
 
-    var t = ["%s | %cError: ", this.name, "color:red"];
+    var t = ['%s | %cError: ', this.name, 'color:red'];
     t.push(...args);
     console.log.apply(console, t);
   }
