@@ -21,6 +21,7 @@ dependencies:
 test:
   pre:
     - npm install
+    - gulp
     - npm run build:prod
     - npm run server:prod:
         background: true
