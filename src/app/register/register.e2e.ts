@@ -92,7 +92,7 @@ describe('Register', () => {
   describe('On leaving fields empty', () => {
     beforeAll(() => {
       registerPage.load();
-    })
+    });
     it('should display email required', () => {
         registerPage.expectErrorAfterLeavingInput(registerPage.emailInput(), registerPage.emailErrors(), 'Required');
     });
@@ -101,6 +101,32 @@ describe('Register', () => {
     });
     it('should display confirm password required', () => {
       registerPage.expectErrorAfterLeavingInput(registerPage.confirmPasswordInput(), registerPage.confirmPasswordErrors(), 'Required');
+    });
+
+  });
+
+  describe('On filling out all fields correctly', () => {
+    beforeAll(() => {
+      registerPage.load();
+      registerPage.emailInput().sendKeys('joe@example.com');
+      registerPage.passwordInput().sendKeys('Password123$');
+      registerPage.confirmPasswordInput().sendKeys('Password123$');
+    })
+    it('should display submit button enabled', () => {
+      expect(registerPage.submitButton().isDisplayed()).toBeTruthy();
+      expect(registerPage.submitButton().getAttribute('disabled') === null).toBeTruthy();
+    });
+    it('should not display passwords errors', () => {
+      expect(registerPage.passwordErrors().count()).toBe(0);
+    });
+    it('should not display email errors', () => {
+      expect(registerPage.emailErrors().count()).toBe(0);
+    });
+    it('should not display confirm password errors', () => {
+      expect(registerPage.emailErrors().count()).toBe(0);
+    });
+    it('should not display matching password errors', () => {
+      expect(registerPage.matchingPasswordErrors().count()).toBe(0);
     });
 
   });

@@ -16,6 +16,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from '../common/log';
 import {SpinnerComponent} from '../common/spinner/spinner';
+import {Router} from "angular2/router";
 
 @Component({
 
@@ -48,7 +49,7 @@ export class RegisterForm {
   emailCheckResult:EmailCheckResult = null;
   startEmailCheck$:Subject<string>;
 
-  constructor(fb:FormBuilder, private http:Http, public toastr:ToastsManager, private registrationService: RegistrationService, logginService: LoggingService) {
+  constructor(fb:FormBuilder, private _router: Router,private http:Http, public toastr:ToastsManager, private registrationService: RegistrationService, logginService: LoggingService) {
     let log : Logger = logginService.getLogger('RegisterForm');
 
     this.log = log;
@@ -97,6 +98,7 @@ export class RegisterForm {
     this.isSubmitting = false;
     if (response.success) {
       this.log.debug('success');
+      this._router.navigate(['EmailSent']);
     } else {
       if (response.alreadyExists) {
         this.log.debug('exists');

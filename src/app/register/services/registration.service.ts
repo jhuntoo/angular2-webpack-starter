@@ -35,6 +35,17 @@ export class RegistrationService {
         return this._toRegisterResponse(res);
       });
   }
+
+  //public confirmEmailCode(code :string):Observable<RegisterResponse> {
+  //  return this.http.post(`${this.config.apiBaseUrl}/auth/register`, JSON.stringify(request))
+  //    //.timeout(5000, '/register timed out')
+  //    //.retry(3)
+  //    .map((res:Response): RegisterResponse => {
+  //      return this._toRegisterResponse(res);
+  //    });
+  //}
+
+
   private _toRegisterResponse(response:Response):RegisterResponse {
     if (response.status !== 200) return RegisterResponse.error('http status is not 200');
     var body = response.json();

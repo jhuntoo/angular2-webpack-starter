@@ -26,18 +26,10 @@ gulp.task('images', function () {
                     suffix: '-3x',
                     extname: '.jpg',
                 },
+
                 // Do not enlarge the output image if the input image are already less than the required dimensions.
                 withoutEnlargement: true,
-            }
-            //    , {
-            //    // Convert images to the webp format
-            //    width: 630,
-            //    rename: {
-            //        suffix: '-630px',
-            //        extname: '.webp',
-            //    },
-            //}
-            ],
+            }],
         }, {
             // Global configuration for all images
             // The output quality for JPEG, WebP and TIFF output formats
@@ -52,4 +44,43 @@ gulp.task('images', function () {
         .pipe(gulp.dest('src/assets/img/dist'));
 });
 
-gulp.task('default', ['images']);
+gulp.task('images-blur', function () {
+  return gulp.src('src/assets/img/*.jpg')
+    .pipe(responsive({
+      '*.jpg': [
+        {
+          width: '50.00%',
+          blur: 5.0,
+          gamma: 3,
+          flatten: true,
+          background: "#7743CE",
+          rename: {
+            suffix: '-blur',
+            extname: '.jpg',
+          }
+        }
+        //    , {
+        //    // Convert images to the webp format
+        //    width: 630,
+        //    rename: {
+        //        suffix: '-630px',
+        //        extname: '.webp',
+        //    },
+        //}
+      ],
+    }, {
+      // Global configuration for all images
+      // The output quality for JPEG, WebP and TIFF output formats
+      quality: 50,
+      // Use progressive (interlace) scan for JPEG and PNG output
+      progressive: true,
+      // Strip all metadata
+      withMetadata: false,
+      // Do not emit the error when image is enlarged.
+      errorOnEnlargement: false,
+    }))
+    .pipe(gulp.dest('src/assets/img/dist'));
+});
+
+
+gulp.task('default', ['images', 'images-blur']);

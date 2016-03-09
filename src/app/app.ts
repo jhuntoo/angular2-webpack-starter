@@ -10,6 +10,7 @@ import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';
 import {VerifyEmail} from './verifyemail/verifyemail';
+import {EmailSentForm} from "./register/email-sent";
 
 /*
  * App Component
@@ -20,21 +21,6 @@ import {VerifyEmail} from './verifyemail/verifyemail';
   providers: [ ...FORM_PROVIDERS ],
   directives: [ ...ROUTER_DIRECTIVES, RouterActive, Navbar ],
   pipes: [],
-  styles: [`
-    nav ul {
-      display: inline;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      width: 60px;
-    }
-    nav li {
-      display: inline;
-    }
-    nav li.active {
-      background-color: lightgray;
-    }
-  `],
   template: `
     <!--<header>-->
       <!--<nav>-->
@@ -55,7 +41,7 @@ import {VerifyEmail} from './verifyemail/verifyemail';
     <navbar></navbar>
 
 
-    <main>
+    <main id="content">
       <router-outlet></router-outlet>
     </main>
 
@@ -65,6 +51,7 @@ import {VerifyEmail} from './verifyemail/verifyemail';
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: RegisterForm, name: 'Register' },
+  { path: '/emailsent', component: EmailSentForm, name: 'EmailSent' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' },
