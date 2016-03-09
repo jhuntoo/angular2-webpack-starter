@@ -1,67 +1,60 @@
-<section class="container register-panel">
-  <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <div class="panel-title">Create your account</div>
-        <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="/login">
-          Sign In</a></div>
-      </div>
-      <div class="panel-body">
-        <div style="padding-bottom: 50px" class="form-group">
-
-          <div class="col-md-offset-3 col-md-9">
-            <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="fa fa-facebook"></i>   Continue
-              with Facebook
-            </button>
-          </div>
-
+<div class="app app-header-fixed ">
+  <div class="container w-xxl w-auto-xs" ng-controller="SignupFormController" ng-init="app.settings.container = false;">
+    <a href class="navbar-brand block m-t">MustRace</a>
+    <div class="m-b-lg">
+      <div style="padding-bottom: 50px" class="form-group">
+        <div class="wrapper text-center">
+          <strong>Sign up to find interesting thing</strong>
         </div>
-        <div class="form-group horizontalSplit"><span>or</span></div>
+        <!--<div class="col-md-offset-3 col-md-9">-->
+          <!--<button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="fa fa-facebook"></i>   Continue-->
+            <!--with Facebook-->
+          <!--</button>-->
+        <!--</div>-->
+        <a class="btn btn-primary btn-block m-b-sm"><i class="fa fa-facebook pull-left"></i>Sign in with Facebook</a>
+        <a class="btn btn-info btn-block m-b-sm"><i class="fa fa-twitter pull-left"></i>Sign in with Twitter</a>
+        <a class="btn btn-danger btn-block"><i class="fa fa-google-plus pull-left"></i>Sign in with Google+</a>
+
+      </div>
+      <div class="form-group horizontalSplit"><span>or</span></div>
 
 
-        <form [ngFormModel]="form" (ngSubmit)="onSubmit()" class="form-body">
+      <form [ngFormModel]="form" (ngSubmit)="onSubmit()" class="form-validation">
+        <div class="list-group list-group-sm">
           <div class="form-group">
-            <label for="email" class="col-md-3 control-label">Email:</label>
-            <div class="col-md-9 input-icon right">
-              <i class="fa fa-envelope"></i>
-              <input id="email" ngControl="email" class="form-control" type="text">
-            </div>
-            <i class="fa fa-check"  *ngIf="emailCheckResult != null && emailCheckResult.available"></i>
-            <div *ngIf="email.dirty && emailTaken" class="alert alert-danger">
-              <p *ngIf="mailAddress.errors.incorrectMailFormat">Taken</p>
-            </div>
+            <input id="input-email" ngControl="email" class="form-control m-b" type="text" placeholder="Email">
           </div>
-          <control-messages control="email"></control-messages>
+          <span class="label bg-success" *ngIf="emailCheckResult != null && emailCheckResult.available">Available</span>
+          <div *ngIf="email.dirty && emailTaken" class="alert alert-danger">
+            <p *ngIf="mailAddress.errors.incorrectMailFormat">Taken</p>
+          </div>
+          <control-messages control="email" class="text-danger wrapper text-center" id="errors-email"></control-messages>
           <br>
           <div ngControlGroup="matchingPassword">
             <div class="form-group">
-              <label for="password" class="col-md-3 control-label">Password:</label>
-              <div class="col-md-9 input-icon right">
-                <i class="fa fa-envelope"></i>
-                <input id="password" type="password" ngControl="password" class="form-control">
-              </div>
-              <control-messages control="matchingPassword/password"></control-messages>
+              <input id="input-password" type="password" ngControl="password" class="form-control m-b" placeholder="Password">
+
             </div>
+            <control-messages control="matchingPassword/password"
+                              class="text-danger wrapper text-center" id="errors-password"></control-messages>
             <br>
             <div class="form-group">
-              <label for="confirmPassword" class="col-md-3 control-label">Confirm Password:</label>
-              <div class="col-md-9 input-icon right">
-                <i class="fa fa-envelope"></i>
-                <input id="confirmPassword" type="password" ngControl="confirmPassword" class="form-control">
-              </div>
-              <control-messages control="matchingPassword/confirmPassword"></control-messages>
-              <control-messages control="matchingPassword"></control-messages>
+              <input id="input-confirm-password" type="password" ngControl="confirmPassword"
+                     class="form-control m-b" placeholder="Confirm Password">
             </div>
+            <control-messages control="matchingPassword/confirmPassword"
+                              class="text-danger wrapper text-center" id="errors-confirm-password"></control-messages>
+            <control-messages control="matchingPassword" class="text-danger wrapper text-center" id="errors-matching-password"></control-messages>
           </div>
-          <div class="form-group">
-            <button type="submit" [disabled]="!form.valid" class="btn btn-default">Submit</button>
-            <spinner [isRunning]="isSubmitting" [delay]="0"></spinner>
-            <div [hidden]="!isNetworkError">Network Error</div>
-          </div>
+          <button id="button-submit" type="submit" [disabled]="!form.valid" class="btn btn-success">
+            Submit
+          </button>
+          <spinner [isRunning]="isSubmitting" [delay]="0"></spinner>
+          <div [hidden]="!isNetworkError" class="text-danger wrapper text-center">Network Error</div>
 
-        </form>
-
-      </div>
+        </div>
+      </form>
     </div>
   </div>
-</section>
+
+</div>

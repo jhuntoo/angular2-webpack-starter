@@ -20,7 +20,7 @@ export class RegistrationService {
   public checkEmail(email:string):Observable<EmailCheckResult> {
     let request = {email: email };
     return this.http.post(`${this.config.apiBaseUrl}/auth/checkemail`, JSON.stringify(request))
-      .timeout(1000, '/checkemail timed out')
+      .timeout(10000, '/checkemail timed out')
       .map((response:Response):EmailCheckResult => {
         return this._toEmailCheckResult(response);
       });

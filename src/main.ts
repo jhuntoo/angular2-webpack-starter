@@ -86,11 +86,12 @@ if ('development' === process.env.ENV) {
   bootstrapDomReady();
 }
 
-//import './assets/css/component.css';
+import './assets/css/font.css';
 //import './assets/css/cssparallax.css';
 //import './assets/css/reset.css';
 //import './assets/css/responsivemobile.css';
 //import './assets/css/style.css';
+import './assets/css/less/app.less';
 import 'ng2-toastr/ng2-toastr.js';
 import 'ng2-toastr/ng2-toastr.css';
 import 'font-awesome-webpack!../font-awesome.config.js';

@@ -10,7 +10,7 @@ import {Control} from 'angular2/common';
   selector: 'control-messages',
   inputs: ['controlName: control'],
   styles: [ require('./control-messages.css').toString()],
-  template: `<div *ngIf="errorMessage !== null" class="validation-error">{{errorMessage}}</div>`
+  template: `<span *ngIf="errorMessage !== null" class="validation-error">{{errorMessage}}</span>`
 })
 export class ControlMessages {
   controlName: string;

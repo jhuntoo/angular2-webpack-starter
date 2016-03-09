@@ -24,7 +24,7 @@ import {SpinnerComponent} from '../common/spinner/spinner';
   providers: [ToastsManager, RegistrationService, LoggingService],
   directives: [ Alert, DATEPICKER_DIRECTIVES, ControlMessages, SpinnerComponent],
   // Our list of styles in our component. We may add more to compose many styles together
-  styles: [require('./register.css').toString()],
+  styles: [require('./register.less').toString()],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./register.html')
 })
