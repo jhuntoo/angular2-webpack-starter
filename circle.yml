@@ -13,7 +13,8 @@ dependencies:
     - /home/ubuntu/nvm/versions/node/5.0.0/bin
     - /home/ubuntu/nvm/versions/node/5.0.0/lib/node_modules
   pre:
-    - npm install -g npm gulp-cli
+    - npm install -g npm
+    - npm install -g gulp-cli
   override:
     - sudo pip install -r requirements.txt
 
