@@ -1,31 +1,31 @@
 <header id="header" class="navbar navbar-fixed-top bg-white-only padder-v"  data-spy="affix" data-offset-top="1">
   <div class="container">
     <div class="navbar-header">
-      <button class="btn btn-link visible-xs pull-right m-r" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+      <button id="button-toggle-collapse" class="btn btn-link visible-xs pull-right m-r" (click)="isCollapsed = !isCollapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
         <i class="fa fa-bars"></i>
       </button>
-      <a id="siteLink" href="/" class="navbar-brand m-r-lg"><span class="h3 font-bold">MustRace</span></a>
+      <a id="link-site" href="/" class="navbar-brand m-r-lg"><span class="h3 font-bold">MustRace</span></a>
 
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="hidden-xs hidden-xs-down">
       <ul class="nav navbar-nav font-bold">
         <li>
-          <a href="#what" data-ride="scroll">Races</a>
+          <a data-ride="scroll">Races</a>
         </li>
         <li>
-          <a href="#why" data-ride="scroll">Organisers</a>
+          <a  data-ride="scroll">Organisers</a>
         </li>
         <li>
-          <a href="#features" data-ride="scroll">About Us</a>
+          <a  data-ride="scroll">About Us</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 
         <li>
           <div class="m-t-sm">
-            <a id="emailLink" class="m-l" href="mailto:contact@mustrace.com?Subject=Hello%20again"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
-            <a id="twitterLink" class="m-l" href="https://twitter.com/Must_Race_Com"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;
-            <a id="facebookLink" class="m-l" href="https://www.facebook.com/mustracecom/?fref=ts"><i
+            <a id="link-email" class="m-l" href="mailto:contact@mustrace.com?Subject=Hello%20again"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+            <a id="link-twitter" class="m-l" href="https://twitter.com/Must_Race_Com"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;
+            <a id="link-facebook" class="m-l" href="https://www.facebook.com/mustracecom/?fref=ts"><i
               class="fa fa-facebook-official"></i></a>
             <a  class="btn btn-link btn-sm">Sign in</a> or
             <a href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
@@ -33,6 +33,12 @@
         </li>
       </ul>
     </div>
+    <nav class="visible-xs hidden-md-up">
+      <ul id="menu-collapse" class="nav nav-pills nav-stacked scrollable-menu" [collapse]="isCollapsed" (click)="isCollapsed = !isCollapsed; true">
+        <li class="nav-item"><a class="nav-link" href="{{prefix}}#getting-started">Getting started</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{prefix}}#migration">Migration</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
 <!-- / header -->
