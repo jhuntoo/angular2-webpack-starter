@@ -11,7 +11,7 @@ function sleepFor(sleepDuration ){
 
 let registerPage = {
   load: function () {
-    browser.get('/#/register');
+    return browser.get('/#/register');
   },
 
   emailInput () {
@@ -38,6 +38,19 @@ let registerPage = {
   submitButton: function () {
     return element(by.id('button-submit')).getWebElement()
   },
+
+  completeForm(email, password, confirmpassword) {
+    let page = this;
+    page.load().then(() => {
+      page.emailInput().sendKeys('joe@example.com');
+    }).then(() => {
+      page.passwordInput().sendKeys('Password123$');
+    }).then(() => {
+      page.confirmPasswordInput().sendKeys('Password123$');
+    });
+
+  },
+
 
   expectErrorAfterLeavingInput(input, errorElements, expectError) {
     return input.sendKeys(protractor.Key.TAB).then(() =>{
@@ -73,7 +86,7 @@ describe('Register', () => {
     });
     it('should display submit button disabled', () => {
       expect(registerPage.submitButton().isDisplayed()).toBeTruthy();
-      expect(registerPage.submitButton().getAttribute('disabled') !== null).toBeTruthy();
+      expect(registerPage.submitButton().getAttribute('disabled')).not.toBeNull();
     });
     it('should not display passwords errors', () => {
       expect(registerPage.passwordErrors().count()).toBe(0);
@@ -107,14 +120,11 @@ describe('Register', () => {
 
   describe('On filling out all fields correctly', () => {
     beforeAll(() => {
-      registerPage.load();
-      registerPage.emailInput().sendKeys('joe@example.com');
-      registerPage.passwordInput().sendKeys('Password123$');
-      registerPage.confirmPasswordInput().sendKeys('Password123$');
+      return registerPage.completeForm('joe@example.com', 'Password123$', 'Password123$');
     })
     it('should display submit button enabled', () => {
       expect(registerPage.submitButton().isDisplayed()).toBeTruthy();
-      expect(registerPage.submitButton().getAttribute('disabled') === null).toBeTruthy();
+      expect(registerPage.submitButton().getAttribute('disabled')).toBeNull();
     });
     it('should not display passwords errors', () => {
       expect(registerPage.passwordErrors().count()).toBe(0);
