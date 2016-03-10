@@ -4,8 +4,17 @@
 import WebElement = protractor.WebElement;
 
 let page = {
-  load: function () {
+  load() {
     return browser.get('/#/home');
+  },
+  header() {
+    return element(by.id('header')).getWebElement();
+  },
+  headerPaddingTop() {
+    return this.header().getCssValue('padding-top');
+  },
+  headerPaddingBottom() {
+    return this.header().getCssValue('padding-bottom');
   },
   collapseToggle() {
     return element(by.id('button-toggle-collapse')).getWebElement();
@@ -33,6 +42,12 @@ let page = {
   facebookLink() {
     return element(by.id('link-facebook')).getWebElement();
   },
+  registerButtonFull() {
+    return element(by.id('button-register-full')).getWebElement();
+  },
+  registerButtonMobile() {
+    return element(by.id('button-register-mobile')).getWebElement();
+  },
   setFullWidthScreen() {
     browser.manage().window().setSize(1080, 1920);
   },
@@ -57,6 +72,23 @@ describe('App', () => {
     beforeAll(() => {
       page.load();
       page.setFullWidthScreen();
+    });
+    describe('Header', () => {
+      it('should have large vertical padding', () => {
+        expect(page.headerPaddingBottom()).toBe("15px");
+        expect(page.headerPaddingTop()).toBe("15px");
+      });
+    });
+
+    describe('Register button full-size', () => {
+      it('should be displayed', () => {
+        expect(page.registerButtonFull().isDisplayed()).toBe(true);
+      });
+    });
+    describe('Register button mobile-size', () => {
+      it('should not be displayed', () => {
+        expect(page.registerButtonMobile().isDisplayed()).toBe(false);
+      });
     });
     describe('Collapse button', () => {
       it('should not be displayed', () => {
@@ -126,6 +158,22 @@ describe('App', () => {
         page.load();
         page.setMobileScreen();
       });
+      describe('Header', () => {
+        it('should have small vertical padding', () => {
+          expect(page.headerPaddingBottom()).toBe("5px");
+          expect(page.headerPaddingTop()).toBe("5px");
+        });
+      });
+      describe('Register button full-size', () => {
+        it('should NOT be displayed', () => {
+          expect(page.registerButtonFull().isDisplayed()).toBe(false);
+        });
+      });
+      describe('Register button mobile-size', () => {
+        it('should be displayed', () => {
+          expect(page.registerButtonMobile().isDisplayed()).toBe(true);
+        });
+      });
       describe('Collapse button', () => {
         it('should be displayed', () => {
           expect(page.collapseToggle().isDisplayed()).toBe(true);
@@ -141,6 +189,16 @@ describe('App', () => {
     describe('After toggle button clicked', () => {
       beforeAll(() => {
         page.clickCollapseToggle();
+      });
+      describe('Register button full-size', () => {
+        it('should NOT be displayed', () => {
+          expect(page.registerButtonFull().isDisplayed()).toBe(false);
+        });
+      });
+      describe('Register button mobile-size', () => {
+        it('should be displayed', () => {
+          expect(page.registerButtonMobile().isDisplayed()).toBe(true);
+        });
       });
       describe('Collapse button', () => {
         it('should be displayed', () => {

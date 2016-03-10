@@ -1,10 +1,15 @@
-<header id="header" class="navbar navbar-fixed-top bg-white-only padder-v"  data-spy="affix" data-offset-top="1">
+<header id="header" class="navbar navbar-fixed-top bg-white-only"  data-spy="affix" data-offset-top="1">
   <div class="container">
     <div class="navbar-header">
+
       <button id="button-toggle-collapse" class="btn btn-link visible-xs pull-right m-r" (click)="isCollapsed = !isCollapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
         <i class="fa fa-bars"></i>
       </button>
-      <a id="link-site" href="/" class="navbar-brand m-r-lg"><span class="h3 font-bold">MustRace</span></a>
+      <div class="visible-xs pull-right m-t-sm">
+        <a id="button-signin-mobile"  class="btn btn-link btn-sm">Sign in</a> or
+        <a id="button-register-mobile" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
+      </div>
+      <a id="link-site" href="/" class="navbar-brand m-r-md"><span class="h3 font-bold">MustRace</span></a>
 
     </div>
     <div class="hidden-xs hidden-xs-down">
@@ -27,8 +32,8 @@
             <a id="link-twitter" class="m-l" href="https://twitter.com/Must_Race_Com"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;
             <a id="link-facebook" class="m-l" href="https://www.facebook.com/mustracecom/?fref=ts"><i
               class="fa fa-facebook-official"></i></a>
-            <a  class="btn btn-link btn-sm">Sign in</a> or
-            <a href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
+            <a id="button-signin-full"  class="btn btn-link btn-sm">Sign in</a> or
+            <a id="button-register-full" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
           </div>
         </li>
       </ul>

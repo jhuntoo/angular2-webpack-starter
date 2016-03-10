@@ -12,7 +12,7 @@ import {
     Collapse,
     DROPDOWN_DIRECTIVES
   ],
-  styles: [ require('./navbar.css').toString()],
+  styles: [ require('./navbar.less').toString()],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./navbar.html')
 })
