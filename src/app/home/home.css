@@ -1,4 +1,33 @@
-img {
-  max-width: 100%;
-  height: auto;
+
+.image_container {
+  /*width:960px;*/
+  height:300px;
+  position:relative; /* Set as position relative to the IMG will move relative to this container */
 }
+
+#image_container img {
+  max-width: 100%;
+
+  position:absolute;
+
+}
+
+/*.background {*/
+  /*height: 500px;      !* equals max image height *!*/
+  /*border: 1px solid red;*/
+  /*white-space: nowrap;*/
+
+  /*text-align: center; margin: 1em 0;*/
+/*}*/
+
+/*.helper {*/
+  /*display: inline-block;*/
+  /*height: 100%;*/
+  /*vertical-align: middle;*/
+/*}*/
+
+
+/*.background {*/
+  /*margin:0 auto;*/
+  /*text-align:center;*/
+/*}*/
