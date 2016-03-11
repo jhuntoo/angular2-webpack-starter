@@ -38,10 +38,11 @@ import {EmailSentForm} from "./register/email-sent";
         <!--</ul>-->
       <!--</nav>-->
     <!--</header>-->
-    <navbar></navbar>
+
+      <navbar></navbar>
 
 
-    <main id="content">
+    <main>
       <router-outlet></router-outlet>
     </main>
 
