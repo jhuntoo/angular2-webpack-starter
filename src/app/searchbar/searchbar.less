@@ -1,4 +1,5 @@
 @import '../../assets/css/less/app.variables.less';
+@import '../../assets/css/less/mr.variables.less';
 //#image_container img {
 //  position:absolute;
 //  /*top:50%; !* Move the image down, so its top is half way down the container *!*/
@@ -24,11 +25,39 @@ div.centre-h
 {
   //background-color: plum;
   display: block;
-  width: 80%;
   height: 100%;
   margin-left: auto;
   margin-right: auto;
 }
+
+@media @desktop {
+  div.centre-h {
+    width: 785px;
+  }
+}
+@media @tablet {
+  div.centre-h {
+    width: 80%;
+  }
+}
+@media @phone {
+  div.centre-h {
+    width: 100%;
+  }
+}
+
+@media @tablet, @phone {
+  #main-image {
+    height: 500px;
+  }
+
+  #image-row {
+    min-height: 500px;
+    max-height: 500px;
+  }
+}
+
+
 
 
 div.centre-v
