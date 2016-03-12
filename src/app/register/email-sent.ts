@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {Logger} from "../common/log";
-import {LoggingService} from "../common/log";
+import {Logger} from '../common/log';
+import {LoggingService} from '../common/log';
 
 
 @Component({

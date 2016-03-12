@@ -18,6 +18,7 @@ import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegistrationService, MockRegistrationService} from './services/registration.service';
 import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import {LoggingService} from '../common/log';
+import {Router} from "angular2/router";
 
 
 let mockedServiceEmailAvailable = MockRegistrationService.withMocked(EmailCheckResult.available());
@@ -30,6 +31,7 @@ describe('RegisterForm', () => {
     MockBackend,
     DynamicComponentLoader,
     ApplicationRef,
+    Router,
     provide(Http, {
       useFactory: function(backend, defaultOptions) {
         return new Http(backend, defaultOptions);

@@ -10,7 +10,8 @@ import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';
 import {VerifyEmail} from './verifyemail/verifyemail';
-import {EmailSentForm} from "./register/email-sent";
+import {EmailSentForm} from './register/email-sent';
+import {SearchPage} from './search/search';
 
 /*
  * App Component
@@ -27,13 +28,13 @@ import {EmailSentForm} from "./register/email-sent";
         <!--<h1>Hello {{ name }}</h1>-->
         <!--<ul>-->
           <!--<li router-active>-->
-            <!--<a [routerLink]=" ['Index'] ">Index</a>-->
+            <!--<a [routerLink]=' ['Index'] '>Index</a>-->
           <!--</li>-->
           <!--<li router-active>-->
-            <!--<a [routerLink]=" ['Home'] ">Home</a>-->
+            <!--<a [routerLink]=" ['Home'] '>Home</a>-->
           <!--</li>-->
           <!--<li router-active>-->
-            <!--<a [routerLink]=" ['About'] ">About</a>-->
+            <!--<a [routerLink]=' ['About'] '>About</a>-->
           <!--</li>-->
         <!--</ul>-->
       <!--</nav>-->
@@ -52,6 +53,7 @@ import {EmailSentForm} from "./register/email-sent";
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: RegisterForm, name: 'Register' },
+  { path: '/search', component: SearchPage, name: 'Search' },
   { path: '/emailsent', component: EmailSentForm, name: 'EmailSent' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`

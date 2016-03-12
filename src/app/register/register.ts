@@ -16,7 +16,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from '../common/log';
 import {SpinnerComponent} from '../common/spinner/spinner';
-import {Router} from "angular2/router";
+import {Router} from 'angular2/router';
 
 @Component({
 

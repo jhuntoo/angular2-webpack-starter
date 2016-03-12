@@ -1,8 +1,8 @@
 import {Component} from 'angular2/core';
-import {LoggingService} from "../common/log";
-import {Http} from "angular2/http";
-import {Router} from "angular2/router";
-import {Logger} from "../common/log";
+import {LoggingService} from '../common/log';
+import {Http} from 'angular2/http';
+import {Router} from 'angular2/router';
+import {Logger} from '../common/log';
 
 
 @Component({
@@ -22,6 +22,10 @@ export class SearchBar {
 
 
 
+  }
+
+  search() {
+    this._router.navigate(['Search']);
   }
 
 

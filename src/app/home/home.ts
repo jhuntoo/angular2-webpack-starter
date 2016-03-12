@@ -4,6 +4,7 @@ import {FORM_DIRECTIVES} from 'angular2/common';
 import {Title} from './services/title';
 import {XLarge} from './directives/x-large';
 import {SearchBar} from '../searchbar/searchbar';
+import {Router} from 'angular2/router';
 
 @Component({
   // The selector is what angular internally uses
@@ -32,9 +33,11 @@ export class Home {
   // Set our default values
   data = { value: '' };
   // TypeScript public modifiers
-  constructor(public title: Title) {
+  constructor(public title: Title, private _router: Router) {
 
   }
+
+
 
   ngOnInit() {
     console.log('hello `Home` component');
