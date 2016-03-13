@@ -2,8 +2,7 @@
  * Angular 2 decorators and services
  */
 import {Component} from 'angular2/core';
-import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
-import {FORM_PROVIDERS} from 'angular2/common';
+import {RouteConfig, Router} from 'angular2/router';
 
 import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
@@ -19,8 +18,8 @@ import {SearchPage} from './search/search';
  */
 @Component({
   selector: 'app',
-  providers: [ ...FORM_PROVIDERS ],
-  directives: [ ...ROUTER_DIRECTIVES, RouterActive, Navbar ],
+  providers: [ ],
+  directives: [ Navbar ],
   pipes: [],
   template: `
     <!--<header>-->
@@ -50,15 +49,14 @@ import {SearchPage} from './search/search';
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' },
+  { path: '/', component: Home, name: 'Index', useAsDefault: true },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: RegisterForm, name: 'Register' },
   { path: '/search', component: SearchPage, name: 'Search' },
   { path: '/emailsent', component: EmailSentForm, name: 'EmailSent' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
-  { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' },
-  { path: '/**', redirectTo: ['Index'] }
+  { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])
 export class App {
   name = 'MustRace';

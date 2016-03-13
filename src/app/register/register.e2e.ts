@@ -3,10 +3,10 @@
  */
 //import WebElement = protractor.WebElement;
 import textToBePresentInElementValue = protractor.ExpectedConditions.textToBePresentInElementValue;
-import {error} from "util";
-function sleepFor(sleepDuration ){
+import {error} from 'util';
+function sleepFor(sleepDuration ) {
   var now = new Date().getTime();
-  while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+  while(new Date().getTime() < now + sleepDuration) { /* do nothing */ }
 }
 
 let registerPage = {
@@ -21,13 +21,13 @@ let registerPage = {
     return element(by.id('errors-email')).all(by.tagName('span'));
   },
   passwordInput () {
-    return element(by.id('input-password')).getWebElement()
+    return element(by.id('input-password')).getWebElement();
   },
   passwordErrors() {
     return element(by.id('errors-password')).all(by.tagName('span'));
   },
   confirmPasswordInput () {
-    return element(by.id('input-confirm-password')).getWebElement()
+    return element(by.id('input-confirm-password')).getWebElement();
   },
   confirmPasswordErrors () {
     return element(by.id('errors-confirm-password')).all(by.tagName('span'));
@@ -36,7 +36,7 @@ let registerPage = {
     return element(by.id('errors-matching-password')).all(by.tagName('span'));
   },
   submitButton: function () {
-    return element(by.id('button-submit')).getWebElement()
+    return element(by.id('button-submit')).getWebElement();
   },
 
   completeForm(email, password, confirmpassword) {
@@ -53,18 +53,18 @@ let registerPage = {
 
 
   expectErrorAfterLeavingInput(input, errorElements, expectError) {
-    return input.sendKeys(protractor.Key.TAB).then(() =>{
+    return input.sendKeys(protractor.Key.TAB).then(() => {
       var errors = errorElements.filter((errorElement) => {
         return  errorElement.getText().then((label) => {
           return label === expectError;
-        })
-      })
+        });
+      });
 
       expect(errors.count()).toBe(1);
 
     });
   }
-}
+};
 
 
 describe('Register', () => {
@@ -121,7 +121,7 @@ describe('Register', () => {
   describe('On filling out all fields correctly', () => {
     beforeAll(() => {
       return registerPage.completeForm('joe@example.com', 'Password123$', 'Password123$');
-    })
+    });
     it('should display submit button enabled', () => {
       expect(registerPage.submitButton().isDisplayed()).toBeTruthy();
       expect(registerPage.submitButton().getAttribute('disabled')).toBeNull();

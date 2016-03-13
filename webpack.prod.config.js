@@ -16,6 +16,7 @@ var CompressionPlugin = require('compression-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
+var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || 'localhost';
@@ -34,17 +35,17 @@ var metadata = {
 /*
  * Config
  */
-module.exports = helpers.defaults({
+module.exports = {
   // static data for index.html
   metadata: metadata,
 
   devtool: 'source-map',
-  cache: false,
   debug: false,
 
   entry: {
-    'polyfills':'./src/polyfills.ts',
-    'main':'./src/main.ts' // our angular app
+    'polyfills': './src/polyfills.ts',
+    'vendor': './src/vendor.ts',
+    'main': './src/main.ts'
     //'bootstrap' : 'bootstrap-loader'
   },
 
@@ -57,8 +58,6 @@ module.exports = helpers.defaults({
   },
 
   resolve: {
-    cache: false,
-    // ensure loader extensions match
     extensions: ['', '.ts','.js','.json','.css','.html', '.woff', '.ttf', '.eot', '.svg', '.jpg', '.less', '.scss']
   },
 
@@ -84,27 +83,26 @@ module.exports = helpers.defaults({
       // Support for .ts files.
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: 'awesome-typescript-loader',
         query: {
           // remove TypeScript helpers to be injected below by DefinePlugin
           'compilerOptions': {
-            'removeComments': true,
-            'noEmitHelpers': true,
+            'removeComments': true
           }
         },
         exclude: [
-          /\.(spec|e2e)\.ts$/
+          /\.(spec|e2e)\.ts$/,
         ]
       },
 
       // Support for *.json files.
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json-loader',
       },
 
       // Support for CSS as raw text
-      { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+      { test: /\.css$/,   loader: 'raw-loader' },
 
       { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },
 
@@ -127,17 +125,23 @@ module.exports = helpers.defaults({
         ]
       }
 
+    ],
+    noParse: [
+      helpers.root('zone.js', 'dist'),
+      helpers.root('angular2', 'bundles')
     ]
+
   },
 
   plugins: [
+    new ForkCheckerPlugin(),
     new WebpackMd5Hash(),
     new DedupePlugin(),
     new OccurenceOrderPlugin(true),
     new CommonsChunkPlugin({
-      name: 'polyfills',
-      filename: 'polyfills.[chunkhash].bundle.js',
-      chunks: Infinity
+      name: ['main', 'vendor', 'polyfills'],
+      filename: '[name].bundle.js',
+      minChunks: Infinity
     }),
     // static assets
     new CopyWebpackPlugin([
@@ -147,23 +151,10 @@ module.exports = helpers.defaults({
       }
     ]),
     // generating html
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ template: 'src/index.html', chunksSortMode: 'none' }),
     new DefinePlugin({
-      // Environment helpers
-      'process.env': {
-        'ENV': JSON.stringify(metadata.ENV),
-        'NODE_ENV': JSON.stringify(metadata.ENV)
-      }
-    }),
-    new ProvidePlugin({
-      // TypeScript helpers
-      '__metadata': 'ts-helper/metadata',
-      '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
-      '$': 'jquery',
-      'jQuery': 'jquery'
+      'ENV': JSON.stringify(metadata.ENV),
+      'HMR': false
     }),
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
@@ -181,6 +172,58 @@ module.exports = helpers.defaults({
       // TODO(mastertinner): enable mangling as soon as angular2 beta.4 is out
       // mangle: { screw_ie8 : true },//prod
       mangle: false,
+      //mangle: {
+      //  screw_ie8 : true,
+      //  except: [
+      //    'App',
+      //    'About',
+      //    'Contact',
+      //    'Home',
+      //    'Menu',
+      //    'Footer',
+      //    'XLarge',
+      //    'RouterActive',
+      //    'RouterLink',
+      //    'RouterOutlet',
+      //    'NgFor',
+      //    'NgIf',
+      //    'NgClass',
+      //    'NgSwitch',
+      //    'NgStyle',
+      //    'NgSwitchDefault',
+      //    'NgControl',
+      //    'NgControlName',
+      //    'NgControlGroup',
+      //    'NgFormControl',
+      //    'NgModel',
+      //    'NgFormModel',
+      //    'NgForm',
+      //    'NgSelectOption',
+      //    'DefaultValueAccessor',
+      //    'NumberValueAccessor',
+      //    'CheckboxControlValueAccessor',
+      //    'SelectControlValueAccessor',
+      //    'RadioControlValueAccessor',
+      //    'NgControlStatus',
+      //    'RequiredValidator',
+      //    'MinLengthValidator',
+      //    'MaxLengthValidator',
+      //    'PatternValidator',
+      //    'AsyncPipe',
+      //    'DatePipe',
+      //    'JsonPipe',
+      //    'NumberPipe',
+      //    'DecimalPipe',
+      //    'PercentPipe',
+      //    'CurrencyPipe',
+      //    'LowerCasePipe',
+      //    'UpperCasePipe',
+      //    'SlicePipe',
+      //    'ReplacePipe',
+      //    'I18nPluralPipe',
+      //    'I18nSelectPipe'
+      //  ] // needed for uglify RouterLink problem
+      //},// prod
       compress : { screw_ie8 : true },//prod
       comments: false//prod
 
@@ -190,13 +233,12 @@ module.exports = helpers.defaults({
       algorithm: helpers.gzipMaxLevel,
       regExp: /\.css$|\.html$|\.js$|\.map$/,
       threshold: 2 * 1024
-    }),
-    new ExtractTextPlugin("styles.css")
+    })
   ],
   // Other module loader config
   tslint: {
     emitErrors: true,
-    failOnHint: false, //true, : https://github.com/AngularClass/angular2-webpack-starter/issues/374
+    failOnHint: true,
     resourcePath: 'src',
   },
 
@@ -208,5 +250,12 @@ module.exports = helpers.defaults({
     customAttrAssign: [ /\)?\]?=/ ]
   },
   // don't use devServer for production
-
-});
+  node: {
+    global: 'window',
+    progress: false,
+    crypto: 'empty',
+    module: false,
+    clearImmediate: false,
+    setImmediate: false
+  }
+};

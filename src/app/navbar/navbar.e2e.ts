@@ -27,8 +27,8 @@ let page = {
   },
   collapseMenuIsExapanded() {
     return this.collapseMenu().getAttribute('aria-expanded').then(attr => {
-      return attr === "true";
-    })
+      return attr === 'true';
+    });
   },
   siteLink() {
     return element(by.id('link-site')).getWebElement();
@@ -68,15 +68,15 @@ describe('App', () => {
 
 
 
-  describe("When in full-width mode", () => {
+  describe('When in full-width mode', () => {
     beforeAll(() => {
       page.load();
       page.setFullWidthScreen();
     });
     describe('Header', () => {
       it('should have large vertical padding', () => {
-        expect(page.headerPaddingBottom()).toBe("15px");
-        expect(page.headerPaddingTop()).toBe("15px");
+        expect(page.headerPaddingBottom()).toBe('15px');
+        expect(page.headerPaddingTop()).toBe('15px');
       });
     });
 
@@ -150,7 +150,7 @@ describe('App', () => {
     });
   });
 
-  describe("When in Mobile mode", () => {
+  describe('When in Mobile mode', () => {
 
 
     describe('On Load', () => {
@@ -160,8 +160,8 @@ describe('App', () => {
       });
       describe('Header', () => {
         it('should have small vertical padding', () => {
-          expect(page.headerPaddingBottom()).toBe("5px");
-          expect(page.headerPaddingTop()).toBe("5px");
+          expect(page.headerPaddingBottom()).toBe('5px');
+          expect(page.headerPaddingTop()).toBe('5px');
         });
       });
       describe('Register button full-size', () => {

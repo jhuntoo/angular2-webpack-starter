@@ -18,7 +18,6 @@ import {Router} from 'angular2/router';
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
   directives: [
-    ...FORM_DIRECTIVES,
     SearchBar,
     XLarge
   ],

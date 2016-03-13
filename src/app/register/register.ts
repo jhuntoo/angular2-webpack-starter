@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
 import {Validators, FormBuilder, Control, ControlGroup} from 'angular2/common';
-import {Alert, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {ControlMessages} from '../control-messages/control-messages';
 import {AbstractControl} from 'angular2/common';
 import {ValidationService} from '../validation/ValidationService';
@@ -23,7 +22,7 @@ import {Router} from 'angular2/router';
   selector: 'register',
   viewProviders: [HTTP_PROVIDERS],
   providers: [ToastsManager, RegistrationService, LoggingService],
-  directives: [ Alert, DATEPICKER_DIRECTIVES, ControlMessages, SpinnerComponent],
+  directives: [ ControlMessages, SpinnerComponent],
   // Our list of styles in our component. We may add more to compose many styles together
   styles: [require('./register.less').toString()],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler

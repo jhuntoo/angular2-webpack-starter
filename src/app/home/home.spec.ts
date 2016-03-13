@@ -10,19 +10,25 @@ import {
 import {Component, provide} from 'angular2/core';
 import {BaseRequestOptions, Http} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
+import {App} from '../app';
+import { RootRouter } from 'angular2/src/router/router';
+import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { SpyLocation } from 'angular2/src/mock/location_mock';
 
 
 // Load the implementations that should be tested
 import {Home} from './home';
 import {Title} from './services/title';
-import {Router} from "angular2/router";
 
 describe('Home', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEachProviders(() => [
     BaseRequestOptions,
     MockBackend,
-    Router,
+    RouteRegistry,
+    provide(Location, {useClass: SpyLocation}),
+    provide(ROUTER_PRIMARY_COMPONENT, {useValue: App}),
+    provide(Router, {useClass: RootRouter}),
     provide(Http, {
       useFactory: function(backend, defaultOptions) {
         return new Http(backend, defaultOptions);

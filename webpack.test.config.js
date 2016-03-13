@@ -9,8 +9,11 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 /*
  * Config
  */
-module.exports = helpers.defaults({
+module.exports = {
   devtool: 'inline-source-map',
+  resolve: {
+    extensions: ['', '.ts', '.js']
+  },
   module: {
     preLoaders: [
       {
@@ -31,20 +34,19 @@ module.exports = helpers.defaults({
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
+        loader: 'awesome-typescript-loader',
         query: {
           "compilerOptions": {
-            "noEmitHelpers": true,
             "removeComments": true,
           }
         },
         exclude: [ /\.e2e\.ts$/ ]
       },
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.html$/, loader: 'raw-loader' },
-      { test: /\.css$/,  loader: 'raw-loader' },
-      { test: /\.less$/,     loader: 'style!css!less'},
-      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
+      { test: /\.json$/, loader: 'json-loader', exclude: [ helpers.root('src/index.html') ] },
+      { test: /\.html$/, loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
+      { test: /\.css$/,  loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
+      { test: /\.less$/,     loader: 'style!css!less', exclude: [ helpers.root('src/index.html') ]},
+      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader", exclude: [ helpers.root('src/index.html') ] }
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul
@@ -60,21 +62,23 @@ module.exports = helpers.defaults({
     ]
   },
   plugins: [
+    // Environment helpers
     new DefinePlugin({
-      // Environment helpers
-      'process.env': {
-        'ENV': JSON.stringify(ENV),
-        'NODE_ENV': JSON.stringify(ENV)
-      }
-    }),
-    new ProvidePlugin({
-      // TypeScript helpers
-      '__metadata': 'ts-helper/metadata',
-      '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
+      'ENV': JSON.stringify(ENV),
+      'HMR': false
     })
   ],
-});
-
+  node: {
+    global: 'window',
+    progress: false,
+    crypto: 'empty',
+    module: false,
+    clearImmediate: false,
+    setImmediate: false
+  },
+  tslint: {
+    emitErrors: false,
+    failOnHint: false,
+    resourcePath: 'src',
+  }
+};

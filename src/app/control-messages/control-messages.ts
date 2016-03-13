@@ -5,19 +5,22 @@ import {NgControlGroup} from 'angular2/common';
 import {ControlArray} from 'angular2/common';
 import {ControlGroup} from 'angular2/common';
 import {Control} from 'angular2/common';
+import {Input} from 'angular2/core';
+import {ChangeDetectionStrategy} from 'angular2/core';
 
 @Component({
   selector: 'control-messages',
-  inputs: ['controlName: control'],
   styles: [ require('./control-messages.css').toString()],
-  template: `<span *ngIf="errorMessage !== null" class="validation-error">{{errorMessage}}</span>`
+  template: `<span *ngIf='errorMessage !== null' class='validation-error'>{{errorMessage}}</span>`,
 })
 export class ControlMessages {
-  controlName: string;
+  @Input() control: string;
   constructor(@Host() private _formDir: NgFormModel) { }
 
   get errorMessage() {
-    let messageControl = this._formDir.form.find(this.controlName);
+    console.log(`ControlName: ${this.control}`);
+    let messageControl = this._formDir.form.find(this.control);
+    if (messageControl === null) return null;
     let shouldReportError : boolean = false;
 
     if (messageControl instanceof Control) {
