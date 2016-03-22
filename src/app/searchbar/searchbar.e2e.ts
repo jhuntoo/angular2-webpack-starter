@@ -6,7 +6,7 @@ let oneHundredPercentOfPhone= `${phoneScreenWidth}px`;
 // The browser size is different in CI, weird!
 if (process.env.CIRCLECI) {
   eightyPercentOfTablet = `624px`;
-  oneHundredPercentOfPhone = `375px`;
+  oneHundredPercentOfPhone = `360px`;
 }
 
 
