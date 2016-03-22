@@ -14,6 +14,9 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {Config} from './config/config';
 import {LoggingService, Level} from './app/common/log';
+import {AUTHENTICATION_PROVIDERS} from './app/common/authentication';
+
+import {LOCAL_STORAGE_PROVIDERS} from '../src/app/common/local-storage';
 
 let options = {
   autoDismiss: false,
@@ -36,6 +39,8 @@ const APPLICATION_PROVIDERS = [
   ...HTTP_PROVIDERS,
   ...ROUTER_PROVIDERS,
   ...FORM_PROVIDERS,
+  ...LOCAL_STORAGE_PROVIDERS,
+  ...AUTHENTICATION_PROVIDERS,
   ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
 ];
 

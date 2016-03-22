@@ -20,7 +20,7 @@ let homePage = {
   }
 };
 
-describe('HomePage', () => {
+describe('*** HomePage ***', () => {
   describe('When in full-width mode', () => {
     beforeAll(() => {
       homePage.load();

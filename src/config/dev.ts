@@ -1,4 +1,4 @@
 const config = {
-  apiBaseUrl: 'http://api.mustrace.com/api/v1'
+  apiBaseUrl: 'http://localhost:9000/api/v1'
 };
 export {config};

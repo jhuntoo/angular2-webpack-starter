@@ -16,12 +16,15 @@ import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from '../common/log';
 import {SpinnerComponent} from '../common/spinner/spinner';
 import {Router} from 'angular2/router';
+import {LocalStorage} from '../common/local-storage';
+import {Config} from '../../config/config';
+import {SocialLogin} from '../common/social-login';
 
 @Component({
 
   selector: 'register',
   viewProviders: [HTTP_PROVIDERS],
-  providers: [ToastsManager, RegistrationService, LoggingService],
+  providers: [ToastsManager, RegistrationService, LoggingService, SocialLogin],
   directives: [ ControlMessages, SpinnerComponent],
   // Our list of styles in our component. We may add more to compose many styles together
   styles: [require('./register.less').toString()],
@@ -41,6 +44,7 @@ export class RegisterForm {
       Validators.required,
       ValidationService.passwordValidator]));
   confirmPassword = new Control('', Validators.required);
+  googleLogin:string;
   isCheckingEmail:boolean = false;
   isSubmitting:boolean = false;
   isNetworkError:boolean = false;
@@ -48,11 +52,17 @@ export class RegisterForm {
   emailCheckResult:EmailCheckResult = null;
   startEmailCheck$:Subject<string>;
 
-  constructor(fb:FormBuilder, private _router: Router,private http:Http, public toastr:ToastsManager, private registrationService: RegistrationService, logginService: LoggingService) {
+  constructor(private fb:FormBuilder,
+              private _router: Router,
+              private http:Http,
+              public toastr:ToastsManager,
+              public socialLogin: SocialLogin,
+              private registrationService: RegistrationService,
+              logginService: LoggingService,
+              private config:Config) {
     let log : Logger = logginService.getLogger('RegisterForm');
 
     this.log = log;
-
     this.form = fb.group({
       email: this.email,
       matchingPassword: fb.group({
@@ -97,10 +107,11 @@ export class RegisterForm {
     this.isSubmitting = false;
     if (response.success) {
       this.log.debug('success');
+      //this._localStorage.set('jwt', response.jwt)
       this._router.navigate(['EmailSent']);
     } else {
       if (response.alreadyExists) {
-        this.log.debug('exists');
+        this.emailCheckResult = EmailCheckResult.taken();
       }
     }
   }

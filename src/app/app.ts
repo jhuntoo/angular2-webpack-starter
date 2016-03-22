@@ -9,8 +9,10 @@ import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';
 import {VerifyEmail} from './verifyemail/verifyemail';
+import {LoginCallback} from './login/login-callback';
 import {EmailSentForm} from './register/email-sent';
 import {SearchPage} from './search/search';
+import {WelcomePage} from './welcome/welcome';
 
 /*
  * App Component
@@ -55,6 +57,8 @@ import {SearchPage} from './search/search';
   { path: '/search', component: SearchPage, name: 'Search' },
   { path: '/emailsent', component: EmailSentForm, name: 'EmailSent' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
+  { path: '/logincallback', component: LoginCallback, name: 'LoginCallback' },
+  { path: '/welcome', component: WelcomePage, name: 'WelcomePage' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])

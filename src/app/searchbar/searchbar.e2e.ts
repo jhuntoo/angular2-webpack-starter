@@ -1,5 +1,5 @@
 let tabletScreenWidth = 790;
-let phoneScreenWidth = 400;
+let phoneScreenWidth = 385;
 let eightyPercentOfTablet = `${tabletScreenWidth * 0.8}px`;
 let oneHundredPercentOfPhone= `${phoneScreenWidth}px`;
 
@@ -32,19 +32,19 @@ let searchbarPage = {
 };
 
 describe('Searchbar', () => {
-  describe('When in full-width mode', () => {
+  describe("When in full-width mode", () => {
     beforeAll(() => {
       searchbarPage.load();
       searchbarPage.setFullWidthScreen();
     });
     describe('Width', () => {
       it('should be fixed', () => {
-        expect(searchbarPage.formSearchBarWidth()).toBe('785px');
+        expect(searchbarPage.formSearchBarWidth()).toBe("785px");
       });
     });
   });
 
-  describe('When in Tablet mode', () => {
+  describe("When in Tablet mode", () => {
     beforeAll(() => {
       searchbarPage.load();
       searchbarPage.setTabletScreen();
@@ -57,7 +57,7 @@ describe('Searchbar', () => {
   });
 
 
-  describe('When in Mobile mode', () => {
+  describe("When in Mobile mode", () => {
     beforeAll(() => {
       searchbarPage.load();
       searchbarPage.setMobileScreen();

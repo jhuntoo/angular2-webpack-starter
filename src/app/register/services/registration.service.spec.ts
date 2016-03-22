@@ -4,26 +4,24 @@ import {
   injectAsync,
   beforeEachProviders,
   beforeEach,
-  TestComponentBuilder,
   expect,
 } from 'angular2/testing';
 
-import {BaseRequestOptions, Http} from 'angular2/http';
+import {BaseRequestOptions, Http, ResponseOptions, Response} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
+import {MockConnection} from 'angular2/src/http/backends/mock_backend';
+
 import {Component, provide} from 'angular2/core';
 
 // Load the implementations that should be tested
 import {RegistrationService} from './registration.service';
-import {MockConnection} from 'angular2/src/http/backends/mock_backend';
-import {ResponseOptions} from 'angular2/http';
-import {Response} from 'angular2/http';
 import {EmailCheckResult} from '../models/EmailCheckResult';
 import {Config} from '../../../config/config';
 import {throwError} from 'rxjs/util/throwError';
 import {RegisterResponse} from '../models/registerResponse';
 
 
-describe('Register Service', () => {
+describe('*** Register Service ***', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEachProviders(() => [
     BaseRequestOptions,

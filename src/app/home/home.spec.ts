@@ -20,7 +20,7 @@ import { SpyLocation } from 'angular2/src/mock/location_mock';
 import {Home} from './home';
 import {Title} from './services/title';
 
-describe('Home', () => {
+describe('*** Home ***', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEachProviders(() => [
     BaseRequestOptions,

@@ -5,7 +5,6 @@ import {Subject} from 'rxjs/Subject';
 import {Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {EmailCheckResult} from '../models/EmailCheckResult';
-import {inject} from 'angular2/testing';
 import {RegisterResponse} from '../models/registerResponse';
 
 
@@ -40,7 +39,7 @@ export class RegistrationService {
     if (response.status !== 200) return RegisterResponse.error('http status is not 200');
     var body = response.json();
     if (body.success) {
-      return RegisterResponse.success();
+      return RegisterResponse.success(body.token);
     } else if (body.exists) {
       return RegisterResponse.alreadyExists();
     }

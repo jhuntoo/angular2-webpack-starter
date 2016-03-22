@@ -22,6 +22,8 @@ import {App} from '../app';
 import { RootRouter } from 'angular2/src/router/router';
 import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
 import { SpyLocation } from 'angular2/src/mock/location_mock';
+import {SocialLogin} from '../common/social-login';
+import {Config} from '../../config/config';
 
 
 let mockedServiceEmailAvailable = MockRegistrationService.withMocked(EmailCheckResult.available());
@@ -48,7 +50,9 @@ describe('RegisterForm', () => {
     provide(RegistrationService, {useValue: new MockRegistrationService()}),
     provide(LoggingService, {useValue: new LoggingService()}),
     ToastsManager,
-    RegisterForm
+    RegisterForm,
+    provide(Config, { useValue: {apiBaseUrl : '/test'} }),
+    SocialLogin
   ]);
 
 
