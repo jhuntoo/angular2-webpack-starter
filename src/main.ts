@@ -71,7 +71,7 @@ if ('production' === ENV) {
  * our Services and Providers into Angular's dependency injection
  */
 export function main() {
-  let config = ('production' === process.env.ENV)  ? require('./config/production.ts').config : require('./config/dev.ts').config;
+  let config = ('production' === ENV)  ? require('./config/production.ts').config : require('./config/dev.ts').config;
   console.log(`config: ${JSON.stringify(config)}`);
   return browser.bootstrap(App, [
     ...APPLICATION_PROVIDERS,
