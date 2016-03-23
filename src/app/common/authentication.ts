@@ -65,5 +65,5 @@ export class AuthenticationService {
   }
 }
 export const AUTHENTICATION_PROVIDERS:any[] = [
-  provide(LocalStorage, {useClass: LocalStorage})
+  provide(AuthenticationService, {useClass: AuthenticationService})
 ];
