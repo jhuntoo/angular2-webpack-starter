@@ -4,6 +4,7 @@ export class Event {
 
   constructor() {
     this.categories = [];
+    this.location = new Location();
   }
 
   name:string;

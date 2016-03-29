@@ -11,17 +11,17 @@ import {
 } from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {ToastOptions} from 'ng2-toastr/ng2-toastr';
+//import {ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {Config} from './config/config';
 import {LoggingService, Level} from './app/common/log';
 import {AUTHENTICATION_PROVIDERS} from './app/common/authentication';
 
 import {LOCAL_STORAGE_PROVIDERS} from '../src/app/common/local-storage';
 
-let options = {
-  autoDismiss: false,
-  positionClass: 'toast-bottom-right',
-};
+//let options = {
+//  autoDismiss: false,
+//  positionClass: 'toast-bottom-right',
+//};
 
 /*
  * App Component
@@ -77,7 +77,7 @@ export function main() {
     ...APPLICATION_PROVIDERS,
     ngCore.provide(ngCore.PLATFORM_DIRECTIVES, {useValue: APPLICATION_DIRECTIVES, multi: true}),
     ngCore.provide(ngCore.PLATFORM_PIPES, {useValue: APPLICATION_PIPES, multi: true}),
-    ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)}),
+    //ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)}),
     ngCore.provide(Config, { useValue: config}),
     ngCore.provide(LoggingService, { useValue: new LoggingService()})
   ])
