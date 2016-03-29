@@ -13,6 +13,7 @@ import {LoginCallback} from './login/login-callback';
 import {EmailSentForm} from './register/email-sent';
 import {SearchPage} from './search/search';
 import {WelcomePage} from './welcome/welcome';
+import {AdminApp} from '../admin/app';
 
 /*
  * App Component
@@ -77,3 +78,12 @@ export class App {
  * For help or questions please contact us at @AngularClass on twitter
  * or our chat on Slack at https://AngularClass.com/slack-join
  */
+
+import '../assets/css/font.css';
+//import './assets/css/cssparallax.css';
+//import './assets/css/reset.css';
+//import './assets/css/responsivemobile.css';
+//import './assets/css/style.css';
+import '../assets/css/less/app.less';
+
+import 'font-awesome-webpack!../../font-awesome.config.js';

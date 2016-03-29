@@ -27,7 +27,7 @@ let options = {
  * App Component
  * our top level component that holds all of our components
  */
-import {App} from './app/app';
+import {Root} from './root';
 import {RouterActive} from './app/directives/router-active';
 
 /*
@@ -73,7 +73,7 @@ if ('production' === ENV) {
 export function main() {
   let config = ('production' === ENV)  ? require('./config/production.ts').config : require('./config/dev.ts').config;
   console.log(`config: ${JSON.stringify(config)}`);
-  return browser.bootstrap(App, [
+  return browser.bootstrap(Root, [
     ...APPLICATION_PROVIDERS,
     ngCore.provide(ngCore.PLATFORM_DIRECTIVES, {useValue: APPLICATION_DIRECTIVES, multi: true}),
     ngCore.provide(ngCore.PLATFORM_PIPES, {useValue: APPLICATION_PIPES, multi: true}),
@@ -119,11 +119,4 @@ if ('development' === ENV) {
   bootstrapDomReady();
 }
 
-import './assets/css/font.css';
-//import './assets/css/cssparallax.css';
-//import './assets/css/reset.css';
-//import './assets/css/responsivemobile.css';
-//import './assets/css/style.css';
-import './assets/css/less/app.less';
 
-import 'font-awesome-webpack!../font-awesome.config.js';

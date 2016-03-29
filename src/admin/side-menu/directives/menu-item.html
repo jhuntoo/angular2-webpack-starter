@@ -1,0 +1,17 @@
+<li class="active">
+  <a class="auto" (click)="toggle()">
+                  <span class="pull-right text-muted" [hidden]="menuIsFolded">
+                    <i class="fa fa-fw {{toggleIcon}}"></i>
+                  </span>
+    <i class="glyphicon {{iconClass}} icon"></i>
+    <span>{{title}}</span>
+  </a>
+
+  <ul [hidden]="isCollapsed" class="nav nav-sub dk" style="">
+    <li *ngFor="#subItem of subItems" class="active">
+      <a (click)="subItem.navigate()">
+        <span>{{subItem.title}}</span>
+      </a>
+    </li>
+  </ul>
+</li>

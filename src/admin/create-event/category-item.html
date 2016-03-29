@@ -1,0 +1,40 @@
+
+<div class="form-group">
+  <label class="col-sm-2 control-label">Sport</label>
+  <div class="col-sm-4">
+    <select [(ngModel)]="model.sportId" class="w-full">
+        <option value="1">Running</option>
+        <option value="2">Obstacle / Mud</option>
+        <option value="3">Road Cycling</option>
+        <option value="4">Mountain Biking</option>
+        <option value="5">Swimming</option>
+      <option value="6">Triathlon</option>
+      <option value="7">Duathlon</option>
+      <option value="8">Aquathlon</option>
+      <option value="9">Adventure Race</option>
+      <option value="10">Childrens</option>
+      <option value="11">Multisport</option>
+    </select>
+  </div>
+  <label class="col-sm-2 control-label">Distance</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control"  [(ngModel)]="model.distance">
+  </div>
+</div>
+<div class="form-group">
+
+  <label class="col-sm-2 control-label">Registration Closure Date</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control"  placeholder="dd/mm/yyyy"  [(ngModel)]="model.registrationClosureDate">
+  </div>
+</div>
+<div class="form-group">
+
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">Capacity</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control"   [(ngModel)]="model.capacity">
+  </div>
+</div>
+

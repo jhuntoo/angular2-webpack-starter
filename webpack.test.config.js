@@ -46,7 +46,8 @@ module.exports = {
       { test: /\.html$/, loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
       { test: /\.css$/,  loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
       { test: /\.less$/,     loader: 'style!css!less', exclude: [ helpers.root('src/index.html') ]},
-      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader", exclude: [ helpers.root('src/index.html') ] }
+      { test: /\.(ttf|eot|svg|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader", exclude: [ helpers.root('src/index.html') ] },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" }
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul
