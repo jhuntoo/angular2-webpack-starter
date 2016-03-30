@@ -1,4 +1,8 @@
 export class Location {
   location:string;
-  coordinates:string;
+  lat:number;
+  long:number;
+  get hasCoordinates() {
+    return (this.lat && this.long);
+  }
 }

@@ -4,3 +4,24 @@
     <input type="text" class="form-control" [(ngModel)]="location.location">
   </div>
 </div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">Location</label>
+  <div class="col-sm-10">
+    <sebm-google-map
+      [zoom]="zoom"
+      [latitude]="defaultLat"
+      [longitude]="defaultLng"
+      [disableDefaultUI]="false"
+      (mapClick)="mapClicked($event)">
+
+      <sebm-google-map-marker
+        *ngIf="location.hasCoordinates"
+        (markerClick)="clickedMarker(m.label, i)"
+        [latitude]="location.lat"
+        [longitude]="location.long"
+        [markerDraggable]="true"
+        (dragEnd)="markerDragEnd(m, $event)"></sebm-google-map-marker>
+
+    </sebm-google-map>
+  </div>
+</div>

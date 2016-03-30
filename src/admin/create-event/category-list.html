@@ -1,3 +1,9 @@
-<category-item [model]="category" *ngFor="#category of categories"></category-item>
-<button class="btn btn-success btn-sm" (click)="add()">Add row</button>
+<table class="table table-striped bg-white b-a">
+  <tbody>
+  <tr *ngFor="#category of categories">
+    <category-item [model]="category" ></category-item>
+  </tr>
+  </tbody>
+</table>
+<button class="btn btn-success btn-sm" (click)="add()">Add Category</button>
 

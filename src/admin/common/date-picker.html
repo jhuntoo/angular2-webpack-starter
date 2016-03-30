@@ -1,0 +1,8 @@
+<div class="input-group w-md">
+  <input type="text" class="form-control" [value]="value">
+<span class="input-group-btn">
+  <button type="button" class="btn btn-default" (click)="toggleDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i>
+  </button>
+</span>
+  <datepicker [(ngModel)]="value" [minDate]="minDate" [showWeeks]="true" ></datepicker>
+</div>

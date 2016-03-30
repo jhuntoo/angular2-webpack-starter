@@ -17,6 +17,7 @@ import {LoggingService, Level} from './app/common/log';
 import {AUTHENTICATION_PROVIDERS} from './app/common/authentication';
 
 import {LOCAL_STORAGE_PROVIDERS} from '../src/app/common/local-storage';
+import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 
 //let options = {
 //  autoDismiss: false,
@@ -41,6 +42,7 @@ const APPLICATION_PROVIDERS = [
   ...FORM_PROVIDERS,
   ...LOCAL_STORAGE_PROVIDERS,
   ...AUTHENTICATION_PROVIDERS,
+  ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
   ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
 ];
 
