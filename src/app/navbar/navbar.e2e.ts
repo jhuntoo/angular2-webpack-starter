@@ -113,41 +113,8 @@ describe('App', () => {
       });
     });
 
-    describe('Email link', () => {
-      it('should be displayed', () => {
-        expect(page.emailLink().isDisplayed()).toBe(true);
-      });
-      it('should link to contain the correct mailto link', () => {
-        expect(page.emailLink().getAttribute('href')).toBe('mailto:contact@mustrace.com?Subject=Hello%20again');
-      });
-      it('should contain the font awesome envelope icon', () => {
-        expect(page.emailLink().findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-envelope');
-      });
-    });
 
-    describe('Twitter link', () => {
-     it('should be displayed', () => {
-        expect(page.twitterLink().isDisplayed()).toBe(true);
-      });
-      it('should link to contain the correct twitter link', () => {
-        expect(page.twitterLink().getAttribute('href')).toBe('https://twitter.com/Must_Race_Com');
-      });
-      it('should contain the font awesome twitter icon', () => {
-        expect(page.twitterLink().findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-twitter');
-      });
-    });
 
-    describe('Facebook link', () => {
-      it('should be displayed', () => {
-        expect(page.facebookLink().isDisplayed()).toBe(true);
-      });
-      it('should link to contain the correct twitter link', () => {
-        expect(page.facebookLink().getAttribute('href')).toBe('https://www.facebook.com/mustracecom/?fref=ts');
-      });
-      it('should contain the font awesome facebook-official icon', () => {
-        expect(page.facebookLink().findElement(by.tagName('i')).getAttribute('class')).toBe('fa fa-facebook-official');
-      });
-    });
   });
 
   describe('When in Mobile mode', () => {
