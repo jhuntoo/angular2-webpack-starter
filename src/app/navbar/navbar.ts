@@ -4,6 +4,7 @@ import {
   Collapse
 } from 'ng2-bootstrap/components/collapse';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
+import {AuthenticationService} from '../common/authentication';
 
 @Component({
 
@@ -18,8 +19,10 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
 })
 export class Navbar {
   public isCollapsed:boolean = true;
-
-  constructor() {
+  public showLoginRegiser:boolean;
+  constructor(private authenticationService: AuthenticationService) {
+      this.showLoginRegiser = !authenticationService.isLoggedIn;
+      authenticationService.$loginStatusChanged.subscribe((isLoggedIn: boolean) => this.showLoginRegiser = !isLoggedIn);
 
   }
 
