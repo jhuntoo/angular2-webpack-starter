@@ -1,7 +1,7 @@
 import {Component, Input} from 'angular2/core';
 import {EventCategory} from './models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
-import {Select} from 'ng2-select/ng2-select'
+import {Select} from 'ng2-select/ng2-select';
 import {RegistrationTypeList} from './registration-type-list';
 
 @Component({

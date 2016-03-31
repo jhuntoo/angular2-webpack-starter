@@ -20,7 +20,7 @@ export class EventLocation {
   @Input() location: Location;
   log:Logger;
   zoom: number = 5;
-  markers: marker[] = [];
+  markers: Marker[] = [];
 
   defaultLat:number = 52.48278022207823;
   defaultLng:number = -1.40625;
@@ -36,12 +36,12 @@ export class EventLocation {
     this.location.long = $event.coords.lng;
   }
 
-  markerDragEnd(m: marker, $event: MouseEvent) {
+  markerDragEnd(m: Marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
 
 }
-interface marker {
+interface Marker {
   lat: number;
   lng: number;
   label?: string;

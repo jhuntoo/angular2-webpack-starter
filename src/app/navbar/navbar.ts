@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 import {
   Collapse
-} from 'ng2-bootstrap/ng2-bootstrap';
+} from 'ng2-bootstrap/components/collapse';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
 
 @Component({
