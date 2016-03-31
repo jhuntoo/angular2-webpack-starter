@@ -28,18 +28,25 @@ export class LoginCallback {
   ngOnInit() {
     console.log(`hello 'LoginCallback' component with loginCompletionId ${this.loginCompletionId}`);
     this.authenticationService.completeSocialLogin(this.loginCompletionId)
-      .subscribe((result : SocialLoginResult) => this.handleSocialLoginResult,
+      .subscribe((result : SocialLoginResult) => {this.handleSocialLoginResult(result)},
         (err) => {this.log.error(err);},
         () => {this.log.debug('complete');});
 
   }
   handleSocialLoginResult(result : SocialLoginResult) {
     if (result.success) {
-      if (result.type === 'type') {
+      if (result.type === 'new') {
+        this.log.debug(`Social Login succeeded, redirecting new user to welcome page..`);
         this._router.navigate(['WelcomePage']);
+      } else {
+        this.log.debug(`Social Login succeeded, redirecting existing user to home page`);
+        this._router.navigate(['Home']);
       }
+    } else {
+      this.log.debug(`Social Login failed, redirecting to home page`);
+      this._router.navigate(['Home']);
     }
-    this._router.navigate(['WelcomePage']);
+
   }
 
 
