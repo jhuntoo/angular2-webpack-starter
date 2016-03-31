@@ -5,7 +5,7 @@
       <button id="button-toggle-collapse" class="btn btn-link visible-xs pull-right m-r" (click)="isCollapsed = !isCollapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
         <i class="fa fa-bars"></i>
       </button>
-      <div *ngIf="showLoginRegiser" class="visible-xs pull-right m-t-sm">
+      <div *ngIf="!loggedIn" class="visible-xs pull-right m-t-sm">
         <a id="button-signin-mobile"  class="btn btn-link btn-sm">Sign in</a> or
         <a id="button-register-mobile" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
       </div>
@@ -32,11 +32,43 @@
             <a id="link-twitter" class="m-l" href="https://twitter.com/Must_Race_Com"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;
             <a id="link-facebook" class="m-l" href="https://www.facebook.com/mustracecom/?fref=ts"><i
               class="fa fa-facebook-official"></i></a>
-            <div *ngIf="showLoginRegiser">
+            <div *ngIf="!loggedIn">
               <a id="button-signin-full"  class="btn btn-link btn-sm">Sign in</a> or
               <a id="button-register-full" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
             </div>
           </div>
+        </li>
+        <li *ngIf="loggedIn" [ngClass]="{'open': userMenuOpen}" class="dropdown" [offClick]="clickedOutside">
+          <a class="dropdown-toggle clear" dropdown-toggle="" aria-haspopup="true" aria-expanded="true" (click)="onUserMenuClicked()">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="../../assets/img/a0.jpg" alt="...">
+                <i class="on md b-white bottom"></i>
+              </span>
+            <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+          </a>
+          <!-- dropdown -->
+          <ul class="dropdown-menu animated fadeInRight w">
+            <li>
+              <a href="">
+                <span class="badge bg-danger pull-right">30%</span>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li>
+              <a >Profile</a>
+            </li>
+            <li>
+              <a >
+                <span class="label bg-info pull-right">new</span>
+                Help
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="logout()">Logout</a>
+            </li>
+          </ul>
+          <!-- / dropdown -->
         </li>
       </ul>
     </div>

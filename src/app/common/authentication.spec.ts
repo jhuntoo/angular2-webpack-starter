@@ -30,9 +30,22 @@ describe('*** Authentication Service ****', () => {
     AuthenticationService,
   ]);
 
-  describe('On load', () => {
+  describe('On load with - No existing token', () => {
     it('should set isLoggedIn to false', inject([AuthenticationService], (service) => {
       expect(service.isLoggedIn).toBeFalsy();
+    }));
+  });
+
+  describe('On load - with existing token', () => {
+    let localStorage = new MockLocalStorage();
+    beforeEachProviders(() => [
+      provide(LocalStorage, {useValue: localStorage}),
+    ]);
+    beforeEach(() => {
+      localStorage.set('jwt', 'TOKEN');
+    });
+    it('should set isLoggedIn to true', inject([AuthenticationService], (service) => {
+      expect(service.isLoggedIn).toBeTruthy();
     }));
   });
 

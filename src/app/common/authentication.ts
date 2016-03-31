@@ -28,7 +28,12 @@ export class AuthenticationService {
   public isLoggedIn:boolean = false;
 
   constructor(private http:Http, private config:Config, private localStorage:LocalStorage) {
-
+     let jwt = localStorage.get('jwt');
+     if (jwt) {
+        this.isLoggedIn = true;
+     } else {
+       this.isLoggedIn = false;
+     }
   }
 
   completeSocialLogin(loginCompletionId: string) {
@@ -44,9 +49,19 @@ export class AuthenticationService {
       return;
     }
     this.localStorage.set('jwt', token);
-    this.isLoggedIn = true;
-    this.$loginStatusChanged.next(true);
+    this.updateLoggedInStatus(true);
   }
+
+  updateLoggedInStatus(value:boolean) {
+    this.isLoggedIn = value;
+    this.$loginStatusChanged.next(value);
+  }
+
+  logout() {
+    this.localStorage.remove('jwt');
+    this.updateLoggedInStatus(false);
+  }
+
   private update(socialLoginResult: SocialLoginResult) {
     //console.log(`socialLoginResult: ${JSON.stringify(socialLoginResult)}`);
     if (socialLoginResult.success) {
@@ -63,6 +78,7 @@ export class AuthenticationService {
       return SocialLoginResult.error();
     }
   }
+
 }
 export const AUTHENTICATION_PROVIDERS:any[] = [
   provide(AuthenticationService, {useClass: AuthenticationService})

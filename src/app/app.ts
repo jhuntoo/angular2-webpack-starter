@@ -4,7 +4,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, Router} from 'angular2/router';
 
-import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';

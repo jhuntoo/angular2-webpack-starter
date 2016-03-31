@@ -2,7 +2,6 @@ import {Component} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 
 import {Title} from './services/title';
-import {XLarge} from './directives/x-large';
 import {SearchBar} from '../searchbar/searchbar';
 import {Router} from 'angular2/router';
 
@@ -18,8 +17,7 @@ import {Router} from 'angular2/router';
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
   directives: [
-    SearchBar,
-    XLarge
+    SearchBar
   ],
   // We need to tell Angular's compiler which custom pipes are in our template.
   pipes: [ ],
