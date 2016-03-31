@@ -1,15 +1,10 @@
 var path = require('path');
-var zlib = require('zlib');
 
 
 // Helper functions
 
 function hasProcessFlag(flag) {
   return process.argv.join('').indexOf(flag) > -1;
-}
-
-function gzipMaxLevel(buffer, callback) {
-  return zlib['gzip'](buffer, {level: 9}, callback)
 }
 
 function root(args) {
@@ -33,7 +28,6 @@ function prependExt(extensions, args) {
 }
 
 exports.hasProcessFlag = hasProcessFlag;
-exports.gzipMaxLevel = gzipMaxLevel;
 exports.root = root;
 exports.rootNode = rootNode;
 exports.prependExt = prependExt;
