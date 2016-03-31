@@ -230,7 +230,6 @@ module.exports = {
     }),
    // include uglify in production
     new CompressionPlugin({
-      algorithm: helpers.gzipMaxLevel,
       regExp: /\.css$|\.html$|\.js$|\.map$/,
       threshold: 2 * 1024
     })
