@@ -12,7 +12,7 @@ import {Component, provide} from 'angular2/core';
 import {Config} from '../../config/config';
 import {LocalStorage, MockLocalStorage} from './local-storage';
 import {AuthenticationService} from './authentication';
-import {SocialLoginResult} from "./authentication";
+import {SocialLoginResult} from './authentication';
 
 
 describe('*** Authentication Service ****', () => {
