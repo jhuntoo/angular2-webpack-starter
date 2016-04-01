@@ -10,7 +10,11 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'jasmine-matchers'],
+
+    plugins: [
+      'karma-jasmine-matchers'
+    ],
 
     // list of files to exclude
     exclude: [ ],
