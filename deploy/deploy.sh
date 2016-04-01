@@ -35,4 +35,4 @@ stackup $STACK_NAME up  --parameters "parameters.json" --template webapp.templat
 #stackup $STACK_NAME up  --parameters "parameters.json" --template cloudformation.template
 BUCKET_NAME=$(stackup $STACK_NAME outputs | jq -r '.BucketName')
 #BUCKET_NAME=$(stackup $STACK_NAME outputs | jq -r '.BucketName')
-aws s3 cp ../dist/ s3://$BUCKET_NAME/ --recursive
+aws s3 sync ../dist/ s3://$BUCKET_NAME/ --delete
