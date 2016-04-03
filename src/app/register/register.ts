@@ -14,11 +14,9 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from '../common/log';
-import {SpinnerComponent} from '../common/spinner/spinner';
 import {Router} from 'angular2/router';
-import {LocalStorage} from '../common/local-storage';
+import {LocalStorage, SocialLogin, AuthenticationService, SpinnerComponent} from '../common/index';
 import {Config} from '../../config/config';
-import {SocialLogin} from '../common/social-login';
 
 @Component({
 
@@ -58,9 +56,11 @@ export class RegisterForm {
               public toastr:ToastsManager,
               public socialLogin: SocialLogin,
               private registrationService: RegistrationService,
+              private authenticationService: AuthenticationService,
               logginService: LoggingService,
               private config:Config) {
     let log : Logger = logginService.getLogger('RegisterForm');
+    log.debug('Constructor called');
 
     this.log = log;
     this.form = fb.group({
@@ -94,6 +94,7 @@ export class RegisterForm {
 
   onSubmit() {
     this.isSubmitting = true;
+    this.isNetworkError = false;
     this.log.debug('calling the register endpoint');
     this.registrationService.register(this.email.value, this.password.value)
       .subscribe(
@@ -106,9 +107,14 @@ export class RegisterForm {
   applyRegisterReponse(response: RegisterResponse) {
     this.isSubmitting = false;
     if (response.success) {
-      this.log.debug('success');
+      this.log.debug(`Registration Success. Email sent: ${response.confirmEmail}`);
       //this._localStorage.set('jwt', response.jwt)
-      this._router.navigate(['EmailSent']);
+      this.authenticationService.setToken(response.jwt);
+      if (response.confirmEmail) {
+        this._router.navigate(['EmailSent']);
+      } else {
+        this._router.navigate(['Home']);
+      }
     } else {
       if (response.alreadyExists) {
         this.emailCheckResult = EmailCheckResult.taken();

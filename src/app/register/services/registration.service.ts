@@ -39,7 +39,7 @@ export class RegistrationService {
     if (response.status !== 200) return RegisterResponse.error('http status is not 200');
     var body = response.json();
     if (body.success) {
-      return RegisterResponse.success(body.token);
+      return RegisterResponse.success(body.confirmEmail, body.token);
     } else if (body.exists) {
       return RegisterResponse.alreadyExists();
     }
@@ -48,8 +48,9 @@ export class RegistrationService {
 
   private _toEmailCheckResult(response:Response):EmailCheckResult {
     if (response.status !== 200) return EmailCheckResult.error();
-    if (response.json().available) {
-      return EmailCheckResult.available();
+    let body = response.json();
+    if (body.available) {
+      return EmailCheckResult.available(body.alternativeProfiles);
     }
     return EmailCheckResult.taken();
   }

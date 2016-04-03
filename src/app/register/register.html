@@ -11,9 +11,9 @@
             <!--with Facebook-->
           <!--</button>-->
         <!--</div>-->
-        <a [href]="socialLogin.facebook.authUrl" class="btn btn-primary btn-block m-b-sm"><i class="fa fa-facebook pull-left"></i>Sign in with Facebook</a>
+        <a [href]="socialLogin.facebook.authUrl" class="btn btn-primary btn-block m-b-sm"><i class="fa fa-facebook pull-left"></i>Register with Facebook</a>
         <!--<a [href]="socialLogin.twitter.authUrl" class="btn btn-info btn-block m-b-sm"><i class="fa fa-twitter pull-left"></i>Sign in with Twitter</a>-->
-        <a [href]="socialLogin.google.authUrl" class="btn btn-danger btn-block"><i class="fa fa-google-plus pull-left"></i>Sign in with Google</a>
+        <a [href]="socialLogin.google.authUrl" class="btn btn-danger btn-block"><i class="fa fa-google-plus pull-left"></i>Register with Google</a>
 
       </div>
       <div class="form-group horizontalSplit"><span>or</span></div>
@@ -22,11 +22,17 @@
       <form [ngFormModel]="form" (ngSubmit)="onSubmit()" class="form-validation">
         <div class="list-group list-group-sm">
           <div class="form-group">
+            <span class="label bg-success" *ngIf="emailCheckResult != null && emailCheckResult.available">Available</span>
             <input id="input-email" ngControl="email" class="form-control m-b" type="text" placeholder="Email">
           </div>
-          <span class="label bg-success" *ngIf="emailCheckResult != null && emailCheckResult.available">Available</span>
+
           <div *ngIf="email.dirty && emailCheckResult != null && !emailCheckResult.available" class="alert alert-danger">
-            <p `>Taken</p>
+            <p>Already Registered</p>
+          </div>
+          <div *ngIf="email.dirty && emailCheckResult != null && emailCheckResult.connectedProfiles.length > 0" class="alert mdi-alert-warning">
+            <p>Already Registered with social profiles <strong *ngFor="#profile of emailCheckResult.connectedProfiles; #isLast=last">{{profile}}{{isLast ? '' : ', '}}</strong>.</p>
+            <p>If you continue to register with an email and password, you will be able to login with both this email and your connected social profiles</p>
+
           </div>
           <control-messages control="email" class="text-danger wrapper text-center" id="errors-email"></control-messages>
           <br>

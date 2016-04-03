@@ -3,7 +3,7 @@ import {
   inject,
   beforeEach
 } from 'angular2/testing';
-import {EmailCheckResult} from './emailCheckResult';
+import {EmailCheckResult} from './EmailCheckResult';
 
 describe('EmailCheckResult', () => {
   describe('error()', () => {

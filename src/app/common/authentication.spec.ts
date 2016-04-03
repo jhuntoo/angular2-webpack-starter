@@ -11,8 +11,7 @@ import {BaseRequestOptions, Http, ResponseOptions, Response} from 'angular2/http
 import {Component, provide} from 'angular2/core';
 import {Config} from '../../config/config';
 import {LocalStorage, MockLocalStorage} from './local-storage';
-import {AuthenticationService} from './authentication';
-import {SocialLoginResult} from './authentication';
+import {AuthenticationService, SocialLoginResult, LoginResult} from './authentication';
 
 
 describe('*** Authentication Service ****', () => {
@@ -122,6 +121,84 @@ describe('*** Authentication Service ****', () => {
         },err => fail('should not fail'));
       }));
     });
+
+  });
+
+  describe('On login called', () => {
+    describe('Poorly formed Response', () => {
+      beforeEach(inject([MockBackend], (backend:MockBackend) => {
+        backend.connections.subscribe((c:MockConnection) =>
+          c.mockRespond(new Response(new ResponseOptions({body: 'bad response'}))));
+      }));
+      it('should return an error', inject([AuthenticationService], (service:AuthenticationService) => {
+        service.login('IRRELEVANT','PASSWORD' ).subscribe((result: LoginResult) => {
+          expect(result.success).toBeFalsy();
+        },err => fail('This is a malformed json response, not a http error'));
+      }));
+      it('should NOT login', inject([AuthenticationService], (service:AuthenticationService) => {
+        expect(service.isLoggedIn).toBeFalsy();
+      }));
+    });
+    describe('valid response with login success & token', () => {
+      let localStorage = new MockLocalStorage();
+      beforeEachProviders(() => [
+        provide(LocalStorage, {useValue: localStorage}),
+      ]);
+      beforeEach(inject([MockBackend], (backend:MockBackend) => {
+        backend.connections.subscribe((c:MockConnection) =>
+          c.mockRespond(new Response(new ResponseOptions({body: { token: 'TEST_TOKEN_3', success : true }, status: 200 } ))));
+      }));
+      it('should NOT return an error', inject([AuthenticationService], (service:AuthenticationService) => {
+        service.login('IRRELEVANT','PASSWORD').subscribe((result: LoginResult) => {
+          expect(result.success).toBeTruthy();
+        },err => fail('should not fail'));
+      }));
+      it('should set token in localStorage', () => {
+        expect(localStorage.get('jwt')).toEqual('TEST_TOKEN_3');
+      });
+      it('should set isLoggedIn to true', inject([AuthenticationService], (service:AuthenticationService) => {
+        service.login('IRRELEVANT', 'PASSWORD').subscribe((result: LoginResult) => {
+          expect(service.isLoggedIn).toBeTruthy();
+        },err => fail('should not fail'));
+      }));
+    });
+    describe('valid response with login unsuccessful', () => {
+      let localStorage = new MockLocalStorage();
+      beforeEachProviders(() => [
+        provide(LocalStorage, {useValue: localStorage}),
+      ]);
+      beforeEach(inject([MockBackend], (backend:MockBackend) => {
+        backend.connections.subscribe((c:MockConnection) =>
+          c.mockRespond(new Response(new ResponseOptions({body: {  success : false }, status: 401 } ))));
+      }));
+      it('should NOT return an error', inject([AuthenticationService], (service:AuthenticationService) => {
+        service.login('IRRELEVANT','PASSWORD').subscribe((result: LoginResult) => {
+          expect(result.success).toBeFalsy();
+        },err => fail('should not fail'));
+      }));
+      it('should set isLoggedIn to false', inject([AuthenticationService], (service:AuthenticationService) => {
+        service.login('IRRELEVANT', 'PASSWORD').subscribe((result: LoginResult) => {
+          expect(service.isLoggedIn).toBeFalsy();
+        },err => fail('should not fail'));
+      }));
+    });
+
+    describe('valid response with login unsuccessful and alternativeProfiles', () => {
+      let localStorage = new MockLocalStorage();
+      beforeEachProviders(() => [
+        provide(LocalStorage, {useValue: localStorage}),
+      ]);
+      beforeEach(inject([MockBackend], (backend:MockBackend) => {
+        backend.connections.subscribe((c:MockConnection) =>
+          c.mockRespond(new Response(new ResponseOptions({body: {  success : false, alternativeProfiles: ['google'] }, status: 401 } ))));
+      }));
+      it('should return alternativeProfiles', inject([AuthenticationService], (service:AuthenticationService) => {
+        service.login('IRRELEVANT','PASSWORD').subscribe((result: LoginResult) => {
+          expect(result.alternativeProfiles).toEqual(['google']);
+        },err => fail('should not fail'));
+      }));
+    });
+
 
   });
 

@@ -1,0 +1,55 @@
+<modal #modal id="cancelConfirmation"
+       [title]="'Did you forget something?'"
+       [cancel-label]="'cancel'"
+       [positive-label]="'OK'"
+      >
+
+
+  It appears you've registered with the following social profiles
+  <strong *ngFor="#profile of alternativeProfiles; #isLast=last">{{profile}}{{isLast ? '' : ', '}}</strong>.
+  <br>
+  Try logging in via the social login buttons
+</modal>
+
+<div class="app app-header-fixed ">
+  <div class="container w-xxl w-auto-xs">
+    <div class="m-b-lg">
+      <div style="padding-bottom: 50px" class="form-group">
+        <div class="wrapper text-center">
+        </div>
+
+        <a [href]="socialLogin.facebook.authUrl" class="btn btn-primary btn-block m-b-sm"><i class="fa fa-facebook pull-left"></i>Log in with Facebook</a>
+        <!--<a [href]="socialLogin.twitter.authUrl" class="btn btn-info btn-block m-b-sm"><i class="fa fa-twitter pull-left"></i>Sign in with Twitter</a>-->
+        <a [href]="socialLogin.google.authUrl" class="btn btn-danger btn-block"><i class="fa fa-google-plus pull-left"></i>Log in with Google</a>
+
+      </div>
+      <div class="form-group horizontalSplit"><span>or</span></div>
+
+
+      <form [ngFormModel]="form" (ngSubmit)="onSubmit()" class="form-validation">
+        <div class="list-group list-group-sm">
+          <div class="form-group">
+            <input id="input-email" ngControl="email" class="form-control m-b" type="text" placeholder="Email">
+          </div>
+
+          <control-messages control="email" class="text-danger wrapper text-center" id="errors-email"></control-messages>
+          <br>
+            <div class="form-group">
+              <input id="input-password" type="password" ngControl="password" class="form-control m-b" placeholder="Password">
+
+            </div>
+            <control-messages control="matchingPassword/password"
+                              class="text-danger wrapper text-center" id="errors-password"></control-messages>
+            <br>
+          <button id="button-submit" type="submit" [disabled]="!form.valid" class="btn btn-success">
+            Log In
+          </button>
+          <spinner [isRunning]="isSubmitting" [delay]="0"></spinner>
+          <div [hidden]="!isNetworkError" class="text-danger wrapper text-center">Network Error</div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+@import "../../assets/css/less/app.less";
+
+.horizontalSplit {
+  display: block;
+  margin-bottom: 20px;
+  margin: 0 auto 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 12px;
+  font-size: 1.2em;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.horizontalSplit>span {
+  position: relative;
+  display: inline-block;
+
+}
+
+.horizontalSplit>span:before {
+  right: 100%;
+  margin-right: 60px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #dfdfdf;
+}
+
+.horizontalSplit>span:after {
+  left: 100%;
+  margin-left: 60px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #dfdfdf;
+}
