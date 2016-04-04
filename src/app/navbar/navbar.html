@@ -5,11 +5,11 @@
       <button id="button-toggle-collapse" class="btn btn-link visible-xs pull-right m-r" (click)="isCollapsed = !isCollapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
         <i class="fa fa-bars"></i>
       </button>
-      <div *ngIf="!loggedIn" class="visible-xs pull-right m-t-sm">
-        <a id="button-signin-mobile"  class="btn btn-link btn-sm">Sign In</a> or
+      <div *ngIf="!loggedIn"  class="visible-xs pull-right m-t-sm">
+        <a id="button-signin-mobile" href="/#/login"  class="btn btn-link btn-sm">Log In</a> or
         <a id="button-register-mobile" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
       </div>
-      <a id="link-site" href="/" class="navbar-brand m-r-md"><span class="h3 font-bold">MustRace</span></a>
+      <a id="link-site" href="/" class="navbar-brand"><span class="h3 font-bold">MustRace</span></a>
 
     </div>
     <div class="hidden-xs hidden-xs-down">
