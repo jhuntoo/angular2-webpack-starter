@@ -1,24 +1,45 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteParams, RouteConfig} from 'angular2/router';
+import {ROUTER_DIRECTIVES, RouteParams, RouteConfig, Router} from 'angular2/router';
+import {AuthenticationService, LoggingService, Logger} from '../common/index';
 
 @Component({
 
   selector: 'verifyemail',
-  // Our list of styles in our component. We may add more to compose many styles together
   styles: [ require('./verifyemail.css').toString()],
-  // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./verifyemail.html'),
   directives: [ROUTER_DIRECTIVES]
 })
 export class VerifyEmail {
   code: string;
+  log:Logger;
 
-  constructor(params: RouteParams) {
+  constructor(params: RouteParams,
+              private router:Router,
+              private authenticationService: AuthenticationService,
+              loggingService:LoggingService) {
+    this.log = loggingService.getLogger('VerifyEmail');
     this.code = params.get('code');
+    this.log.debug(`Code: ${this.code}`);
+    authenticationService.verifyEmail(this.code)
+      .subscribe(
+        (result: boolean) => this.handleResult(result),
+        err => this.handleResult(false),
+        () => this.log.debug('Random Quote Complete')
+      );
+
+  }
+
+  private handleResult(success : boolean) {
+      if (success) {
+        this.log.debug('Email confirmed');
+        this.router.navigate(['Home']);
+      } else {
+         this.log.debug('Could not confirm email');
+         this.router.navigate(['Home']);
+      }
   }
 
   ngOnInit() {
-    console.log('hello `VerifyEmail` component');
-    // this.title.getData().subscribe(data => this.data = data);
+    this.log.debug('hello `VerifyEmail` component');
   }
 }

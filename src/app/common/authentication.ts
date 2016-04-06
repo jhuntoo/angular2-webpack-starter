@@ -72,6 +72,12 @@ export class AuthenticationService {
       .do((result: LoginResult) => this.updateWithLogin(result));
   }
 
+  verifyEmail(code: string) : Observable<boolean> {
+    return this.http.post(`${this.config.apiBaseUrl}/auth/verify_email_code`, JSON.stringify({ code : code }))
+      .timeout(10000, '/auth/verify_email_code timed out')
+      .map((response:Response) => { return (response.status === 200 && response.json().success)});
+  }
+
   setToken(token:string) {
     //console.log(`setToken: ${token}`);
     if (!token || token.length === 0) {
