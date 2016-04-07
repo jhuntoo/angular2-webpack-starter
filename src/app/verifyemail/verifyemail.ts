@@ -39,7 +39,5 @@ export class VerifyEmail {
       }
   }
 
-  ngOnInit() {
-    this.log.debug('hello `VerifyEmail` component');
-  }
+
 }
