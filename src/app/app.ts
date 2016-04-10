@@ -9,7 +9,6 @@ import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';
 import {VerifyEmail} from './verifyemail/verifyemail';
 import {LoginCallback, LoginForm} from './login/index';
-import {EmailSentForm} from './register/email-sent';
 import {SearchPage} from './search/search';
 import {WelcomePage} from './welcome/welcome';
 import {AdminApp} from '../admin/app';
@@ -55,7 +54,6 @@ import {AdminApp} from '../admin/app';
   { path: '/home', component: Home, name: 'Home' },
   { path: '/register', component: RegisterForm, name: 'Register' },
   { path: '/search', component: SearchPage, name: 'Search' },
-  { path: '/emailsent', component: EmailSentForm, name: 'EmailSent' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
   { path: '/logincallback', component: LoginCallback, name: 'LoginCallback' },
   { path: '/login', component: LoginForm, name: 'LoginForm' },

@@ -1,0 +1,82 @@
+<header id="header" class="navbar navbar-fixed-top bg-white-only"  data-spy="affix" data-offset-top="1">
+  <div class="container">
+    <div class="navbar-header">
+
+      <button id="button-toggle-collapse" class="btn btn-link visible-xs pull-right m-r" (click)="isCollapsed = !isCollapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div *ngIf="!loggedIn"  class="visible-xs pull-right m-t-sm">
+        <a id="button-signin-mobile" href="/#/login"  class="btn btn-link btn-sm">Log In</a> or
+        <a id="button-register-mobile" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
+      </div>
+      <a id="link-site" href="/" class="navbar-brand"><span class="h3 font-bold">MustRace</span></a>
+
+    </div>
+    <div class="hidden-xs hidden-xs-down">
+      <ul class="nav navbar-nav font-bold">
+        <li>
+          <a data-ride="scroll">Races</a>
+        </li>
+        <li>
+          <a  data-ride="scroll">Organisers</a>
+        </li>
+        <li>
+          <a  data-ride="scroll">About Us</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+          <div class="m-t-sm">
+
+            <div *ngIf="!loggedIn">
+              <a id="button-signin-full" href="/#/login"  class="btn btn-link btn-sm">Log In</a> or
+              <a id="button-register-full" href="/#/register" class="btn btn-sm btn-success btn-rounded m-l"><strong>Register</strong></a>
+            </div>
+          </div>
+        </li>
+        <li *ngIf="loggedIn" [ngClass]="{'open': userMenuOpen}" class="dropdown" [offClick]="clickedOutside">
+          <a class="dropdown-toggle clear" dropdown-toggle="" aria-haspopup="true" aria-expanded="true" (click)="onUserMenuClicked()">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="../../assets/img/a0.jpg" alt="...">
+                <i class="on md b-white bottom"></i>
+              </span>
+            <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+          </a>
+          <!-- dropdown -->
+          <ul class="dropdown-menu animated fadeInRight w">
+            <li>
+              <a href="">
+                <span class="badge bg-danger pull-right">30%</span>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li>
+              <a >Profile</a>
+            </li>
+            <li>
+              <a >
+                <span class="label bg-info pull-right">new</span>
+                Help
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="logout()">Logout</a>
+            </li>
+          </ul>
+          <!-- / dropdown -->
+        </li>
+      </ul>
+    </div>
+    <nav class="visible-xs hidden-md-up">
+      <ul id="menu-collapse" class="nav nav-pills nav-stacked scrollable-menu" [collapse]="isCollapsed" (click)="isCollapsed = !isCollapsed; true">
+        <li class="nav-item"><a class="nav-link" href="{{prefix}}#getting-started">Getting started</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{prefix}}#migration">Migration</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- / header -->
+
+

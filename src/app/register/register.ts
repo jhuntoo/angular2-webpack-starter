@@ -71,7 +71,7 @@ export class RegisterForm {
       }, {validator: ValidationService.passwordsDoNotMatch})
     });
 
-    this.startEmailCheck$ = new Subject();
+    this.startEmailCheck$ = new Subject<string>();
     this.startEmailCheck$
             .debounceTime(200)
            .distinctUntilChanged()
@@ -100,7 +100,7 @@ export class RegisterForm {
       .subscribe(
         (response: RegisterResponse) => this.applyRegisterReponse(response),
         err => this.applyRegisterError(err),
-        () => this.log.debug('Random Quote Complete')
+        () => this.log.debug('Register Complete')
       );
   }
 
@@ -111,7 +111,7 @@ export class RegisterForm {
       //this._localStorage.set('jwt', response.jwt)
       this.authenticationService.setToken(response.jwt);
       if (response.confirmEmail) {
-        this._router.navigate(['EmailSent']);
+        this._router.navigate(['WelcomePage', { emailSent: true}]);
       } else {
         this._router.navigate(['Home']);
       }
