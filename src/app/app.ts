@@ -12,7 +12,7 @@ import {LoginCallback, LoginForm} from './login/index';
 import {SearchPage} from './search/search';
 import {WelcomePage} from './welcome/welcome';
 import {AdminApp} from '../admin/app';
-import {Profile} from './profile/profile';
+import {ProfilePage} from './profile/profile';
 
 /*
  * App Component
@@ -44,7 +44,7 @@ import {Profile} from './profile/profile';
   { path: '/logincallback', component: LoginCallback, name: 'LoginCallback' },
   { path: '/login', component: LoginForm, name: 'LoginForm' },
   { path: '/welcome', component: WelcomePage, name: 'WelcomePage' },
-  { path: '/profile', component: Profile, name: 'Profile' },
+  { path: '/profile', component: ProfilePage, name: 'Profile' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])

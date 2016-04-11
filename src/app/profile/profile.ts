@@ -1,6 +1,10 @@
 import {Component} from 'angular2/core';
 import {AuthenticationService, LoggingService, Logger} from '../common/index';
 import {Router} from 'angular2/router';
+import {OnInit} from 'angular2/core';
+import {ProfileService} from '../common/profile-service';
+import {Observable} from 'rxjs';
+import {Profile} from '../common/profile-service';
 
 @Component({
 
@@ -9,15 +13,35 @@ import {Router} from 'angular2/router';
   template: require('./profile.html')
 })
 
-export class Profile {
+export class ProfilePage implements OnInit {
+
   log:Logger;
-  constructor(private auth: AuthenticationService, loggingService: LoggingService, router: Router) {
+
+  profile: Profile;
+
+  constructor(private auth: AuthenticationService,
+              private router: Router,
+              private profileService: ProfileService,
+              loggingService: LoggingService
+              ) {
     this.log = loggingService.getLogger('Profile');
-    if (!auth.isLoggedIn) {
+  }
+
+  ngOnInit() {
+    if (!this.auth.isLoggedIn) {
       this.log.debug(`Is NOT logged in.`);
-      router.navigate(['LoginForm']);
+      this.router.navigate(['LoginForm']);
     } else {
       this.log.debug(`Is logged in.`);
+      this.profileService.getProfile().subscribe(
+        (p: Profile) => {
+          this.profile = p;
+          this.log.debug(`Profile: ${JSON.stringify(p)}`);
+        },
+            (err) => this.log.error(err),
+            () => this.log.debug(`getProfile Complete`)
+
+      );
     }
   }
 }
