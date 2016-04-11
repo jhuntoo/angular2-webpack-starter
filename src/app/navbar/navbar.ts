@@ -6,6 +6,7 @@ import {
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
 import {AuthenticationService} from '../common/authentication';
 import {OffClickDirective, LoggingService, Logger} from '../common/index';
+import {Router} from 'angular2/router';
 
 @Component({
 
@@ -24,7 +25,7 @@ export class Navbar {
   public loggedIn:boolean;
   public userMenuOpen:boolean;
   log:Logger;
-  constructor(private authenticationService: AuthenticationService, loggingService: LoggingService) {
+  constructor(private authenticationService: AuthenticationService, loggingService: LoggingService, private router: Router) {
       this.loggedIn = authenticationService.isLoggedIn;
       authenticationService.$loginStatusChanged.subscribe((isLoggedIn: boolean) => this.loggedIn = isLoggedIn);
       this.clickedOutside = this.clickedOutside.bind(this);
@@ -37,6 +38,11 @@ export class Navbar {
 
   clickedOutside() {
     this.userMenuOpen = false;
+  }
+
+  goToProfile() {
+    this.userMenuOpen = false;
+    this.router.navigate(['Profile']);
   }
 
   logout() {

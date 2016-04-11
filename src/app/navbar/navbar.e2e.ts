@@ -73,12 +73,12 @@ describe('App', () => {
       page.load();
       page.setFullWidthScreen();
     });
-    describe('Header', () => {
-      it('should have large vertical padding', () => {
-        expect(page.headerPaddingBottom()).toBe('15px');
-        expect(page.headerPaddingTop()).toBe('15px');
-      });
-    });
+    //describe('Header', () => {
+    //  it('should have large vertical padding', () => {
+    //    expect(page.headerPaddingBottom()).toBe('15px');
+    //    expect(page.headerPaddingTop()).toBe('15px');
+    //  });
+    //});
 
     describe('Register button full-size', () => {
       it('should be displayed', () => {
@@ -125,12 +125,12 @@ describe('App', () => {
         page.load();
         page.setMobileScreen();
       });
-      describe('Header', () => {
-        it('should have small vertical padding', () => {
-          expect(page.headerPaddingBottom()).toBe('5px');
-          expect(page.headerPaddingTop()).toBe('5px');
-        });
-      });
+      //describe('Header', () => {
+      //  it('should have small vertical padding', () => {
+      //    expect(page.headerPaddingBottom()).toBe('5px');
+      //    expect(page.headerPaddingTop()).toBe('5px');
+      //  });
+      //});
       describe('Register button full-size', () => {
         it('should NOT be displayed', () => {
           expect(page.registerButtonFull().isDisplayed()).toBe(false);

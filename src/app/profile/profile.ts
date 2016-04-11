@@ -1,31 +1,23 @@
 import {Component} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
-import {
-  Collapse
-} from 'ng2-bootstrap/components/collapse';
-import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
-import {AuthenticationService} from '../common/authentication';
-import {OffClickDirective, LoggingService, Logger} from '../common/index';
+import {AuthenticationService, LoggingService, Logger} from '../common/index';
+import {Router} from 'angular2/router';
 
 @Component({
 
   selector: 'profile',
-  directives: [
-    Collapse,
-    DROPDOWN_DIRECTIVES,
-    OffClickDirective,
-  ],
-  styles: [require('./navbar.less').toString()],
-  // Every Angular template is first compiled by the browser before Angular runs it's compiler
-  template: require('./navbar.html')
+  styles: [require('./profile.less').toString()],
+  template: require('./profile.html')
 })
+
 export class Profile {
   log:Logger;
-  constructor(private authenticationService: AuthenticationService, loggingService: LoggingService) {
+  constructor(private auth: AuthenticationService, loggingService: LoggingService, router: Router) {
     this.log = loggingService.getLogger('Profile');
-
+    if (!auth.isLoggedIn) {
+      this.log.debug(`Is NOT logged in.`);
+      router.navigate(['LoginForm']);
+    } else {
+      this.log.debug(`Is logged in.`);
+    }
   }
-
-
-
 }

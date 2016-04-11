@@ -57,9 +57,9 @@ export class RegisterForm {
               public socialLogin: SocialLogin,
               private registrationService: RegistrationService,
               private authenticationService: AuthenticationService,
-              logginService: LoggingService,
+              loggingService: LoggingService,
               private config:Config) {
-    let log : Logger = logginService.getLogger('RegisterForm');
+    let log : Logger = loggingService.getLogger('RegisterForm');
     log.debug('Constructor called');
 
     this.log = log;

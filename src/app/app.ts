@@ -12,6 +12,7 @@ import {LoginCallback, LoginForm} from './login/index';
 import {SearchPage} from './search/search';
 import {WelcomePage} from './welcome/welcome';
 import {AdminApp} from '../admin/app';
+import {Profile} from './profile/profile';
 
 /*
  * App Component
@@ -23,29 +24,14 @@ import {AdminApp} from '../admin/app';
   directives: [ Navbar ],
   pipes: [],
   template: `
-    <!--<header>-->
-      <!--<nav>-->
-        <!--<h1>Hello {{ name }}</h1>-->
-        <!--<ul>-->
-          <!--<li router-active>-->
-            <!--<a [routerLink]=' ['Index'] '>Index</a>-->
-          <!--</li>-->
-          <!--<li router-active>-->
-            <!--<a [routerLink]=" ['Home'] '>Home</a>-->
-          <!--</li>-->
-          <!--<li router-active>-->
-            <!--<a [routerLink]=' ['About'] '>About</a>-->
-          <!--</li>-->
-        <!--</ul>-->
-      <!--</nav>-->
-    <!--</header>-->
-
-      <navbar></navbar>
+    <div class="app ng-scope app-header-fixed">
+    <navbar class="app-header"></navbar>
 
 
     <main>
       <router-outlet></router-outlet>
     </main>
+    </div>
 
   `
 })
@@ -58,6 +44,7 @@ import {AdminApp} from '../admin/app';
   { path: '/logincallback', component: LoginCallback, name: 'LoginCallback' },
   { path: '/login', component: LoginForm, name: 'LoginForm' },
   { path: '/welcome', component: WelcomePage, name: 'WelcomePage' },
+  { path: '/profile', component: Profile, name: 'Profile' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])
