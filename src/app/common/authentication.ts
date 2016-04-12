@@ -1,10 +1,9 @@
 import {Injectable, provide} from 'angular2/core';
 import {Config} from '../../config/config';
-import {Subject} from 'rxjs/Subject';
 import {LocalStorage} from './local-storage';
-import {Http} from 'angular2/http';
-import {Response} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
+import {Http, Response} from 'angular2/http';
+import {Observable, Subject} from 'rxjs';
+import {Router} from 'angular2/router';
 
 
 export class SocialLoginResult {
@@ -49,7 +48,10 @@ export class AuthenticationService {
   public $loginStatusChanged:Subject<boolean> = new Subject<boolean>();
   public isLoggedIn:boolean = false;
 
-  constructor(private http:Http, private config:Config, private localStorage:LocalStorage) {
+  constructor(private http:Http,
+              private router: Router,
+              private config:Config,
+              private localStorage:LocalStorage) {
      let jwt = localStorage.get('jwt');
      if (jwt) {
         this.isLoggedIn = true;
@@ -87,9 +89,10 @@ export class AuthenticationService {
     this.updateLoggedInStatus(true);
   }
 
-  logout() {
+  logout() : Observable<any> {
     this.localStorage.remove('jwt');
     this.updateLoggedInStatus(false);
+    return Observable.fromPromise(this.router.navigate(['Index']));
   }
 
   private updateLoggedInStatus(value:boolean) {

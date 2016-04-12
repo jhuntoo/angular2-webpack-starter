@@ -7,6 +7,7 @@ import {LocalStorage} from '../common/local-storage';
 import {Router} from 'angular2/router';
 import {AuthenticationService} from '../common/authentication';
 import {SocialLoginResult} from '../common/authentication';
+import {SeoService} from '../common/seo-service';
 
 @Component({
   template: require('./login-callback.html'),
@@ -20,13 +21,15 @@ export class LoginCallback {
               private config:Config,
               private _router: Router,
               private authenticationService: AuthenticationService,
-              private loggingService : LoggingService) {
+              private loggingService : LoggingService,
+              private seoService: SeoService) {
     this.log  = loggingService.getLogger('LoginCallback');
     this.loginCompletionId = params.get('id');
   }
 
   ngOnInit() {
-    console.log(`hello 'LoginCallback' component with loginCompletionId ${this.loginCompletionId}`);
+    this.log.debug(`Init: component with loginCompletionId ${this.loginCompletionId}`);
+    this.seoService.setTitle('Logging In...');
     this.authenticationService.completeSocialLogin(this.loginCompletionId)
       .subscribe((result : SocialLoginResult) => {this.handleSocialLoginResult(result);},
         (err) => {this.log.error(err);},

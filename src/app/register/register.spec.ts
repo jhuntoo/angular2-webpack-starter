@@ -17,7 +17,11 @@ import {RegisterForm} from './register';
 import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegistrationService, MockRegistrationService} from './services/registration.service';
 import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
-import {LoggingService, AuthenticationService, MockAuthenticationService} from '../common/index';
+import {LoggingService,
+  AuthenticationService,
+  MockAuthenticationService,
+  SeoService,
+  MockSeoService} from '../common/index';
 import {App} from '../app';
 import { RootRouter } from 'angular2/src/router/router';
 import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
@@ -48,6 +52,7 @@ describe('RegisterForm', () => {
     }),
     provide(ToastOptions, {useValue: new ToastOptions({})}),
     provide(RegistrationService, {useValue: new MockRegistrationService()}),
+    provide(SeoService, {useValue: new MockSeoService()}),
     provide(AuthenticationService, {useValue: new MockAuthenticationService()}),
     provide(LoggingService, {useValue: new LoggingService()}),
     ToastsManager,

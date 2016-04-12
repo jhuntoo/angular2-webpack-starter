@@ -75,6 +75,9 @@ describe('Register', () => {
     beforeAll(() => {
       registerPage.load();
     });
+    it('should display page title of `Register with MustRace`', () => {
+      expect(browser.getTitle()).toEqual('Register with MustRace');
+    });
     it('should display email input', () => {
       expect(registerPage.emailInput().isDisplayed()).toBeTruthy();
     });

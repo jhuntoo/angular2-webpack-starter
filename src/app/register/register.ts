@@ -17,6 +17,7 @@ import {Logger, LoggingService} from '../common/log';
 import {Router} from 'angular2/router';
 import {LocalStorage, SocialLogin, AuthenticationService, SpinnerComponent} from '../common/index';
 import {Config} from '../../config/config';
+import {SeoService} from '../common/seo-service';
 
 @Component({
 
@@ -57,8 +58,9 @@ export class RegisterForm {
               public socialLogin: SocialLogin,
               private registrationService: RegistrationService,
               private authenticationService: AuthenticationService,
-              loggingService: LoggingService,
-              private config:Config) {
+              private loggingService: LoggingService,
+              private config:Config,
+              private seoService: SeoService) {
     let log : Logger = loggingService.getLogger('RegisterForm');
     log.debug('Constructor called');
 
@@ -88,8 +90,8 @@ export class RegisterForm {
 
 
   ngOnInit() {
-    this.log.debug('hello `register` component');
-    // this.title.getData().subscribe(data => this.data = data);
+    this.log.debug('Init');
+    this.seoService.setTitle('Register with MustRace');
   }
 
   onSubmit() {

@@ -1,6 +1,4 @@
-/*
- * Angular 2 decorators and services
- */
+
 import {Component} from 'angular2/core';
 import {RouteConfig, Router} from 'angular2/router';
 
@@ -8,11 +6,11 @@ import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';
 import {RegisterForm} from './register/register';
 import {VerifyEmail} from './verifyemail/verifyemail';
-import {LoginCallback, LoginForm} from './login/index';
+import {LoginCallback, LoginForm, LoginError} from './login/index';
 import {SearchPage} from './search/search';
 import {WelcomePage} from './welcome/welcome';
 import {AdminApp} from '../admin/app';
-import {Profile} from './profile/profile';
+import {ProfilePage} from './profile/profile';
 
 /*
  * App Component
@@ -23,6 +21,9 @@ import {Profile} from './profile/profile';
   providers: [ ],
   directives: [ Navbar ],
   pipes: [],
+  styles: [`
+
+  `],
   template: `
     <div class="app ng-scope app-header-fixed">
     <navbar class="app-header"></navbar>
@@ -42,9 +43,10 @@ import {Profile} from './profile/profile';
   { path: '/search', component: SearchPage, name: 'Search' },
   { path: '/verifyemail/:code/', component: VerifyEmail, name: 'VerifyEmail' },
   { path: '/logincallback', component: LoginCallback, name: 'LoginCallback' },
+  { path: '/loginerror', component: LoginError, name: 'LoginError' },
   { path: '/login', component: LoginForm, name: 'LoginForm' },
   { path: '/welcome', component: WelcomePage, name: 'WelcomePage' },
-  { path: '/profile', component: Profile, name: 'Profile' },
+  { path: '/profile', component: ProfilePage, name: 'Profile' },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])

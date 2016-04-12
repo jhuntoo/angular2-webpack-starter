@@ -7,6 +7,12 @@ import {
 } from 'angular2/testing';
 import {MockBackend} from 'angular2/http/testing';
 import {MockConnection} from 'angular2/src/http/backends/mock_backend';
+
+import {App} from '../app';
+import { RootRouter } from 'angular2/src/router/router';
+import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { SpyLocation } from 'angular2/src/mock/location_mock';
+
 import {BaseRequestOptions, Http, ResponseOptions, Response} from 'angular2/http';
 import {Component, provide} from 'angular2/core';
 import {Config} from '../../config/config';
@@ -18,6 +24,10 @@ describe('*** Authentication Service ****', () => {
   beforeEachProviders(() => [
     BaseRequestOptions,
     MockBackend,
+    RouteRegistry,
+    provide(Router, {useClass: RootRouter}),
+    provide(Location, {useClass: SpyLocation}),
+    provide(ROUTER_PRIMARY_COMPONENT, {useValue: App}),
     provide(LocalStorage, {useValue: new MockLocalStorage()}),
     provide(Config, {useValue: {apiBaseUrl: '/test'}}),
     provide(Http, {
@@ -199,6 +209,52 @@ describe('*** Authentication Service ****', () => {
       }));
     });
 
+
+  });
+
+  describe('On logout called', () => {
+    let localStorage = new MockLocalStorage();
+    let location, router;
+    beforeEachProviders(() => [
+      provide(LocalStorage, {useValue: localStorage}),
+      RouteRegistry,
+      provide(Location, { useClass: SpyLocation }),
+      provide(ROUTER_PRIMARY_COMPONENT, { useValue: App }),
+      provide(Router, {useClass: RootRouter})
+    ]);
+
+    beforeEach(inject([AuthenticationService,MockBackend, Router, Location], (service:AuthenticationService, backend:MockBackend, r: Router, l : Location) => {
+      location = l;
+      router = r;
+      backend.connections.subscribe((c:MockConnection) =>
+        c.mockRespond(new Response(new ResponseOptions({body: { token: 'TEST_TOKEN_3', success : true }, status: 200 } ))));
+        service.login('IRRELEVANT','PASSWORD' ).subscribe(() => {
+          expect(service.isLoggedIn).toBeTruthy();
+            service.logout();
+        });
+
+    }));
+
+      it('should remove token in localStorage', inject([LocalStorage], (localStorage:LocalStorage) => {
+        expect(localStorage.get('jwt')).toBeFalsy();
+      }));
+
+
+      it('should logout', inject([AuthenticationService], (service:AuthenticationService) => {
+          expect(service.isLoggedIn).toBeFalsy();
+      }));
+
+    it('should navigate back to index page', inject([AuthenticationService], (service:AuthenticationService) => {
+      service.login('IRRELEVANT','PASSWORD' ).subscribe(() => {
+        expect(service.isLoggedIn).toBeTruthy();
+        router.navigate(['Profile']).then(() => {
+          expect(location.path()).toEqual('/profile',"did not navigate to /profile");
+          service.logout().subscribe(() => {
+            expect(location.path()).toEqual('');
+          });
+        });
+      });
+    }));
 
   });
 
