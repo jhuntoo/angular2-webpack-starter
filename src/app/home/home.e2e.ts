@@ -1,3 +1,4 @@
+import {browser, verifyNoBrowserErrors} from 'angular2/src/testing/e2e_util';
 let homePage = {
   load() {
     return browser.get('/#/home');
@@ -21,6 +22,9 @@ let homePage = {
 };
 
 describe('*** HomePage ***', () => {
+  afterEach(() => {
+    verifyNoBrowserErrors();
+  });
   describe('When in full-width mode', () => {
     beforeAll(() => {
       homePage.load();

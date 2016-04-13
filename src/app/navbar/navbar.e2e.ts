@@ -2,6 +2,7 @@
  * TODO: ES5 for now until I make a webpack plugin for protractor
  */
 import WebElement = protractor.WebElement;
+import {browser, verifyNoBrowserErrors} from 'angular2/src/testing/e2e_util';
 
 let page = {
   load() {
@@ -66,7 +67,9 @@ var hasClass = function (element, cls) {
 
 describe('App', () => {
 
-
+  afterEach(() => {
+    verifyNoBrowserErrors();
+  });
 
   describe('When in full-width mode', () => {
     beforeAll(() => {

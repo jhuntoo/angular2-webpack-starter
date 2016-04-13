@@ -3,6 +3,7 @@
  */
 //import WebElement = protractor.WebElement;
 import textToBePresentInElementValue = protractor.ExpectedConditions.textToBePresentInElementValue;
+import {browser, verifyNoBrowserErrors} from 'angular2/src/testing/e2e_util';
 import {error} from 'util';
 var until = protractor.ExpectedConditions;
 
@@ -75,13 +76,18 @@ let registerPage = {
 
 describe('Register', () => {
 
+  afterEach(() => {
+    verifyNoBrowserErrors();
+  });
+
 
 
   describe('On Page Load', () => {
     beforeAll(() => {
       registerPage.load();
-      browser.wait(until.presenceOf(registerPage.id()), 5000);
+      browser.wait(protractor.until.elementLocated(by.id('register-component')), 15000);
     });
+
     it('should display page title of `Register with MustRace`', () => {
       expect(browser.getTitle()).toEqual('Register with MustRace');
     });
@@ -115,6 +121,7 @@ describe('Register', () => {
   describe('On leaving fields empty', () => {
     beforeAll(() => {
       registerPage.load();
+      browser.wait(protractor.until.elementLocated(by.id('register-component')), 15000);
     });
     it('should display email required', () => {
         registerPage.expectErrorAfterLeavingInput(registerPage.emailInput(), registerPage.emailErrors(), 'Required');

@@ -1,3 +1,4 @@
+import {browser, verifyNoBrowserErrors} from 'angular2/src/testing/e2e_util';
 var until = protractor.ExpectedConditions;
 let loginPage = {
   load() {
@@ -14,6 +15,10 @@ describe('*** Login Page ***', () => {
     beforeAll(() => {
       loginPage.load();
       return browser.wait(until.presenceOf(loginPage.id()), 5000);
+    });
+
+    afterEach(() => {
+      verifyNoBrowserErrors();
     });
 
     it(`should have page title of 'Login on MustRace`, () => {
