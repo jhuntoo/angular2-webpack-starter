@@ -29,7 +29,18 @@ gulp.task('images', function () {
 
                 // Do not enlarge the output image if the input image are already less than the required dimensions.
                 withoutEnlargement: true,
-            }],
+            },
+              {
+                width: 350,
+                height: 350,
+                rename: {
+                  suffix: '-cover',
+                  extname: '.jpg',
+                },
+
+                // Do not enlarge the output image if the input image are already less than the required dimensions.
+                withoutEnlargement: true,
+              }],
         }, {
             // Global configuration for all images
             // The output quality for JPEG, WebP and TIFF output formats

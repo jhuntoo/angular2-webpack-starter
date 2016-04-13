@@ -11,6 +11,7 @@ import { deserializeAs, deserialize, Deserialize } from 'cerialize/dist/serializ
 export class Profile {
      @deserialize public firstName : string;
      @deserialize public lastName : string;
+     @deserialize public email : string;
 
 }
 

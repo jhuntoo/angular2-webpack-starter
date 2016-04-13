@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, HostBinding} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 import {
   Collapse
@@ -16,7 +16,12 @@ import {Router} from 'angular2/router';
     DROPDOWN_DIRECTIVES,
     OffClickDirective,
   ],
-  styles: [require('./navbar.less').toString()],
+  //host: {
+  //  'class': 'navbar-component'
+  //},
+  styles: [
+
+    require('./navbar.less').toString()],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./navbar.html')
 })
@@ -25,6 +30,9 @@ export class Navbar {
   public loggedIn:boolean;
   public userMenuOpen:boolean;
   log:Logger;
+
+  @HostBinding('class') class = 'navbar-component';
+
   constructor(private authenticationService: AuthenticationService, loggingService: LoggingService, private router: Router) {
       this.loggedIn = authenticationService.isLoggedIn;
       authenticationService.$loginStatusChanged.subscribe((isLoggedIn: boolean) => this.loggedIn = isLoggedIn);

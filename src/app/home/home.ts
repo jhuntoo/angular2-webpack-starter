@@ -5,6 +5,7 @@ import {Title} from './services/title';
 import {SearchBar} from '../searchbar/searchbar';
 import {Router} from 'angular2/router';
 import {Footer} from '../footer/footer';
+import {Card} from './card';
 
 @Component({
   // The selector is what angular internally uses
@@ -18,7 +19,7 @@ import {Footer} from '../footer/footer';
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
   directives: [
-    SearchBar, Footer
+    SearchBar, Footer, Card
   ],
   // We need to tell Angular's compiler which custom pipes are in our template.
   pipes: [ ],

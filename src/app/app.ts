@@ -1,5 +1,5 @@
 
-import {Component} from 'angular2/core';
+import {Component, HostBinding} from 'angular2/core';
 import {RouteConfig, Router} from 'angular2/router';
 
 import {Home} from './home/home';
@@ -21,15 +21,15 @@ import {ProfilePage} from './profile/profile';
   providers: [ ],
   directives: [ Navbar ],
   pipes: [],
-  styles: [`
-
-  `],
+  //host: {
+  //  'style': 'position: fixed; height: 100%'
+  //},
   template: `
     <div class="app ng-scope app-header-fixed">
     <navbar class="app-header"></navbar>
 
 
-    <main>
+    <main style="position: fixed; height: 100%; width: 100%; overflow-y: scroll">
       <router-outlet></router-outlet>
     </main>
     </div>
@@ -51,6 +51,8 @@ import {ProfilePage} from './profile/profile';
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])
 export class App {
+  @HostBinding('style') style = 'position: fixed; height: 100%;';
+
   name = 'MustRace';
   url = 'https://mustrace.com';
   constructor() {

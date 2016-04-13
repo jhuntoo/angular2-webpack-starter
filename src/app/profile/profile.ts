@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, HostBinding} from 'angular2/core';
 import {AuthenticationService, LoggingService, Logger} from '../common/index';
 import {Router} from 'angular2/router';
 import {OnInit} from 'angular2/core';
@@ -9,6 +9,9 @@ import {Profile} from '../common/profile-service';
 @Component({
 
   selector: 'profile',
+  //host: {
+  //  'class': 'h-full'
+  //},
   styles: [require('./profile.less').toString()],
   template: require('./profile.html')
 })
@@ -18,6 +21,8 @@ export class ProfilePage implements OnInit {
   log:Logger;
 
   profile: Profile;
+
+  @HostBinding('class') class = 'h-full';
 
   constructor(private auth: AuthenticationService,
               private router: Router,
