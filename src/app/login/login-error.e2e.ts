@@ -8,7 +8,7 @@ let loginErrorPage = {
 describe('*** Login Error Page ***', () => {
   describe('On load when NOT logged in', () => {
     beforeAll(() => {
-      loginErrorPage.load();
+      return loginErrorPage.load();
     });
 
     it(`should have page title of 'Login Error`, () => {

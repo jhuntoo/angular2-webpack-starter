@@ -13,10 +13,10 @@ let homePage = {
   },
 
   setFullWidthScreen() {
-    browser.manage().window().setSize(1080, 1920);
+    return browser.manage().window().setSize(1080, 1920);
   },
   setMobileScreen() {
-    browser.manage().window().setSize(320, 480);
+    return browser.manage().window().setSize(320, 480);
   }
 };
 
