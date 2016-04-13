@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, HostBinding, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteParams, RouteConfig} from 'angular2/router';
 import {Config} from '../../config/config';
 import {LoggingService} from '../common/log';
@@ -9,12 +9,15 @@ import {AuthenticationService} from '../common/index';
 import {SeoService} from '../common/seo-service';
 
 @Component({
+  selector: 'login-error',
   template: require('./login-error.html'),
   directives: [ROUTER_DIRECTIVES]
 })
 export class LoginError implements OnInit {
 
   log : Logger;
+
+  @HostBinding('id') id = 'login-error-component'; // Used in protractor tests
 
   constructor(private config:Config,
               private router: Router,

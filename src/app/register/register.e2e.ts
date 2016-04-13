@@ -4,6 +4,8 @@
 //import WebElement = protractor.WebElement;
 import textToBePresentInElementValue = protractor.ExpectedConditions.textToBePresentInElementValue;
 import {error} from 'util';
+var until = protractor.ExpectedConditions;
+
 function sleepFor(sleepDuration ) {
   var now = new Date().getTime();
   while(new Date().getTime() < now + sleepDuration) { /* do nothing */ }
@@ -12,6 +14,10 @@ function sleepFor(sleepDuration ) {
 let registerPage = {
   load: function () {
     return browser.get('/#/register');
+  },
+
+  id () {
+    return element(by.id('register-component'));
   },
 
   emailInput () {
@@ -74,6 +80,7 @@ describe('Register', () => {
   describe('On Page Load', () => {
     beforeAll(() => {
       registerPage.load();
+      browser.wait(until.presenceOf(registerPage.id()), 5000);
     });
     it('should display page title of `Register with MustRace`', () => {
       expect(browser.getTitle()).toEqual('Register with MustRace');

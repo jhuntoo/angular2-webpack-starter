@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit} from 'angular2/core';
+import {Component, ViewChild, HostBinding, OnInit} from 'angular2/core';
 import {Validators, FormBuilder, Control, ControlGroup} from 'angular2/common';
 import {ControlMessages} from '../control-messages/control-messages';
 import {AbstractControl} from 'angular2/common';
@@ -35,8 +35,8 @@ export class LoginForm implements OnInit {
   invalidCredentials:boolean = false;
   alternativeProfiles:string[] = [];
 
-  @ViewChild('modal')
-  modal: Modal;
+  @ViewChild('modal') modal: Modal;
+  @HostBinding('id') id = 'login-component'; // Used in protractor tests
 
   constructor(private fb:FormBuilder,
               private _router:Router,

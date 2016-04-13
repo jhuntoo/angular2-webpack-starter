@@ -10,6 +10,8 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
  * Config
  */
 module.exports = {
+  // Do not change, leave as is or it wont work.
+  // See: https://github.com/webpack/karma-webpack#source-maps
   devtool: 'inline-source-map',
   resolve: {
     extensions: ['', '.ts', '.js']

@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, HostBinding} from 'angular2/core';
 import {Validators, FormBuilder, Control, ControlGroup} from 'angular2/common';
 import {ControlMessages} from '../control-messages/control-messages';
 import {AbstractControl} from 'angular2/common';
@@ -50,6 +50,8 @@ export class RegisterForm {
 
   emailCheckResult:EmailCheckResult = null;
   startEmailCheck$:Subject<string>;
+
+  @HostBinding('id') id = 'register-component'; // Used in protractor tests
 
   constructor(private fb:FormBuilder,
               private _router: Router,
