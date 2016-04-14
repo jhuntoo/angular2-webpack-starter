@@ -14,9 +14,10 @@ import {ChangeDetectionStrategy} from 'angular2/core';
 export class Card {
 
   @Input('title') public title : string;
+  @Input('url') public url : string;
   @Input('imgClass') public imgClass : string;
 
-  @HostBinding('class') class = 'col-sm-4 fadeInLeft animated';
+  @HostBinding('class') class = 'col-md-4 col-sm-6 col-xs-12 fadeInLeft animated';
 
 
   constructor() {

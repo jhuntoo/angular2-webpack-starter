@@ -1,15 +1,15 @@
 <div class="item">
-  <div class="pos-rlt b-a bg-white wrapper-xs">
-    <a href="#/mudruns">
-      <div class="thumbnail">
-        <div class="image">
-          <ng-content></ng-content>
+  <div class="pos-rlt">
+    <a href="{{url}}">
+      <div class="card">
+        <ng-content class="card-media"></ng-content>
+        <div class="card-overlay">
+          <h1 class="card-overlay-title text-center">{{title}}</h1>
         </div>
       </div>
     </a>
   </div>
   <div class="padder-v">
-    <a class="text-ellipsis" href="#/music/mtvdetail">{{title}}</a>
   </div>
 </div>
 
