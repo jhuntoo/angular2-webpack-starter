@@ -16,6 +16,7 @@ var CompressionPlugin = require('compression-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
@@ -152,6 +153,9 @@ module.exports = {
     ]),
     // generating html
     new HtmlWebpackPlugin({ template: 'src/index.html', chunksSortMode: 'none' }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
+    }),
     new DefinePlugin({
       'ENV': JSON.stringify(metadata.ENV),
       'HMR': false

@@ -5,6 +5,7 @@ var helpers = require('./helpers');
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
@@ -91,6 +92,10 @@ module.exports = {
     new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]),
     // generating html
     new HtmlWebpackPlugin({ template: 'src/index.html', chunksSortMode: 'none' }),
+    new ScriptExtHtmlWebpackPlugin({
+      sync: ['webpack-dev-server.js'],
+      defaultAttribute: 'defer'
+    }),
     // Environment helpers (when adding more properties make sure you include them in custom-typings.d.ts)
     new webpack.DefinePlugin({
       'ENV': JSON.stringify(metadata.ENV),
