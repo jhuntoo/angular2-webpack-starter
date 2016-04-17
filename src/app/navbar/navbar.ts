@@ -1,4 +1,4 @@
-import {Component, HostBinding} from 'angular2/core';
+import {Component, HostBinding, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 import {
   Collapse
@@ -7,6 +7,7 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
 import {AuthenticationService} from '../common/authentication';
 import {OffClickDirective, LoggingService, Logger} from '../common/index';
 import {Router} from 'angular2/router';
+import {ProfileService, Profile} from '../common/profile-service';
 
 @Component({
 
@@ -29,13 +30,24 @@ export class Navbar {
   public isCollapsed:boolean = true;
   public loggedIn:boolean;
   public userMenuOpen:boolean;
+  public email: string;
   log:Logger;
 
   @HostBinding('class') class = 'navbar-component';
 
-  constructor(private authenticationService: AuthenticationService, loggingService: LoggingService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService,
+              loggingService: LoggingService,
+              private router: Router,
+              private profileService: ProfileService) {
       this.loggedIn = authenticationService.isLoggedIn;
       authenticationService.$loginStatusChanged.subscribe((isLoggedIn: boolean) => this.loggedIn = isLoggedIn);
+      profileService.profile.subscribe((profile : Profile) => {
+        if (profile) {
+          this.email = profile.email;
+        } else {
+          this.email = null;
+        };
+      });
       this.clickedOutside = this.clickedOutside.bind(this);
 
   }
@@ -46,6 +58,11 @@ export class Navbar {
 
   clickedOutside() {
     this.userMenuOpen = false;
+  }
+
+  goToIndex() {
+    this.userMenuOpen = false;
+    this.router.navigate(['Index']);
   }
 
   goToProfile() {

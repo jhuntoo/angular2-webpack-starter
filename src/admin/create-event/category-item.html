@@ -1,48 +1,44 @@
-
+<template tabHeading>
+  <i *ngIf="isValid" class="fa fa-check-circle" aria-hidden="true" style="color: green;"></i>
+  <i *ngIf="!isValid"class="fa fa-exclamation-circle" aria-hidden="true" style="color: orange;"></i>
+  <span>{{$title | async }}</span>
+</template>
 <div class="form-group">
   <label class="col-sm-2 control-label">Sport</label>
   <div class="col-sm-3">
-    <!--<ng2-select [allow-clear]="true"-->
-                <!--[items]="items"-->
-                <!--(data)="refreshValue($event)"-->
-                <!--[placeholder]="'Select a sport'"></ng2-select>-->
-
-    <select [(ngModel)]="model.sportId" class="w-full">
-        <option value="1">Running</option>
-        <option value="2">Obstacle / Mud</option>
-        <option value="3">Road Cycling</option>
-        <option value="4">Mountain Biking</option>
-        <option value="5">Swimming</option>
-      <option value="6">Triathlon</option>
-      <option value="7">Duathlon</option>
-      <option value="8">Aquathlon</option>
-      <option value="9">Adventure Race</option>
-      <option value="10">Childrens</option>
-      <option value="11">Multisport</option>
+    <select [(ngModel)]="model.sportId" class="form-control w-full" (change)="onSportChanged($event.target.value)">
+      <option *ngFor="#sport of sports" value="{{sport.id}}">{{sport.name}}</option>
     </select>
   </div>
-  <label class="col-sm-2 control-label">Distance</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"  [(ngModel)]="model.distance">
+  <div *ngIf="currentSport">
+    <label class="col-sm-2 control-label">Distance</label>
+    <div class="col-sm-3">
+      <select [(ngModel)]="model.distance" class="form-control w-full"
+              (change)="onDistanceChanged($event.target.value)">
+        <option  *ngFor="#distance of currentSport.commonDistances" value="{{distance}}">{{distance}}</option>
+      </select>
+    </div>
   </div>
+
 </div>
 <div class="form-group">
 
   <label class="col-sm-2 control-label">Registration Closure Date</label>
   <div class="col-sm-3">
-    <input type="text" class="form-control"  placeholder="dd/mm/yyyy"  [(ngModel)]="model.registrationClosureDate">
+    <input type="text" class="form-control" placeholder="dd/mm/yyyy" [(ngModel)]="model.registrationClosureDate">
   </div>
-</div>
-<div class="form-group">
-
-</div>
-<div class="form-group">
   <label class="col-sm-2 control-label">Capacity</label>
   <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.capacity">
+    <input type="number" class="form-control" [(ngModel)]="model.capacity">
   </div>
 </div>
+
+
 <div class="form-group">
   <registration-type-list [registrationTypes]="model.registrationTypes"></registration-type-list>
 </div>
+
+
+
+
 

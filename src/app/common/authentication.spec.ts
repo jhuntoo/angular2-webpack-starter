@@ -18,13 +18,17 @@ import {Component, provide} from 'angular2/core';
 import {Config} from '../../config/config';
 import {LocalStorage, MockLocalStorage} from './local-storage';
 import {AuthenticationService, SocialLoginResult, LoginResult} from './authentication';
+import {LoggingService} from './log';
+import {TokenExpiryChecker, MockTokenExpiryChecker} from './authentication';
 
 
 describe('*** Authentication Service ****', () => {
   beforeEachProviders(() => [
     BaseRequestOptions,
     MockBackend,
+    LoggingService,
     RouteRegistry,
+    provide(TokenExpiryChecker, {useClass: MockTokenExpiryChecker}),
     provide(Router, {useClass: RootRouter}),
     provide(Location, {useClass: SpyLocation}),
     provide(ROUTER_PRIMARY_COMPONENT, {useValue: App}),

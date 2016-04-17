@@ -112,7 +112,7 @@ describe('App', () => {
         expect(page.siteLink().getText()).toBe('MustRace');
       });
       it('should reference the root URL', () => {
-        expect(page.siteLink().getAttribute('href')).toBe('http://localhost:8080/');
+        expect(page.siteLink().getAttribute('href')).toBe('http://localhost:8080/#/');
       });
     });
 

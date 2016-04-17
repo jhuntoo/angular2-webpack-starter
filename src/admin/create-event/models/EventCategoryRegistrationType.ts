@@ -1,11 +1,10 @@
+import {AgeRestriction} from './AgeRestriction';
 export class EventCategoryRegistrationType {
   type:string;
   description:string;
   cost:number;
   currencyCode:string;
-  ageRestrictionMin: number;
-  ageRestrictionMax: number;
-  ageRestrictionAsOfDate :Date;
+  ageRestriction: AgeRestriction;
   registrationClosureDate:Date;
   capacity:number;
 }

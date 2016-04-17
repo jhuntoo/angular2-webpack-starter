@@ -32,6 +32,7 @@ import {Root} from './root';
 import {AuthHttp, AuthConfig} from './app/temp/angular2-jwt';
 import {PROFILE_PROVIDERS} from './app/common/profile-service';
 import {SeoService} from './app/common/seo-service';
+import {SPORT_PROVIDERS} from './common/sport/sport-service';
 //import {RouterActive} from './app/directives/router-active';
 
 /*
@@ -79,6 +80,7 @@ export function main() {
   console.log(`config: ${JSON.stringify(config)}`);
   return browser.bootstrap(Root, [
       ...APPLICATION_PROVIDERS,
+      ...SPORT_PROVIDERS,
       browser.Title,
       ngCore.provide(ngCore.PLATFORM_DIRECTIVES, {useValue: APPLICATION_DIRECTIVES, multi: true}),
       ngCore.provide(ngCore.PLATFORM_PIPES, {useValue: APPLICATION_PIPES, multi: true}),
@@ -89,7 +91,7 @@ export function main() {
       ngCore.provide(AuthHttp, {
         useFactory: (http) => {
           console.log(`useFactory`);
-          return new AuthHttp(new AuthConfig({ tokenName: 'jwt', headerPrefix: 'JWT'}), http);
+          return new AuthHttp(new AuthConfig({ tokenName: 'jwt', headerPrefix: 'JWT',}), http);
         },
         deps: [Http]
       })

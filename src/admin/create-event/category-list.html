@@ -1,9 +1,26 @@
-<table class="table table-striped bg-white b-a">
-  <tbody>
-  <tr *ngFor="#category of categories">
-    <category-item [model]="category" ></category-item>
-  </tr>
-  </tbody>
-</table>
-<button class="btn btn-success btn-sm" (click)="add()">Add Category</button>
+<button class="btn btn-success btn-sm btn-addon" (click)="add()"><i class="fa fa-plus"></i>Add Category</button>
+<tabset>
+
+  <tab #tab *ngFor="#category of categories"
+       active="true"
+       removable="true"
+
+       (removed)="removeTabHandler(category)"
+       >
+
+    <category-item  #item [model]="category"></category-item>
+  </tab>
+
+  <!--<tab (select)="alertMe()">-->
+    <!--<template tabHeading>-->
+      <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
+    <!--</template>-->
+    <!--I've got an HTML heading, and a select callback. Pretty cool!-->
+  <!--</tab>-->
+</tabset>
+
+<!--<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">-->
+
+<!--</ul>-->
+
 

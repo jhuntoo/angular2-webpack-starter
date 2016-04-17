@@ -12,6 +12,7 @@ import {WelcomePage} from './welcome/welcome';
 import {AdminApp} from '../admin/app';
 import {ProfilePage} from './profile/profile';
 
+
 /*
  * App Component
  * Top Level Component
@@ -55,6 +56,7 @@ export class App {
 
   name = 'MustRace';
   url = 'https://mustrace.com';
+
   constructor() {
 
   }

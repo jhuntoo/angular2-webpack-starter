@@ -1,8 +1,16 @@
-<table class="table table-striped bg-white b-a">
-  <tbody>
-  <tr *ngFor="#registrationType of registrationTypes">
-    <registration-type-item [model]="registrationType" ></registration-type-item>
-  </tr>
-  </tbody>
-</table>
-<button class="btn btn-success btn-sm" (click)="add()">Add Registration Type</button>
+<h1>Registration Types</h1><button class="btn btn-success btn-sm" (click)="add()">Add Registration Type</button><accordion [closeOthers]="oneAtATime">
+  <accordion-group *ngFor="#registrationType of registrationTypes"
+                   heading="Registration Type X"
+                   [isOpen]="true">
+    <registration-type-item [model]="registrationType"></registration-type-item>
+  </accordion-group>
+</accordion>
+
+<!--<table class="table table-striped bg-white b-a">-->
+  <!--<tbody>-->
+  <!--<tr >-->
+    <!---->
+  <!--</tr>-->
+  <!--</tbody>-->
+<!--</table>-->
+

@@ -4,6 +4,8 @@ import {LocalStorage} from './local-storage';
 import {Http, Response} from 'angular2/http';
 import {Observable, Subject} from 'rxjs';
 import {Router} from 'angular2/router';
+import {LoggingService, Logger} from './log';
+import {JwtHelper} from '../temp/angular2-jwt';
 
 
 export class SocialLoginResult {
@@ -42,22 +44,33 @@ export class LoginResult {
   }
 }
 
+export class TokenExpiryChecker {
+  isExpired(jwt: string) : boolean {
+    let jwtHelper = new JwtHelper();
+    return jwtHelper.isTokenExpired(jwt);
+  }
+}
+export class MockTokenExpiryChecker {
+  isExpired(jwt: string) : boolean {
+    return false;
+  }
+}
+
 @Injectable()
 export class AuthenticationService {
 
   public $loginStatusChanged:Subject<boolean> = new Subject<boolean>();
   public isLoggedIn:boolean = false;
-
+  log: Logger;
   constructor(private http:Http,
               private router: Router,
               private config:Config,
-              private localStorage:LocalStorage) {
-     let jwt = localStorage.get('jwt');
-     if (jwt) {
-        this.isLoggedIn = true;
-     } else {
-       this.isLoggedIn = false;
-     }
+              private localStorage:LocalStorage,
+              private loggingService: LoggingService,
+              private tokenExpiryChecker: TokenExpiryChecker) {
+     this.log = loggingService.getLogger('AuthenticationService');
+     this.initialCheck();
+
   }
 
   completeSocialLogin(loginCompletionId: string) {
@@ -81,7 +94,7 @@ export class AuthenticationService {
   }
 
   setToken(token:string) {
-    //console.log(`setToken: ${token}`);
+    this.log.debug(`Setting Token...`);
     if (!token || token.length === 0) {
       return;
     }
@@ -94,6 +107,25 @@ export class AuthenticationService {
     this.updateLoggedInStatus(false);
     return Observable.fromPromise(this.router.navigate(['Index']));
   }
+
+  private initialCheck() {
+    let jwt = this.localStorage.get('jwt');
+    if (jwt) {
+
+      if (this.tokenExpiryChecker.isExpired(jwt)) {
+          this.localStorage.remove('jwt');
+        this.updateLoggedInStatus(false);
+      } else {
+        this.updateLoggedInStatus(true);
+      }
+
+
+    } else {
+      this.updateLoggedInStatus(false);
+    }
+    this.log.debug(`initialCheck: LoggedIn = ${this.isLoggedIn}`);
+  }
+
 
   private updateLoggedInStatus(value:boolean) {
     this.isLoggedIn = value;
@@ -161,5 +193,6 @@ export class MockAuthenticationService {
   }
 }
 export const AUTHENTICATION_PROVIDERS:any[] = [
-  provide(AuthenticationService, {useClass: AuthenticationService})
+  provide(AuthenticationService, {useClass: AuthenticationService}),
+  provide(TokenExpiryChecker, {useClass: TokenExpiryChecker})
 ];

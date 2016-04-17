@@ -1,0 +1,27 @@
+<div class="form-group">
+  <label class="col-sm-2 control-label">Age Restriction</label>
+  <div class="col-sm-3">
+    <label class="i-switch bg-danger m-t-xs m-r">
+      <input type="checkbox" checked="enabled">
+      <i></i>
+    </label>
+  </div>
+
+
+
+  <!--<button class="btn m-b-xs btn-sm btn-danger btn-addon" *ngIf="!editing" (click)="edit()"><i class="fa fa-plus"></i>Add-->
+
+  <!--</button>-->
+  <div *ngIf="editing">
+    <div>
+      <input type="text" class="form-control" [(ngModel)]="model.min" placeholder="min">
+    </div>
+    <div>
+      <input type="text" class="form-control" [(ngModel)]="model.max" placeholder="max">
+    </div>
+    <div>
+      <input type="text" class="form-control" [(ngModel)]="model.asOfDate" placeholder="as of date">
+    </div>
+  </div>
+</div>
+

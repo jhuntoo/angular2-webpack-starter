@@ -38,7 +38,7 @@ export class ProfilePage implements OnInit {
       this.router.navigate(['LoginForm']);
     } else {
       this.log.debug(`Is logged in.`);
-      this.profileService.getProfile().subscribe(
+      this.profileService.profile.subscribe(
         (p: Profile) => {
           this.profile = p;
           this.log.debug(`Profile: ${JSON.stringify(p)}`);
@@ -47,6 +47,7 @@ export class ProfilePage implements OnInit {
             () => this.log.debug(`getProfile Complete`)
 
       );
+      this.profileService.loadProfile();
     }
   }
 }

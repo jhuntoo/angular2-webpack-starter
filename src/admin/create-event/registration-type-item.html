@@ -48,22 +48,9 @@
   <div class="col-sm-3">
     <input type="text" class="form-control"   [(ngModel)]="model.currencyCode">
   </div>
+
+
 </div>
 <div class="form-group">
-  <label class="col-sm-2 control-label">Minimum Age Restriction</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.ageRestrictionMin">
-  </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Maximum Age Restriction</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.ageRestrictionMax">
-  </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Age Restriction As Of Date</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.ageRestrictionAsOfDate">
-  </div>
+  <age-restriction [model]="model.ageRestriction"></age-restriction>
 </div>

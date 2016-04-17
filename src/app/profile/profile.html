@@ -9,9 +9,9 @@
             <div class="cell-inner">
               <div class="list-group no-radius no-border no-bg m-b-none">
                 <a class="list-group-item b-b focus" ng-class="{'focus': (filter == '')}" ng-click="selectGroup({name:''})">ALL Contacts</a>
-                <!-- ngRepeat: item in groups --><a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select ng-scope" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
+                <!-- ngRepeat: item in groups --><a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select ng-scope">
                 <span ng-click="deleteGroup(item)" class="pull-right text-muted hover-action" role="button" tabindex="0"><i class="fa fa-times"></i></span>
-                <span class="block m-l-n ng-binding" ng-class="{'m-n': item.selected }">Coworkers</span>
+                <span class="block m-l-n ng-binding" ng-class="{'m-n': item.selected }">Coworkerdfsdfsds</span>
                 <input type="text" class="form-control pos-abt ng-pristine ng-untouched ng-valid ng-hide" ng-show="item.editing" ng-blur="doneEditing(item)" ng-model="item.name" style="top:3px;left:2px;width:98%" ui-focus="item.editing" aria-hidden="true" aria-invalid="false">
               </a><!-- end ngRepeat: item in groups --><a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select ng-scope" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
                 <span ng-click="deleteGroup(item)" class="pull-right text-muted hover-action" role="button" tabindex="0"><i class="fa fa-times"></i></span>

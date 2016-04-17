@@ -1,53 +1,102 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, Inject, HostBinding, Host, OnInit, Output, EventEmitter} from 'angular2/core';
 import {EventCategory} from './models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 import {Select} from 'ng2-select/ng2-select';
 import {RegistrationTypeList} from './registration-type-list';
+import {SportService} from '../../common/sport/sport-service';
+import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {Subject} from 'rxjs/Subject';
+//import {Tab} from '../../app/temp/tabs';
+import {Sport} from '../../common/sport/sport-service';
+import {TAB_DIRECTIVES, Tab} from '../../app/temp/tabs';
+//import {TAB_DIRECTIVES, Tab,} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
   selector: 'category-item',  // <home></home>
-  directives: [Select, RegistrationTypeList],
+  directives: [Select, RegistrationTypeList, DROPDOWN_DIRECTIVES, TAB_DIRECTIVES],
+
   template: require('./category-item.html')
 })
-export class CategoryItem {
+export class CategoryItem implements OnInit {
 
-  @Input() model: EventCategory;
+
+  @Input()  public model: EventCategory;
+  //title: string;
+  @Output() public $title : EventEmitter<string> = new EventEmitter<string>();
+  currentSport: Sport;
   log:Logger;
   editing: boolean = false;
+  index: number;
+  isActive:boolean;
 
-  items: any[] = [
-{id: '1', text: 'Running'},
-{id: '2', text: 'Obstacle'},
-{id: '3', text: 'Road Cycling'},
-{id: '4', text: 'Mountain Biking'},
-{id: '5', text: 'Swimming'},
-{   id: '6', text: 'Triathlon'},
-{   id: '7', text: 'Duathlon'},
-{   id: '8', text: 'Aquathlon'},
-{   id: '9', text: 'Adventure Race'},
-{   id: '10', text: 'Childrens'},
-{   id: '11', text: 'Multisport'}
-  ];
+  //@HostBinding('class') class = 'list-group-item clearfix b-l-3x ng-scope';
+  //@HostBinding('attr.style.border-left-color') borderLeftColor = '#23b7e5';
 
-  constructor(logginService: LoggingService) {
+  sports: Sport[];
+
+  constructor(logginService: LoggingService,
+              private sportService :SportService) {
     this.log = logginService.getLogger('CategoryItem');
   }
 
-  edit(): void {
-    this.editing = true;
+  ngOnInit() {
+    this.sports = this.sportService.getSports();
+    if (this.model.sportId) { this.onSportChanged(this.model.sportId);}
+    setTimeout(() => this.updateTitle(), 0);
+
+    this.log.debug(`sports: ${JSON.stringify(this.sports)}`);
   }
 
-  save(): void {
-    this.editing = false;
+  ngAfterViewInit() {
+    this.updateTitle();
+    this.log.debug(`ngAfterViewInit`);
   }
 
-  delete(): void {
-    this.editing = false;
+  onSportChanged(id: number) {
+     this.currentSport = this.sports.find((s: Sport) => s.id === id);
+     if (this.currentSport.commonDistances.indexOf(this.model.distance) === -1) {
+       this.model.distance = '';
+     }
+
+     this.updateTitle();
+
+     console.log(`currentSport: ${JSON.stringify(this.currentSport )}`);
+
+
   }
 
-  stopEditing(): void {
-    this.editing = false;
+  onDistanceChanged(distance : string) {
+    this.model.distance = distance;
+    this.updateTitle();
   }
 
+
+  onSetDistance(event: MouseEvent) {
+     //this.model.distance = distance;
+    this.log.debug(`onSetDistance: ${JSON.stringify(event)}`);
+  }
+
+
+
+  get isValid() : boolean {
+    let valid = (this.model.sportId && this.model.distance && this.model.registrationClosureDate && this.model.capacity) ? true : false;
+    console.log(`valid: ${valid}`);
+    return valid;
+  }
+
+  private updateTitle() {
+    console.log(`udpateTitle`);
+    let title = '';
+    if (this.currentSport) {
+      let distanceDescription = '';
+      if (this.model.distance) { distanceDescription = ` (${this.model.distance})`;}
+      console.log(`sport id: ${this.model.sportId} name: ${this.currentSport.name} distance: '${distanceDescription}'`);
+      title = `${this.currentSport.name}${distanceDescription}`;
+    } else {
+      title =  'New Category';
+    }
+    this.$title.emit(title);
+
+  }
 
 }
