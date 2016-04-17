@@ -33,7 +33,7 @@ export class CategoryList {
     this.log = logginService.getLogger('CategoryList');
   }
 
-  add() {
+  addCategory() {
      let newEventCategory = new EventCategory();
      if (this.categories.length > 0) {
         let lastCateogory = this.categories[this.categories.length - 1];

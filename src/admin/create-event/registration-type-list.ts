@@ -17,7 +17,7 @@ export class RegistrationTypeList {
     this.log = logginService.getLogger('RegistrationTypeList');
   }
 
-  add() {
+  addType() {
     let newRegistrationType = new EventCategoryRegistrationType();
     if (this.registrationTypes.length > 0) {
       let lastRegistrationType = this.registrationTypes[this.registrationTypes.length - 1];

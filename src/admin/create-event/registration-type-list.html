@@ -1,4 +1,4 @@
-<h1>Registration Types</h1><button class="btn btn-success btn-sm" (click)="add()">Add Registration Type</button><accordion [closeOthers]="oneAtATime">
+<h1>Registration Types</h1><button class="btn btn-success btn-sm" (click)="addType()">Add Registration Type</button><accordion [closeOthers]="oneAtATime">
   <accordion-group *ngFor="#registrationType of registrationTypes"
                    heading="Registration Type X"
                    [isOpen]="true">
