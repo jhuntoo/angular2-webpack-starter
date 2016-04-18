@@ -41,6 +41,7 @@ export class CategoryItem implements OnInit {
 
   ngOnInit() {
     this.sports = this.sportService.getSports();
+    if (!this.model) throw 'No associated model';
     if (this.model.sportId) { this.onSportChanged(this.model.sportId);}
     setTimeout(() => this.updateTitle(), 0);
 
@@ -53,30 +54,23 @@ export class CategoryItem implements OnInit {
   }
 
   onSportChanged(id: number) {
-     this.currentSport = this.sports.find((s: Sport) => s.id === id);
-     if (this.currentSport.commonDistances.indexOf(this.model.distance) === -1) {
+    /* tslint:disable */
+    // use ==, not === or it break!
+     this.currentSport = this.sports.find((s: Sport) => s.id == id);
+    /* tslint:enable */
+     if (!this.currentSport || this.currentSport.commonDistances.indexOf(this.model.distance) === -1) {
+       this.log.error(`onSportChanged: could not find sport with id '${id}' in sports '${JSON.stringify(this.sports)}'`);
        this.model.distance = '';
      }
 
      this.updateTitle();
-
      console.log(`currentSport: ${JSON.stringify(this.currentSport )}`);
-
-
   }
 
   onDistanceChanged(distance : string) {
     this.model.distance = distance;
     this.updateTitle();
   }
-
-
-  onSetDistance(event: MouseEvent) {
-     //this.model.distance = distance;
-    this.log.debug(`onSetDistance: ${JSON.stringify(event)}`);
-  }
-
-
 
   get isValid() : boolean {
     let valid = (this.model.sportId && this.model.distance && this.model.registrationClosureDate && this.model.capacity) ? true : false;

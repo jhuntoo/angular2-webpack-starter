@@ -6,14 +6,19 @@
 <div class="form-group">
   <label class="col-sm-2 control-label">Sport</label>
   <div class="col-sm-3">
-    <select [(ngModel)]="model.sportId" class="form-control w-full" (change)="onSportChanged($event.target.value)">
+    <select id="input-sport"
+            [(ngModel)]="model.sportId"
+            class="form-control w-full"
+            (change)="onSportChanged($event.target.value)">
       <option *ngFor="#sport of sports" value="{{sport.id}}">{{sport.name}}</option>
     </select>
   </div>
   <div *ngIf="currentSport">
     <label class="col-sm-2 control-label">Distance</label>
     <div class="col-sm-3">
-      <select [(ngModel)]="model.distance" class="form-control w-full"
+      <select id="input-distance"
+              [(ngModel)]="model.distance"
+              class="form-control w-full"
               (change)="onDistanceChanged($event.target.value)">
         <option  *ngFor="#distance of currentSport.commonDistances" value="{{distance}}">{{distance}}</option>
       </select>
@@ -25,11 +30,18 @@
 
   <label class="col-sm-2 control-label">Registration Closure Date</label>
   <div class="col-sm-3">
-    <input type="text" class="form-control" placeholder="dd/mm/yyyy" [(ngModel)]="model.registrationClosureDate">
+    <input id="input-registration-closure-date"
+           type="text"
+           class="form-control"
+           placeholder="dd/mm/yyyy"
+           [(ngModel)]="model.registrationClosureDate">
   </div>
   <label class="col-sm-2 control-label">Capacity</label>
   <div class="col-sm-3">
-    <input type="number" class="form-control" [(ngModel)]="model.capacity">
+    <input id="input-capacity"
+           type="number"
+           class="form-control"
+           [(ngModel)]="model.capacity">
   </div>
 </div>
 
