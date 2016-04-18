@@ -1,4 +1,5 @@
 import {Component, Input, Inject, HostBinding, Host, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Control} from 'angular2/common';
 import {EventCategory} from './models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 import {Select} from 'ng2-select/ng2-select';
@@ -28,6 +29,7 @@ export class CategoryItem implements OnInit {
   editing: boolean = false;
   index: number;
   isActive:boolean;
+
 
   //@HostBinding('class') class = 'list-group-item clearfix b-l-3x ng-scope';
   //@HostBinding('attr.style.border-left-color') borderLeftColor = '#23b7e5';
@@ -70,6 +72,29 @@ export class CategoryItem implements OnInit {
   onDistanceChanged(distance : string) {
     this.model.distance = distance;
     this.updateTitle();
+  }
+
+  get capacity() {
+     return this.model.capacity;
+  }
+
+  set capacity(capacity) {
+    this.model.capacity = capacity;
+  }
+
+  get registrationClosureDate() {
+     let d = this.model.registrationClosureDate;
+      if (!d) return '';
+      var yyyy = d.getFullYear().toString();
+      var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+      var dd  = d.getDate().toString();
+
+      //return yyyy + '-' + (mm[1]?mm:'0'+mm[0]) + '-' + (dd[1]?dd:'0'+dd[0]);
+     return `${dd[1]?dd:'0'+dd[0]}/${mm[1]?mm:'0'+mm[0]}/${yyyy}`;
+  }
+
+  set registrationClosureDate(date : string) {
+    this.model.registrationClosureDate = new Date(date);
   }
 
   get isValid() : boolean {
