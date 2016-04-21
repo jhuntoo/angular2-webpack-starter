@@ -12,6 +12,10 @@ let createEventPage = {
   addCategoryButton() {
     return element(by.css('category-list > button')).getWebElement();
   },
+
+  googleMap() {
+    return element(by.className('sebm-google-map-container')).getWebElement();
+  },
 };
 
 var hasClass = function (element, cls) {
@@ -31,6 +35,10 @@ describe('Create an event', () => {
 
     afterEach(() => {
       verifyNoBrowserErrors();
+    });
+
+    it('should display google map', () => {
+      expect(createEventPage.googleMap().isDisplayed()).toBe(true);
     });
 
     it('should display add category button', () => {

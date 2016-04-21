@@ -103,11 +103,12 @@ module.exports = {
       },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      { test: /\.css$/,   loader: 'style!css' },
 
       { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },
 
       { test: /\.less$/,     loader: 'style!css!less'},
+
 
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
