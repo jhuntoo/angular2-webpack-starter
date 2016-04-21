@@ -1,7 +1,7 @@
 export class EmailCheckResult {
   constructor(public available:boolean,
               public error:boolean,
-              public connectedProfiles : string[]) {
+              public connectedProfiles) {
     if (!connectedProfiles) {
       this.connectedProfiles = [];
     }
@@ -15,7 +15,7 @@ export class EmailCheckResult {
     return new EmailCheckResult(false, false, []);
   }
 
-  static available(connectedProfiles):EmailCheckResult {
+  static available(connectedProfiles : string[] = []):EmailCheckResult {
     return new EmailCheckResult(true, false, connectedProfiles);
   }
 

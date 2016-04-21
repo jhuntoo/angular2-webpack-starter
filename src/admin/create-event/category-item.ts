@@ -2,20 +2,22 @@ import {Component, Input, Inject, HostBinding, Host, OnInit, Output, EventEmitte
 import {Control} from 'angular2/common';
 import {EventCategory} from './models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
-import {Select} from 'ng2-select/ng2-select';
+//import {Select} from 'ng2-select/ng2-select';
 import {RegistrationTypeList} from './registration-type-list';
 import {SportService} from '../../common/sport/sport-service';
-import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+//import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Subject} from 'rxjs/Subject';
 //import {Tab} from '../../app/temp/tabs';
 import {Sport} from '../../common/sport/sport-service';
 import {TAB_DIRECTIVES, Tab} from '../../app/temp/tabs';
+import {Select} from '../../app/temp/select/select';
 //import {TAB_DIRECTIVES, Tab,} from 'ng2-bootstrap/ng2-bootstrap';
+//import '../../../../ng2-select/components/css/ng2-select.css';
 
 @Component({
   selector: 'category-item',  // <home></home>
-  directives: [Select, RegistrationTypeList, DROPDOWN_DIRECTIVES, TAB_DIRECTIVES],
-
+  directives: [Select, RegistrationTypeList, TAB_DIRECTIVES],
+  styles: [ require('../../app/temp/css/ng2-select.css').toString()],
   template: require('./category-item.html')
 })
 export class CategoryItem implements OnInit {
@@ -36,6 +38,8 @@ export class CategoryItem implements OnInit {
 
   sports: Sport[];
 
+  initialSelected : Sport[];
+
   constructor(logginService: LoggingService,
               private sportService :SportService) {
     this.log = logginService.getLogger('CategoryItem');
@@ -44,7 +48,10 @@ export class CategoryItem implements OnInit {
   ngOnInit() {
     this.sports = this.sportService.getSports();
     if (!this.model) throw 'No associated model';
-    if (this.model.sportId) { this.onSportChanged(this.model.sportId);}
+    if (this.model.sportId) {
+      this.updateCurrentSport();
+      this.initialSelected = [ this.currentSport ];
+    }
     setTimeout(() => this.updateTitle(), 0);
 
     this.log.debug(`sports: ${JSON.stringify(this.sports)}`);
@@ -55,13 +62,24 @@ export class CategoryItem implements OnInit {
     this.log.debug(`ngAfterViewInit`);
   }
 
-  onSportChanged(id: number) {
+  onSportChanged(event: any) {
+    this.log.debug(`onSportChanged: event= ${JSON.stringify(event )}`);
+    let sportId = +(event.id);
+    this.model.sportId = sportId;
+    this.updateCurrentSport();
+  }
+
+
+  updateCurrentSport() {
     /* tslint:disable */
     // use ==, not === or it break!
-     this.currentSport = this.sports.find((s: Sport) => s.id == id);
+     this.currentSport = this.sports.find((s: Sport) => s.id == this.model.sportId );
     /* tslint:enable */
-     if (!this.currentSport || this.currentSport.commonDistances.indexOf(this.model.distance) === -1) {
-       this.log.error(`onSportChanged: could not find sport with id '${id}' in sports '${JSON.stringify(this.sports)}'`);
+     if (!this.currentSport) {
+       this.log.error(`updateCurrentSport: could not find sport with id '${this.model.sportId }' in sports '${JSON.stringify(this.sports)}'`);
+     }
+
+     if (this.currentSport.commonDistances.indexOf(this.model.distance) === -1) {
        this.model.distance = '';
      }
 
@@ -69,10 +87,22 @@ export class CategoryItem implements OnInit {
      console.log(`currentSport: ${JSON.stringify(this.currentSport )}`);
   }
 
-  onDistanceChanged(distance : string) {
-    this.model.distance = distance;
+
+
+
+
+  onSportRemoved(event: any) {
+    this.log.debug(`onSportRemoved: event= ${JSON.stringify(event )}`);
+  }
+
+  onDistanceChanged(event : any) {
+    this.log.debug(`onDistanceChanged: distance= ${JSON.stringify(event.text )}`);
+    this.model.distance = event.text;
     this.updateTitle();
   }
+  onDistanceRemoved(event : any) {
+  }
+
 
   get capacity() {
      return this.model.capacity;
@@ -109,8 +139,8 @@ export class CategoryItem implements OnInit {
     if (this.currentSport) {
       let distanceDescription = '';
       if (this.model.distance) { distanceDescription = ` (${this.model.distance})`;}
-      console.log(`sport id: ${this.model.sportId} name: ${this.currentSport.name} distance: '${distanceDescription}'`);
-      title = `${this.currentSport.name}${distanceDescription}`;
+      console.log(`sport id: ${this.model.sportId} text: ${this.currentSport.text} distance: '${distanceDescription}'`);
+      title = `${this.currentSport.text}${distanceDescription}`;
     } else {
       title =  'New Category';
     }

@@ -6,22 +6,40 @@
 <div class="form-group">
   <label class="col-sm-2 control-label">Sport</label>
   <div class="col-sm-3">
-    <select id="input-sport"
-            [(ngModel)]="model.sportId"
-            class="form-control w-full"
-            (change)="onSportChanged($event.target.value)">
-      <option *ngFor="#sport of sports" value="{{sport.id}}">{{sport.name}}</option>
-    </select>
+    <ng-select id="input-sport"
+                [allow-clear]="true"
+                [items]="sports"
+                [initData]="initialSelected"
+                (selected)="onSportChanged($event)"
+                (removed)="onSportRemoved($event)"
+                [placeholder]="'No sport selected'">
+
+    </ng-select>
+    <!--<select id="input-sport"-->
+            <!--[(ngModel)]="model.sportId"-->
+            <!--class="form-control w-full"-->
+            <!--(change)="">-->
+      <!--<option *ngFor="#sport of sports" value="{{sport.id}}">{{sport.name}}</option>-->
+    <!--</select>-->
   </div>
+
   <div *ngIf="currentSport">
     <label class="col-sm-2 control-label">Distance</label>
     <div class="col-sm-3">
-      <select id="input-distance"
-              [(ngModel)]="model.distance"
-              class="form-control w-full"
-              (change)="onDistanceChanged($event.target.value)">
-        <option  *ngFor="#distance of currentSport.commonDistances" value="{{distance}}">{{distance}}</option>
-      </select>
+      <ng-select id="input-distance"
+                 [allow-clear]="true"
+                 [items]="currentSport.commonDistances"
+                 (selected)="onDistanceChanged($event)"
+                 (removed)="onDistanceRemoved($event)"
+                 [placeholder]="'No distance selected'">
+
+      </ng-select>
+      <!--<select id="input-distance"-->
+              <!--[(ngModel)]="model.distance"-->
+              <!--class="form-control w-full"-->
+              <!--(change)="onDistanceChanged($event.target.value)">-->
+        <!--<option  *ngFor="#distance of currentSport.commonDistances" value="{{distance}}">{{distance}}</option>-->
+      <!--</select>-->
     </div>
   </div>
 
@@ -34,7 +52,8 @@
            type="text"
            class="form-control"
            placeholder="dd/mm/yyyy"
-           [(ngModel)]="registrationClosureDate">
+           (onblur)="registrationClosureDate = $event.target.value"
+           [ngModel]="registrationClosureDate">
   </div>
   <label class="col-sm-2 control-label">Capacity</label>
   <div class="col-sm-3">

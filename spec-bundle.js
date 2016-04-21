@@ -26,6 +26,7 @@ var testing = require('angular2/testing');
 var browser = require('angular2/platform/testing/browser');
 
 require('rxjs/Rx');
+require('ts-helpers');
 
 testing.setBaseTestProviders(
   browser.TEST_BROWSER_PLATFORM_PROVIDERS,

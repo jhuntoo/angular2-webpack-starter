@@ -15,5 +15,6 @@ export class RegistrationTypeItem {
 
   constructor(logginService: LoggingService) {
     this.log = logginService.getLogger('CategoryItem');
+    this.model = new EventCategoryRegistrationType();
   }
 }

@@ -1,10 +1,45 @@
-<h1>Registration Types</h1><button class="btn btn-success btn-sm" (click)="addType()">Add Registration Type</button><accordion [closeOthers]="oneAtATime">
-  <accordion-group *ngFor="#registrationType of registrationTypes"
-                   heading="Registration Type X"
-                   [isOpen]="true">
-    <registration-type-item [model]="registrationType"></registration-type-item>
-  </accordion-group>
-</accordion>
+<h1>Registration Types</h1><button class="btn btn-success btn-sm" (click)="addType()">Add Registration Type</button>
+<!--<accordion [closeOthers]="oneAtATime">-->
+  <!--<accordion-group *ngFor="#registrationType of registrationTypes"-->
+                   <!--heading="Registration Type X"-->
+                   <!--[isOpen]="true">-->
+    <!--<registration-type-item [model]="registrationType"></registration-type-item>-->
+  <!--</accordion-group>-->
+<!--</accordion>-->
+<div class="list-group">
+
+  <!--<a href="" class="list-group-item">-->
+    <!--<i class="fa fa-chevron-right text-muted"></i>-->
+    <!--<span class="badge bg-success">14</span>-->
+    <!--<i class="fa fa-phone fa-fw m-r-xs"></i> Call-->
+  <!--</a>-->
+
+
+  <a *ngFor="#registrationType of registrationTypes"
+                   class="list-group-item registration-type-row">
+            <button class="btn btn-sm btn-icon btn-danger  trash-icon" (click)="removeRegistrationType(registrationType)">
+              <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
+            </button>
+
+
+              <div *ngIf="registrationType.type == 'INDIVIDUAL'" ><i class="fa fa-user fa-2x fa-fw m-r-xs" aria-hidden="true"></i>Individual </div>
+              <div *ngIf="registrationType.type == 'GROUP'"><i class="fa fa-users fa-2x fa-fw m-r-xs" aria-hidden="true"></i>Group</div>
+
+
+    {{registrationType.description}}
+
+
+  </a>
+</div>
+<modal #modal id="cancelConfirmation"
+       [title]="'Create a registration type'"
+       [cancel-label]="'cancel'"
+       [positive-label]="'OK'"
+       (closed)="onCreateNewRegistrationTypeClosed($event, newItem.model)" >
+
+  <registration-type-item #newItem></registration-type-item>
+</modal>
+
 
 <!--<table class="table table-striped bg-white b-a">-->
   <!--<tbody>-->

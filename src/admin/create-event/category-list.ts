@@ -39,7 +39,6 @@ export class CategoryList {
         let lastCateogory = this.categories[this.categories.length - 1];
         newEventCategory.sportId = lastCateogory.sportId;
         newEventCategory.registrationClosureDate = lastCateogory.registrationClosureDate;
-       newEventCategory.capacity = 999;
      }
 
      this.categories.push(newEventCategory);

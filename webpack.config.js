@@ -26,7 +26,7 @@ var metadata = {
 module.exports = {
   // static data for index.html
   metadata: metadata,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   // cache: true,
   debug: true,
   // devtool: 'eval' // for faster builds use 'eval'
@@ -44,7 +44,7 @@ module.exports = {
 
   // Config for our build files
   output: {
-    path: helpers.root('dist'),
+    path: helpers.root('debug'),
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[id].chunk.js'
@@ -66,7 +66,7 @@ module.exports = {
       // Support for CSS as raw text
       //{ test: /\.css$/,   loader: ExtractTextPlugin.extract('raw') },
 
-      { test: /\.css$/,   loader: 'raw-loader' },
+      { test: /\.css$/,   loader: 'style!css' },
 
 
       { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },

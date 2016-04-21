@@ -33,12 +33,13 @@ export class Modal {
    * Shows the modal. There is no method for hiding. This is done using actions of the modal itself.
    */
   show() {
+    console.log('show called');
     this.showModal = true;
   }
 
   positiveAction() {
     this.showModal = false;
-    this.closeEmitter.next({
+    this.closeEmitter.emit({
       action: ModalAction.POSITIVE
     });
     return false;
@@ -47,7 +48,7 @@ export class Modal {
   cancelAction() {
     console.log('sending close event');
     this.showModal = false;
-    this.closeEmitter.next({
+    this.closeEmitter.emit({
       action: ModalAction.CANCEL
     });
     return false;

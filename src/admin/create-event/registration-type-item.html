@@ -1,56 +1,60 @@
-<div class="form-group">
-  <label class="col-sm-2 control-label">Type</label>
-  <div class="col-sm-3">
 
-    <select [(ngModel)]="model.type" class="w-full">
-      <option value="Individual">Individual</option>
-      <option value="Group">Group</option>
-    </select>
+
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Type</label>
+    <div class="col-sm-3">
+
+      <select [(ngModel)]="model.type" class="w-full">
+        <option value="INDIVIDUAL">Individual</option>
+        <option value="GROUP">Group</option>
+      </select>
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Description</label>
-  <div class="col-sm-10">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
             <textarea class="form-control" rows="3" placeholder="Enter a description"
                       [(ngModel)]="model.description"></textarea>
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Capacity</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.capacity">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Capacity</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control"   [(ngModel)]="model.capacity">
+    </div>
   </div>
-</div>
-<div class="form-group">
+  <div class="form-group">
 
-  <label class="col-sm-2 control-label">Registration Closure Date</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"  placeholder="dd/mm/yyyy"  [(ngModel)]="model.registrationClosureDate">
+    <label class="col-sm-2 control-label">Registration Closure Date</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control"  placeholder="dd/mm/yyyy"  [(ngModel)]="model.registrationClosureDate">
+    </div>
   </div>
-</div>
-<div class="form-group">
+  <div class="form-group">
 
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Capacity</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.capacity">
   </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Cost</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.cost">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Capacity</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control"   [(ngModel)]="model.capacity">
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-2 control-label">Currency Code</label>
-  <div class="col-sm-3">
-    <input type="text" class="form-control"   [(ngModel)]="model.currencyCode">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Cost</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control"   [(ngModel)]="model.cost">
+    </div>
   </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Currency Code</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control"   [(ngModel)]="model.currencyCode">
+    </div>
 
 
-</div>
-<div class="form-group">
-  <age-restriction [model]="model.ageRestriction"></age-restriction>
-</div>
+  </div>
+  <div class="form-group">
+    <age-restriction [model]="model.ageRestriction"></age-restriction>
+  </div>
+
