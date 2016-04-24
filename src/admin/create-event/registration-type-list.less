@@ -1,9 +1,55 @@
-.registration-type-row {
-  height: 100px;
+@import '../assets/css/less/mr.variables.less';
+
+.registration-container {
+  width: auto;
 }
+
+.registration-type-row {
+  //height: auto;
+}
+
+.registration-type-col {
+  display: table;
+  position:relative
+}
+
+.registration-type-col > span {
+  position:absolute;
+  top:50%;
+  height:2em;
+  margin-top:-1em
+}
+
+.registration-type-row > div {
+  height: 3em;
+}
+
 
 .trash-icon {
   float: right;
-  margin-top: 4px;
-  margin-right: -5px;
+  //margin-top: 5px;
+  margin: 5px;
+}
+.capacity-container {
+  height: 40px;
+  display: inline-block;
+}
+
+.capacity-container span {
+  height: 40px; /* image's height */
+  display: table-cell;
+  vertical-align: middle;
+}
+
+//.centre-v {
+//  //background-color: yellow;
+//  display: block;
+//  text-align: left;
+//  .vertical-align();
+//}
+
+.centre-v {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }

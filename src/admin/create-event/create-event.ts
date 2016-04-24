@@ -3,13 +3,14 @@ import {Event} from './models/Event';
 import {LoggingService, Logger} from '../../app/common/log';
 import {CategoryList} from './category-list';
 import {EventLocation} from './event-location';
+import {DateParse} from '../../common/date-input';
 //import {DatePicker} from '../common/date-picker';
 //import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
   selector: 'create-event',  // <home></home>
   directives: [
-    CategoryList, EventLocation
+    CategoryList, DateParse, EventLocation
   ],
   styles: [require('./create-event.less').toString()],
 

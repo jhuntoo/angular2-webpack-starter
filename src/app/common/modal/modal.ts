@@ -14,6 +14,8 @@ export class Modal {
   @Input('show-cancel') showCancel: boolean = false;
   @Input('cancel-label') cancelLabel: string = 'Cancel';
   @Input('positive-label') positiveLabel: string = 'OK';
+  @Input('positive-enabled') positiveEnabled: boolean = true;
+
 
   /**
    * Fires an event when the modal is closed. The argument indicated how it was closed.

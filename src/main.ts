@@ -33,6 +33,7 @@ import {AuthHttp, AuthConfig} from './app/temp/angular2-jwt';
 import {PROFILE_PROVIDERS} from './app/common/profile-service';
 import {SeoService} from './app/common/seo-service';
 import {SPORT_PROVIDERS} from './common/sport/sport-service';
+import {CURRENCY_PROVIDERS} from './common/currency/currency-service';
 //import {RouterActive} from './app/directives/router-active';
 
 /*
@@ -81,6 +82,7 @@ export function main() {
   return browser.bootstrap(Root, [
       ...APPLICATION_PROVIDERS,
       ...SPORT_PROVIDERS,
+      ...CURRENCY_PROVIDERS,
       browser.Title,
       ngCore.provide(ngCore.PLATFORM_DIRECTIVES, {useValue: APPLICATION_DIRECTIVES, multi: true}),
       ngCore.provide(ngCore.PLATFORM_PIPES, {useValue: APPLICATION_PIPES, multi: true}),

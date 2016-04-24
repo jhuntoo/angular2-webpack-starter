@@ -1,4 +1,4 @@
-<h1>Registration Types</h1><button class="btn btn-success btn-sm" (click)="addType()">Add Registration Type</button>
+
 <!--<accordion [closeOthers]="oneAtATime">-->
   <!--<accordion-group *ngFor="#registrationType of registrationTypes"-->
                    <!--heading="Registration Type X"-->
@@ -8,36 +8,71 @@
 <!--</accordion>-->
 <div class="list-group">
 
+
   <!--<a href="" class="list-group-item">-->
     <!--<i class="fa fa-chevron-right text-muted"></i>-->
     <!--<span class="badge bg-success">14</span>-->
     <!--<i class="fa fa-phone fa-fw m-r-xs"></i> Call-->
   <!--</a>-->
 
+  <div class="container registration-container">
+    <div class="row">
+      <h4 class="col-sm-9">Registration Types</h4>
+      <div class="col-sm-3">
+        <!--<button class="btn btn-sm btn-icon btn-primary  trash-icon" (click)="editRegistrationType(registrationType)">-->
+          <!--<i class="fa fa-pencil-square-o" aria-hidden="true" style="color: white"></i>-->
+        <!--</button>-->
 
-  <a *ngFor="#registrationType of registrationTypes"
-                   class="list-group-item registration-type-row">
-            <button class="btn btn-sm btn-icon btn-danger  trash-icon" (click)="removeRegistrationType(registrationType)">
-              <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
-            </button>
+        <button class="btn btn-success btn-sm btn-icon pull-right" (click)="addType()"><i class="fa fa-plus" aria-hidden="true" style="color: white"></i></button>
+
+      </div>
+    </div>
+    <a *ngFor="#registrationType of registrationTypes"
+                   class="list-group-item registration-type-row row">
 
 
-              <div *ngIf="registrationType.type == 'INDIVIDUAL'" ><i class="fa fa-user fa-2x fa-fw m-r-xs" aria-hidden="true"></i>Individual </div>
-              <div *ngIf="registrationType.type == 'GROUP'"><i class="fa fa-users fa-2x fa-fw m-r-xs" aria-hidden="true"></i>Group</div>
 
 
-    {{registrationType.description}}
+          <!--<div class="pull-right text-sm text-muted">-->
+            <!--<span class="hidden-xs ng-binding">Capacity: {{capacity}}</span>-->
+          <!--</div>-->
+        <div class="col-sm-3 registration-type-col">
+          <div *ngIf="registrationType.type == 'INDIVIDUAL'" ><i class="fa fa-user fa-2x fa-fw m-r-xs" aria-hidden="true"></i>Individual </div>
+          <div *ngIf="registrationType.type == 'GROUP'"><i class="fa fa-users fa-2x fa-fw m-r-xs" aria-hidden="true"></i>Group</div>
+        </div>
+        <div class="col-sm-6 text-sm text-muted registration-type-col">
+          <span class="capacity-container">
+            <span class="hidden-xs ng-binding">Capacity: {{registrationType.capacity}}</span>
+         </span>
+
+        </div>
+
+
+
+
+        <div class="col-sm-3 registration-type-col">
+          <button class="btn btn-sm btn-icon btn-primary  trash-icon" (click)="editRegistrationType(registrationType)">
+            <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: white"></i>
+          </button>
+          <button class="btn btn-sm btn-icon btn-danger  trash-icon" (click)="removeRegistrationType(registrationType)">
+            <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
+          </button>
+        </div>
+
+
+
 
 
   </a>
+  </div>
 </div>
 <modal #modal id="cancelConfirmation"
-       [title]="'Create a registration type'"
-       [cancel-label]="'cancel'"
-       [positive-label]="'OK'"
-       (closed)="onCreateNewRegistrationTypeClosed($event, newItem.model)" >
+       [cancel-label]="'Cancel'"
+       [show-cancel]="true"
+       [positive-enabled]="currentItem.form.valid"
+       (closed)="onRegistrationTypeClosed($event, currentItem.model)" >
 
-  <registration-type-item #newItem></registration-type-item>
+  <registration-type-item #currentItem></registration-type-item>
 </modal>
 
 

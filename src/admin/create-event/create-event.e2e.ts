@@ -10,7 +10,7 @@ let createEventPage = {
   },
 
   addCategoryButton() {
-    return element(by.css('category-list > button')).getWebElement();
+    return element(by.id('button-add-category')).getWebElement();
   },
 
   googleMap() {

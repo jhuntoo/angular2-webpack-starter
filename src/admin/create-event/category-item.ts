@@ -11,14 +11,17 @@ import {Subject} from 'rxjs/Subject';
 import {Sport} from '../../common/sport/sport-service';
 import {TAB_DIRECTIVES, Tab} from '../../app/temp/tabs';
 import {Select} from '../../app/temp/select/select';
+import {ChangeDetectionStrategy} from 'angular2/core';
+import {DateParse} from '../../common/date-input';
 //import {TAB_DIRECTIVES, Tab,} from 'ng2-bootstrap/ng2-bootstrap';
 //import '../../../../ng2-select/components/css/ng2-select.css';
 
 @Component({
   selector: 'category-item',  // <home></home>
-  directives: [Select, RegistrationTypeList, TAB_DIRECTIVES],
+  directives: [DateParse, Select, RegistrationTypeList, TAB_DIRECTIVES],
   styles: [ require('../../app/temp/css/ng2-select.css').toString()],
-  template: require('./category-item.html')
+  template: require('./category-item.html'),
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItem implements OnInit {
 
@@ -112,23 +115,28 @@ export class CategoryItem implements OnInit {
     this.model.capacity = capacity;
   }
 
-  get registrationClosureDate() {
-     let d = this.model.registrationClosureDate;
-      if (!d) return '';
-      var yyyy = d.getFullYear().toString();
-      var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
-      var dd  = d.getDate().toString();
-
-      //return yyyy + '-' + (mm[1]?mm:'0'+mm[0]) + '-' + (dd[1]?dd:'0'+dd[0]);
-     return `${dd[1]?dd:'0'+dd[0]}/${mm[1]?mm:'0'+mm[0]}/${yyyy}`;
-  }
-
-  set registrationClosureDate(date : string) {
-    this.model.registrationClosureDate = new Date(date);
-  }
+  //get registrationClosureDate() {
+  //   let d = this.model.registrationClosureDate;
+  //    if (!d) return '';
+  //    var yyyy = d.getFullYear().toString();
+  //    var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+  //    var dd  = d.getDate().toString();
+  //
+  //    //return yyyy + '-' + (mm[1]?mm:'0'+mm[0]) + '-' + (dd[1]?dd:'0'+dd[0]);
+  //   return `${dd[1]?dd:'0'+dd[0]}/${mm[1]?mm:'0'+mm[0]}/${yyyy}`;
+  //}
+  //
+  //set registrationClosureDate(date : string) {
+  //  this.model.registrationClosureDate = new Date(date);
+  //}
 
   get isValid() : boolean {
-    let valid = (this.model.sportId && this.model.distance && this.model.registrationClosureDate && this.model.capacity) ? true : false;
+    this.log.debug(`${this.model.sportId}  ${this.model.distance}  ${this.model.registrationClosureDate}  ${this.model.capacity} ${this.model.registrationTypes.length}`);
+    let valid = (this.model.sportId &&
+                this.model.distance &&
+                this.model.registrationClosureDate &&
+                this.model.capacity &&
+    this.model.registrationTypes.length > 0) ? true : false;
     console.log(`valid: ${valid}`);
     return valid;
   }

@@ -6,6 +6,7 @@ import {AgeRestriction} from './models/AgeRestriction';
 
 @Component({
   selector: 'age-restriction',  // <home></home>
+  styles: [ require('./age-restriction.less').toString()],
   template: require('./age-restriction.html')
 })
 export class AgeRestrictionItem {
@@ -34,6 +35,5 @@ export class AgeRestrictionItem {
   stopEditing(): void {
     this.editing = false;
   }
-
 
 }

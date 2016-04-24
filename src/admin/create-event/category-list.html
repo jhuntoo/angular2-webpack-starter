@@ -1,23 +1,33 @@
-<button class="btn btn-success btn-sm btn-addon" (click)="addCategory()"><i class="fa fa-plus"></i>Add Category</button>
-<tabset>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix font-bold">
+    <div style="display: inline; vertical-align: middle">Categories</div> <button id="button-add-category" class="btn btn-success btn-sm btn-addon pull-right" (click)="addCategory()"><i class="fa fa-plus"></i>Category</button>
+  </div>
+  <div class="category-list-panel">
+    <div class="form-horizontal" *ngIf="categories && categories.length > 0">
+      <tabset>
 
-  <tab #tab *ngFor="#category of categories"
-       active="true"
-       removable="true"
+        <tab #tab *ngFor="#category of categories"
+             active="true"
+             removable="true"
 
-       (removed)="removeTabHandler(category)"
-       >
+             (removed)="removeTabHandler(category)"
+        >
+          <category-item  #item [model]="category"></category-item>
+        </tab>
 
-    <category-item  #item [model]="category"></category-item>
-  </tab>
 
-  <!--<tab (select)="alertMe()">-->
-    <!--<template tabHeading>-->
-      <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
-    <!--</template>-->
-    <!--I've got an HTML heading, and a select callback. Pretty cool!-->
-  <!--</tab>-->
-</tabset>
+        <!--<tab (select)="alertMe()">-->
+        <!--<template tabHeading>-->
+        <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
+        <!--</template>-->
+        <!--I've got an HTML heading, and a select callback. Pretty cool!-->
+        <!--</tab>-->
+      </tabset>
+    </div>
+  </div>
+</div>
+
+
 
 <!--<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">-->
 

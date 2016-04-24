@@ -1,5 +1,6 @@
 <div class="modal-backdrop fade in"
-     [style.display]="showModal ? 'block' : 'none'"></div>
+     [style.display]="showModal ? 'block' : 'none'"
+     [style.]></div>
 <div class="modal"
      tabindex="-1"
      role="dialog"
@@ -31,7 +32,8 @@
         </button>
         <button type="button"
                 class="btn btn-primary btn-sm"
-                (click)="positiveAction()">
+                (click)="positiveAction()"
+                [disabled]="!positiveEnabled">
           {{positiveLabel}}
         </button>
       </div>
