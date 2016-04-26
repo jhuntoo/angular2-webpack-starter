@@ -14,8 +14,6 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-//import 'ng2-toastr/ng2-toastr.js';
-//import 'ng2-toastr/ng2-toastr.css';
 
 
 if ('production' === ENV) {

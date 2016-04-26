@@ -11,7 +11,6 @@ import {
 } from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
-//import {ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {Config} from './config/config';
 import {LoggingService, Level} from './app/common/log';
 import {AUTHENTICATION_PROVIDERS} from './app/common/authentication';

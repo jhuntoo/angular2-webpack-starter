@@ -7,7 +7,6 @@ import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegisterResponse} from './models/registerResponse';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {Response} from 'angular2/http';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -23,7 +22,7 @@ import {SeoService} from '../common/seo-service';
 
   selector: 'register',
   viewProviders: [HTTP_PROVIDERS],
-  providers: [ToastsManager, RegistrationService, LoggingService, SocialLogin],
+  providers: [RegistrationService, LoggingService, SocialLogin],
   directives: [ ControlMessages, SpinnerComponent],
   // Our list of styles in our component. We may add more to compose many styles together
   styles: [require('./register.less').toString()],

@@ -16,7 +16,6 @@ import {Component, provide, DynamicComponentLoader, ApplicationRef} from 'angula
 import {RegisterForm} from './register';
 import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegistrationService, MockRegistrationService} from './services/registration.service';
-import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import {LoggingService,
   AuthenticationService,
   MockAuthenticationService,

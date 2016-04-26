@@ -16,7 +16,6 @@
 //import {RegisterForm} from './register';
 //import {EmailCheckResult} from './models/EmailCheckResult';
 //import {RegistrationService, MockRegistrationService} from './services/registration.service';
-//import { ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
 //import {LoggingService} from '../common/log';
 //import {App} from '../app';
 //import { RootRouter } from 'angular2/src/router/router';

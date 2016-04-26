@@ -4,7 +4,6 @@ import {ControlMessages} from '../control-messages/control-messages';
 import {AbstractControl} from 'angular2/common';
 import {ValidationService} from '../validation/ValidationService';
 import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -19,7 +18,7 @@ import {SeoService} from '../common/seo-service';
 
   selector: 'login',
   viewProviders: [HTTP_PROVIDERS],
-  providers: [ToastsManager, LoggingService, SocialLogin],
+  providers: [LoggingService, SocialLogin],
   directives: [ControlMessages, SpinnerComponent, Modal],
   styles: [require('./login.less').toString()],
   template: require('./login.html')
