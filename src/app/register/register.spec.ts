@@ -49,12 +49,10 @@ describe('RegisterForm', () => {
       },
       deps: [MockBackend, BaseRequestOptions]
     }),
-    provide(ToastOptions, {useValue: new ToastOptions({})}),
     provide(RegistrationService, {useValue: new MockRegistrationService()}),
     provide(SeoService, {useValue: new MockSeoService()}),
     provide(AuthenticationService, {useValue: new MockAuthenticationService()}),
     provide(LoggingService, {useValue: new LoggingService()}),
-    ToastsManager,
     RegisterForm,
     provide(Config, { useValue: {apiBaseUrl : '/test'} }),
     SocialLogin

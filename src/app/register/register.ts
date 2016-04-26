@@ -55,7 +55,6 @@ export class RegisterForm {
   constructor(private fb:FormBuilder,
               private _router: Router,
               private http:Http,
-              public toastr:ToastsManager,
               public socialLogin: SocialLogin,
               private registrationService: RegistrationService,
               private authenticationService: AuthenticationService,
