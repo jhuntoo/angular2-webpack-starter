@@ -4,9 +4,9 @@
 <div class="modal"
      tabindex="-1"
      role="dialog"
-     style="display: block"
+     style="display: block !important"
      [style.display]="showModal ? 'block' : 'none'">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
     <div class="modal-content">
       <div class="modal-header">
         <!--
@@ -21,8 +21,8 @@
           {{title}}
         </h4>
       </div>
-      <div class="modal-body">
-        <ng-content></ng-content>
+      <div class="modal-body" style="overflow-y: auto;">
+        <ng-content style="max-height: calc(100vh - 225px);"></ng-content>
       </div>
       <div class="modal-footer">
         <button *ngIf="showCancel" type="button"

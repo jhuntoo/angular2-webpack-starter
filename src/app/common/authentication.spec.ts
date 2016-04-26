@@ -8,7 +8,7 @@ import {
 import {MockBackend} from 'angular2/http/testing';
 import {MockConnection} from 'angular2/src/http/backends/mock_backend';
 
-import {App} from '../app';
+import {AppComponent} from '../app';
 import { RootRouter } from 'angular2/src/router/router';
 import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
 import { SpyLocation } from 'angular2/src/mock/location_mock';
@@ -31,7 +31,7 @@ describe('*** Authentication Service ****', () => {
     provide(TokenExpiryChecker, {useClass: MockTokenExpiryChecker}),
     provide(Router, {useClass: RootRouter}),
     provide(Location, {useClass: SpyLocation}),
-    provide(ROUTER_PRIMARY_COMPONENT, {useValue: App}),
+    provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent}),
     provide(LocalStorage, {useValue: new MockLocalStorage()}),
     provide(Config, {useValue: {apiBaseUrl: '/test'}}),
     provide(Http, {
@@ -223,7 +223,7 @@ describe('*** Authentication Service ****', () => {
       provide(LocalStorage, {useValue: localStorage}),
       RouteRegistry,
       provide(Location, { useClass: SpyLocation }),
-      provide(ROUTER_PRIMARY_COMPONENT, { useValue: App }),
+      provide(ROUTER_PRIMARY_COMPONENT, { useValue: AppComponent }),
       provide(Router, {useClass: RootRouter})
     ]);
 

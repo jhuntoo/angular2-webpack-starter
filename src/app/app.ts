@@ -9,7 +9,7 @@ import {VerifyEmail} from './verifyemail/verifyemail';
 import {LoginCallback, LoginForm, LoginError} from './login/index';
 import {SearchPage} from './search/search';
 import {WelcomePage} from './welcome/welcome';
-import {AdminApp} from '../admin/app';
+import {AdminAppComponent} from '../admin/app';
 import {ProfilePage} from './profile/profile';
 
 
@@ -51,7 +51,7 @@ import {ProfilePage} from './profile/profile';
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' }
 ])
-export class App {
+export class AppComponent {
   @HostBinding('style') style = 'position: fixed; height: 100%;';
 
   name = 'MustRace';

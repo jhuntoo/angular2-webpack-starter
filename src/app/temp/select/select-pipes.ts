@@ -1,10 +1,10 @@
-import {Pipe} from 'angular2/core';
+import {Pipe, PipeTransform} from 'angular2/core';
 import {escapeRegexp} from './common';
 
 @Pipe({
   name: 'hightlight'
 })
-export class HightlightPipe {
+export class HightlightPipe implements PipeTransform {
   transform(value:string, args:any[]) {
     if (args.length < 1) {
       return value;

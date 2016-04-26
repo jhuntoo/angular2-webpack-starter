@@ -12,13 +12,13 @@ import {Sport} from '../../common/sport/sport-service';
 import {TAB_DIRECTIVES, Tab} from '../../app/temp/tabs';
 import {Select} from '../../app/temp/select/select';
 import {ChangeDetectionStrategy} from 'angular2/core';
-import {DateParse} from '../../common/date-input';
+import {DateInputDirective} from '../../common/date-input';
 //import {TAB_DIRECTIVES, Tab,} from 'ng2-bootstrap/ng2-bootstrap';
 //import '../../../../ng2-select/components/css/ng2-select.css';
 
 @Component({
   selector: 'category-item',  // <home></home>
-  directives: [DateParse, Select, RegistrationTypeList, TAB_DIRECTIVES],
+  directives: [DateInputDirective, Select, RegistrationTypeList, TAB_DIRECTIVES],
   styles: [ require('../../app/temp/css/ng2-select.css').toString()],
   template: require('./category-item.html'),
   changeDetection: ChangeDetectionStrategy.OnPush

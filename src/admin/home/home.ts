@@ -1,11 +1,11 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 
 @Component({
   selector: 'admin-home',  // <home></home>
   styles: [ require('./home.less').toString() ],
   template: require('./home.html')
 })
-export class Home {
+export class HomeComponent implements  OnInit {
   constructor() {
 
   }

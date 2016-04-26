@@ -1,8 +1,18 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Directive, Input, forwardRef, Provider} from 'angular2/core';
 import {Location} from './models/Location';
 import {LoggingService, Logger} from '../../app/common/log';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MouseEvent} from 'angular2-google-maps/core';
 import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/components/accordion';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from 'angular2/common';
+import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {HostListener} from 'angular2/core';
+
+interface Marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
+}
 
 @Component({
   selector: 'event-location',  // <home></home>
@@ -41,9 +51,30 @@ export class EventLocation {
   }
 
 }
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
-}
+
+
+//const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
+//  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => EventLocationValueAccessor), multi: true}));
+//
+//@Directive({
+//  selector: '[eventLocation]',
+//  providers: [CUSTOM_VALUE_ACCESSOR]
+//})
+//export class EventLocationValueAccessor implements ControlValueAccessor {
+//
+//  @HostListener('valueChange')
+//  onChange = (_) => {};
+//  onTouched = () => {};
+//
+//  constructor(private host: EventLocation) {
+//
+//  }
+//
+//  writeValue(value: any): void {
+//    console.log(`writeValue: ${JSON.stringify(value)}`);
+//    this.host.location = value;
+//  }
+//
+//  registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
+//  registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+//}

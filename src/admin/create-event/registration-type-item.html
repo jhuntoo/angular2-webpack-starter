@@ -25,7 +25,7 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Capacity</label>
     <div class="col-sm-2">
-      <input type="text" class="form-control" [(ngModel)]="model.capacity" ngControl="capacity">
+      <input type="number" class="form-control" [(ngModel)]="model.capacity" ngControl="capacity">
     </div>
     <label class="col-sm-4 control-label">Registration Closure Date</label>
     <div class="col-sm-4">
@@ -41,7 +41,7 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Cost</label>
     <div class="col-sm-2">
-      <input type="text" class="form-control" [(ngModel)]="model.cost" ngControl="cost">
+      <input type="number" class="form-control" [(ngModel)]="model.cost" ngControl="cost">
     </div>
     <label class="col-sm-4 control-label">Currency</label>
     <div class="col-sm-4">
@@ -59,10 +59,59 @@
 
   </div>
 
-  <div class="form-group">
-    <age-restriction [model]="model.ageRestriction"></age-restriction>
+  <div ngControlGroup="ageRestriction" class="form-group">
+    <!--<age-restriction ngControl="ageRestriction" [(ngModel)]="model.ageRestriction"></age-restriction>-->
+      <label class="col-sm-2 control-label">Age Restriction</label>
+      <div class="col-sm-2">
+        <label class="i-switch bg-danger m-t-xs m-r">
+          <input type="checkbox" checked="enabled" ngControl="enabled" [(ngModel)]="model.ageRestriction.enabled">
+          <i></i>
+        </label>
+      </div>
+
+
+      <!--<button class="btn m-b-xs btn-sm btn-danger btn-addon" *ngIf="!editing" (click)="edit()"><i class="fa fa-plus"></i>Add-->
+
+      <!--</button>-->
+      <div  id="age-inputs" *ngIf="model.ageRestriction.enabled">
+        <div class="col-sm-4">
+          <div style="white-space:nowrap; float: left">
+            <label for="input-age-min">between</label>
+            <input id="input-age-min"
+                   type="number"
+                   class="form-control"
+                   ngControl="min"
+                   [(ngModel)]="model.ageRestriction.min"
+                   placeholder="min" >
+          </div>
+          <div style="white-space:nowrap; float: left">
+            <label for="input-age-max">and</label>
+            <input id="input-age-max"
+                   type="number"
+                   class="form-control"
+                   ngControl="max"
+                   [(ngModel)]="model.ageRestriction.max"
+                   placeholder="max">
+          </div>
+        </div>
+        <div class="col-sm-4" style="white-space:nowrap; float: left">
+          <label for="input-age-as-of-date" style="margin-left: 1em; margin-right: 1em; white-space: nowrap"> as of date </label>
+          <input id="input-age-as-of-date"
+                 type="date"
+                 class="form-control"
+                 ngControl="date"
+                 [(date)]="model.ageRestriction.asOfDate"
+                 placeholder="as of date">
+        </div>
+      </div>
+
   </div>
-  <pre> Testing...
-    {{value}}</pre>
+  <div *ngIf="ageRestriction.dirty && !ageRestriction.valid" class="alert alert-danger fade in">
+    <p *ngIf="ageRestriction.errors.invalidAgeRestriction">
+      {{ageRestriction.errors.invalidAgeRestriction}}
+    </p>
+  </div>
+  <!--<pre> Testing...-->
+    <!--{{value}}</pre>-->
 </form>
 

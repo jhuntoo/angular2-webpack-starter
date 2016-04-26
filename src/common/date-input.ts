@@ -6,7 +6,7 @@ import {NgFor, NgModel} from 'angular2/common';
 })
 /* tslint:enable */
 
-export class DateParse {
+export class DateInputDirective {
   @HostBinding('value')
   _date: string;
 

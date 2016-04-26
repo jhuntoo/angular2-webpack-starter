@@ -4,8 +4,8 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, Router} from 'angular2/router';
 
-import {AdminApp} from './admin/app';
-import {App} from './app/app';
+import {AdminAppComponent} from './admin/app';
+import {AppComponent} from './app/app';
 import {ProfileService} from './app/common/profile-service';
 
 
@@ -26,10 +26,10 @@ import {ProfileService} from './app/common/profile-service';
   `
 })
 @RouteConfig([
-  { path: '/admin/...', component: AdminApp, name: 'Admin' },
-  { path: '/...', component: App, name: 'Index', useAsDefault: true }
+  { path: '/admin/...', component: AdminAppComponent, name: 'Admin' },
+  { path: '/...', component: AppComponent, name: 'Index', useAsDefault: true }
 ])
-export class Root {
+export class RootComponent {
   // Don't remove ProfileService ! it needs to be instantiated early
   constructor(private profileService: ProfileService) {
 

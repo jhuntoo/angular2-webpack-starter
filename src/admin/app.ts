@@ -3,9 +3,9 @@
  */
 import {Component} from 'angular2/core';
 import {RouteConfig} from 'angular2/router';
-import {Home} from './home/home';
+import {HomeComponent} from './home/home';
 import {SideMenu} from './side-menu/side-menu';
-import {AdminHeader} from './header/header';
+import {AdminHeaderComponent} from './header/header';
 import {CreateEvent} from './create-event/create-event';
 
 
@@ -16,7 +16,7 @@ import {CreateEvent} from './create-event/create-event';
 @Component({
   selector: 'admin-app',
   providers: [ ],
-  directives: [SideMenu, AdminHeader],
+  directives: [SideMenu, AdminHeaderComponent],
   pipes: [],
   styles: [`
     :host {
@@ -28,11 +28,11 @@ import {CreateEvent} from './create-event/create-event';
 
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' },
+  { path: '/', component: HomeComponent, name: 'Index' },
   { path: '/events/create', component: CreateEvent, name: 'CreateEvent' }
 
 ])
-export class AdminApp {
+export class AdminAppComponent {
   public isMenuFolded:boolean = false;
   constructor() {
 

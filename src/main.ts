@@ -28,7 +28,7 @@ import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
  * App Component
  * our top level component that holds all of our components
  */
-import {Root} from './root';
+import {RootComponent} from './root';
 import {AuthHttp, AuthConfig} from './app/temp/angular2-jwt';
 import {PROFILE_PROVIDERS} from './app/common/profile-service';
 import {SeoService} from './app/common/seo-service';
@@ -79,7 +79,7 @@ if ('production' === ENV) {
 export function main() {
   let config = ('production' === ENV) ? require('./config/production.ts').config : require('./config/dev.ts').config;
   console.log(`config: ${JSON.stringify(config)}`);
-  return browser.bootstrap(Root, [
+  return browser.bootstrap(RootComponent, [
       ...APPLICATION_PROVIDERS,
       ...SPORT_PROVIDERS,
       ...CURRENCY_PROVIDERS,

@@ -1,23 +1,50 @@
 
 <div class="wrapper-md">
+  <form [ngFormModel]="form" (ngSubmit)="save()">
  <div class="panel panel-default">
     <div class="panel-heading font-bold">
       Summary
     </div>
     <div class="panel-body">
-      <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled"
-            method="get">
+
+      <div class="form-validation"
+           ngControlGroup="summary">
+
+        <!--<div class="form-group">-->
+          <!--<label class="col-sm-2 control-label">Capacity</label>-->
+          <!--<div class="col-sm-2">-->
+            <!--<input type="number" class="form-control" [(ngModel)]="model.capacity" ngControl="capacity">-->
+          <!--</div>-->
+          <!--<label class="col-sm-4 control-label">Registration Closure Date</label>-->
+          <!--<div class="col-sm-4">-->
+            <!--<input-->
+              <!--type="date"-->
+              <!--class="form-control"-->
+              <!--[(date)]="model.registrationClosureDate"-->
+              <!--ngControl="closureDate">-->
+          <!--</div>-->
+        <!--</div>-->
+
+
+
         <div class="form-group">
           <label class="col-sm-2 control-label">Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="event.name">
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="event.name"
+                   ngControl="name">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Description</label>
           <div class="col-sm-10">
-            <textarea class="form-control" rows="5" placeholder="Enter a description"
-                      [(ngModel)]="event.description"></textarea>
+            <textarea class="form-control"
+                      rows="5"
+                      placeholder="Enter a description"
+                      [(ngModel)]="event.description"
+                      ngControl="description"
+            ></textarea>
           </div>
         </div>
 
@@ -30,15 +57,16 @@
           <div class="col-sm-10">
             <input
               type="date"
-            class="form-control"
-            [(date)]="event.date">
+              class="form-control"
+              [(date)]="event.date"
+              ngControl="description">
 
           </div>
           <!--<datepicker class="form-group col-sm-6" [(ngModel)]="event.date" [minDate]="minDate" [showWeeks]="true" ></datepicker>-->
 
         </div>
 
-      </form>
+      </div>
     </div>
   </div>
   <div class="panel panel-default">
@@ -46,8 +74,9 @@
       Location
     </div>
     <div class="panel-body">
-      <div class="form-horizontal">
-        <event-location [location]="event.location"></event-location>
+      <div class="form-validation"
+           >
+        <event-location [location]="event.location" ></event-location>
       </div>
     </div>
   </div>
@@ -59,45 +88,42 @@
       Sponsorship
     </div>
     <div class="panel-body">
-      <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled"
-            method="get">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="event.name">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Description</label>
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="5" placeholder="Enter a description"
-                      [(ngModel)]="event.description"></textarea>
-          </div>
+      <div ngControlGroup="sponsorship" class="form-group">
+        <!--<age-restriction ngControl="ageRestriction" [(ngModel)]="model.ageRestriction"></age-restriction>-->
+        <label class="col-sm-2 control-label">Open to Sponsorship?</label>
+        <div class="col-sm-2">
+          <label class="i-switch bg-danger m-t-xs m-r">
+            <input type="checkbox"
+                   checked="enabled"
+                   ngControl="enabled"
+                   [(ngModel)]="event.sponsorship.enabled">
+            <i></i>
+          </label>
         </div>
 
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Date</label>
 
+        <!--<button class="btn m-b-xs btn-sm btn-danger btn-addon" *ngIf="!editing" (click)="edit()"><i class="fa fa-plus"></i>Add-->
 
-
-
-          <div class="col-sm-10">
-            <input                    type="date"
-                   class="form-control"
-                   [(date)]="event.date">
-
-          </div>
-          <!--<datepicker class="form-group col-sm-6" [(ngModel)]="event.date" [minDate]="minDate" [showWeeks]="true" ></datepicker>-->
-
+        <!--</button>-->
+        <div  id="age-inputs" *ngIf="event.sponsorship.enabled">
+             Stuff here
         </div>
 
-      </form>
+      </div>
     </div>
   </div>
+  </form>
   <div class="form-group">
     <div class="col-sm-4 col-sm-offset-2">
       <button type="submit" class="btn btn-default">Cancel</button>
-      <button type="submit" class="btn btn-primary" (click)="save()">Save changes</button>
+      <button id="button-submit"
+              type="submit"
+              [disabled]="!form.valid"
+              class="btn btn-primary"
+              (click)="save()">
+        Save changes
+      </button>
     </div>
   </div>
+
 </div>

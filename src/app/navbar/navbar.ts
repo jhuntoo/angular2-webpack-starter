@@ -26,7 +26,7 @@ import {ProfileService, Profile} from '../common/profile-service';
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./navbar.html')
 })
-export class Navbar {
+export class Navbar implements OnInit {
   public isCollapsed:boolean = true;
   public loggedIn:boolean;
   public userMenuOpen:boolean;
