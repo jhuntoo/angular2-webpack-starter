@@ -1,17 +1,41 @@
-<aside id="aside" class="app-aside hidden-xs bg-dark">
-  <div class="aside-wrap">
-    <div class="navi-wrap">
-      <nav class="navi clearfix">
-        <ul class="nav">
-        <menu-item-list>
-          <menu-item title="Events" iconClass="glyphicon-briefcase" menuIsFolded="isFolded">
-            <sub-item title="New Event" navigateTo="CreateEvent"></sub-item>
-            <sub-item title="Current Events"></sub-item>
-          </menu-item>
-        </menu-item-list>
-        </ul>
-      </nav>
+<!--<button class="btn btn-default" id="toggle-sidebar" type="button" (click)="onMenuButtonClicked()">-->
+  <!--&#9776;-->
+<!--</button>-->
+<nav class="sidebar" [ngClass]="{sidebarPushRight: !isFolded}">
+  <ul class="list-group">
+    <a  class="list-group-item">
+      <i class="fa fa-fw fa-dashboard" aria-hidden="true"></i> Dashboard
+    </a>
+    <a  class="list-group-item">
+      <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Events
+    </a>
+    <a class="list-group-item">
+      <i class="fa fa-fw fa-bar-chart-o" aria-hidden="true"></i> Reports
+    </a>
+    <a class="list-group-item">
+      <i class="fa fa-fw fa-building" aria-hidden="true" ></i> Organisations
+    </a>
 
-    </div>
-  </div>
-</aside>
+    <a  class="list-group-item">
+      <i class="fa fa-fw fa-wrench" aria-hidden="true"></i> Settings
+    </a>
+
+  </ul>
+</nav>
+<!--<aside id="aside" class="app-aside hidden-xs bg-dark">-->
+  <!--<div class="aside-wrap">-->
+    <!--<div class="navi-wrap">-->
+      <!--<nav class="navi clearfix">-->
+        <!--<ul class="nav">-->
+        <!--<menu-item-list>-->
+          <!--<menu-item title="Events" iconClass="glyphicon-briefcase" menuIsFolded="isFolded">-->
+            <!--<sub-item title="New Event" navigateTo="CreateEvent"></sub-item>-->
+            <!--<sub-item title="Current Events"></sub-item>-->
+          <!--</menu-item>-->
+        <!--</menu-item-list>-->
+        <!--</ul>-->
+      <!--</nav>-->
+
+    <!--</div>-->
+  <!--</div>-->
+<!--</aside>-->

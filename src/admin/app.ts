@@ -1,13 +1,20 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component} from 'angular2/core';
+import {Component, ViewChild, AfterViewInit, HostListener} from 'angular2/core';
+import {NgZone} from 'angular2/core';
 import {RouteConfig} from 'angular2/router';
 import {HomeComponent} from './home/home';
 import {SideMenu} from './side-menu/side-menu';
 import {AdminHeaderComponent} from './header/header';
 import {CreateEvent} from './create-event/create-event';
 
+function getWindowSize() {
+  return {
+    height: window.innerHeight,
+    width: window.innerWidth
+  };
+}
 
 /*
  * App Component
@@ -23,7 +30,7 @@ import {CreateEvent} from './create-event/create-event';
       display: block;
       min-height: 100%;
     }
-  `],
+  `, require('./app.scss').toString()],
   template: require('./app.html')
 
 })
@@ -32,15 +39,36 @@ import {CreateEvent} from './create-event/create-event';
   { path: '/events/create', component: CreateEvent, name: 'CreateEvent' }
 
 ])
-export class AdminAppComponent {
+export class AdminAppComponent implements AfterViewInit {
   public isMenuFolded:boolean = false;
-  constructor() {
+  @ViewChild('header') header: AdminHeaderComponent;
+  @ViewChild('sideMenu') sideMenu: SideMenu;
+
+  onResize(event) {
+    this.ngZone.run(() => {
+      if (getWindowSize().width > 768) {
+        this.handleToggleChanged(false);
+
+      } else {
+        this.handleToggleChanged(true);
+      }
+
+    });
+  }
+  constructor(private ngZone:NgZone) {
 
   }
 
-  handleToggleChanged(event) {
-    console.log(`handleToggleChanged: ${JSON.stringify(event)}`);
-    this.isMenuFolded = event.value;
+  ngAfterViewInit():any {
+    this.header.toggleChanged.subscribe((isFolded) => {this.handleToggleChanged(isFolded);});
+    this.sideMenu.isFoldedChanged.subscribe((isFolded) => {this.handleToggleChanged(isFolded);});
+  }
+
+  handleToggleChanged(isFolded : boolean) {
+    console.log(`handleToggleChanged: ${JSON.stringify(isFolded)}`);
+    this.isMenuFolded = isFolded;
+    this.header.isSideMenuCollapsed = isFolded;
+    this.sideMenu.isFolded = isFolded;
   }
 }
 

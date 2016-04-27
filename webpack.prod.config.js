@@ -105,7 +105,7 @@ module.exports = {
       // Support for CSS as raw text
       { test: /\.css$/,   loader: 'style!css' },
 
-      { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },
+      { test: /\.scss$/, loader: 'style!css!sass'},
 
       { test: /\.less$/,     loader: 'style!css!less'},
 

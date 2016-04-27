@@ -1,0 +1,19 @@
+.main-container{
+  margin: 50px 0 0 225px;
+  padding: 10px;
+  -ms-overflow-x: hidden;
+  overflow-x: hidden;
+  //position: relative;
+  z-index: 1;
+}
+
+.sidebarPushRight{
+  left: 225px !important;
+  z-index:10;
+}
+
+@media screen and (max-width: 768px) {
+  .main-container{
+    margin-left : 0;
+  }
+}

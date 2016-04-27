@@ -1,23 +1,26 @@
 
-<div class="app app-header-fixed app-aside-fixed" [ngClass]="{ 'app-aside-folded' : isMenuFolded}">
+<div (window:resize)="onResize($event)" class="app app-header-fixed app-aside-fixed" [ngClass]="{ 'app-aside-folded' : sideMenu.isMenuFolded}">
 
 
   <!-- header -->
-  <admin-header (toggleChanged)="handleToggleChanged($event);"></admin-header>
+  <admin-header #header></admin-header>
   <!-- / header -->
 
 
   <!-- aside -->
-  <side-menu isFolded="isMenuFolded"></side-menu>
+  <side-menu #sideMenu></side-menu>
   <!-- / aside -->
 
+  <section class="main-container" [ngClass]="{sidebarPushRight: !sideMenu.isMenuFolded}">
+    <router-outlet></router-outlet>
+  </section>
 
   <!-- content -->
-  <div id="content" class="app-content fade-in-up" role="main">
-    <div class="app-content-body" style="position: relative">
-        <router-outlet></router-outlet>
-    </div>
-  </div>
+  <!--<div id="content" class="app-content fade-in-up" role="main">-->
+    <!--<div class="app-content-body" style="position: relative">-->
+        <!--<router-outlet></router-outlet>-->
+    <!--</div>-->
+  <!--</div>-->
   <!-- /content -->
 
 

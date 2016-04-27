@@ -39,7 +39,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.ts', '.js']
+    extensions: ['', '.ts', '.js', '.scss']
   },
 
   // Config for our build files
@@ -69,7 +69,7 @@ module.exports = {
       { test: /\.css$/,   loader: 'style!css' },
 
 
-      { test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ] },
+      { test: /\.scss$/, loader: 'style!css!sass'},
 
       { test: /\.less$/,     loader: 'style!css!less'},
 
