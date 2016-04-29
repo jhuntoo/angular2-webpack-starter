@@ -1,5 +1,5 @@
 import {Component, Directive, Input, forwardRef, Provider} from 'angular2/core';
-import {Location} from './models/Location';
+import {Location} from '../models/Location';
 import {LoggingService, Logger} from '../../app/common/log';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MouseEvent} from 'angular2-google-maps/core';
 import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/components/accordion';

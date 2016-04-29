@@ -1,5 +1,5 @@
 import {EventCategoryRegistrationType} from './EventCategoryRegistrationType';
-import {Guid} from '../../../common/guid';
+import {Guid} from '../../common/guid';
 export class EventCategory {
   get key() { return this._key;}
   sportId:number;

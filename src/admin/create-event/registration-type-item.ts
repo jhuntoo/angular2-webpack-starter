@@ -1,7 +1,7 @@
 import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from 'angular2/core';
 import {Validators, FormBuilder, AbstractControl, Control, ControlGroup} from 'angular2/common';
 import {LoggingService, Logger} from '../../app/common/log';
-import {EventCategoryRegistrationType} from './models/EventCategoryRegistrationType';
+import {EventCategoryRegistrationType} from '../models/EventCategoryRegistrationType';
 //import {AgeRestrictionItem, AgeRestrictionItemValueAccessor} from './age-restriction';
 import {BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {DateInputDirective} from '../../common/date-input';

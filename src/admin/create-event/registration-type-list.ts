@@ -1,10 +1,10 @@
 import {Component, Input, ViewChild, ChangeDetectionStrategy, OnInit} from 'angular2/core';
 import {LoggingService, Logger} from '../../app/common/log';
-import {EventCategoryRegistrationType} from './models/EventCategoryRegistrationType';
+import {EventCategoryRegistrationType} from '../models/EventCategoryRegistrationType';
 import {RegistrationTypeItem} from './registration-type-item';
 import {ACCORDION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Modal, ModalResult, ModalAction} from '../../app/common/modal/modal';
-import {AgeRestriction} from './models/AgeRestriction';
+import {AgeRestriction} from '../models/AgeRestriction';
 
 @Component({
   selector: 'registration-type-list',  // <home></home>

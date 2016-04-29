@@ -1,6 +1,6 @@
 import {Component, Input, Inject, HostBinding, Host, OnInit, Output, EventEmitter} from 'angular2/core';
 import {Control} from 'angular2/common';
-import {EventCategory} from './models/EventCategory';
+import {EventCategory} from '../models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 //import {Select} from 'ng2-select/ng2-select';
 import {RegistrationTypeList} from './registration-type-list';

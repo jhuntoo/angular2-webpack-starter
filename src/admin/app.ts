@@ -8,6 +8,7 @@ import {HomeComponent} from './home/home';
 import {SideMenu} from './side-menu/side-menu';
 import {AdminHeaderComponent} from './header/header';
 import {CreateEvent} from './create-event/create-event';
+import {EventsPageComponent} from './events/events';
 
 function getWindowSize() {
   return {
@@ -36,6 +37,7 @@ function getWindowSize() {
 })
 @RouteConfig([
   { path: '/', component: HomeComponent, name: 'Index' },
+  { path: '/events', component: EventsPageComponent, name: 'Events' },
   { path: '/events/create', component: CreateEvent, name: 'CreateEvent' }
 
 ])

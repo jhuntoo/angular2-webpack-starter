@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Event} from './models/Event';
+import {Event} from '../models/Event';
 import {LoggingService, Logger} from '../../app/common/log';
 import {CategoryList} from './category-list';
 import {EventLocation} from './event-location';

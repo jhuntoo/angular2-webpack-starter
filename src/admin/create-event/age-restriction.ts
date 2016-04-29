@@ -1,11 +1,10 @@
 import {Component, Input, Output, HostBinding, HostListener, Directive, EventEmitter, forwardRef, Provider, ViewChild} from 'angular2/core';
-import {EventCategory} from './models/EventCategory';
+import {EventCategory} from '../models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 import {Select} from 'ng2-select/ng2-select';
-import {AgeRestriction} from './models/AgeRestriction';
+import {AgeRestriction} from '../models/AgeRestriction';
 import {DateInputDirective} from '../../common/date-input';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from 'angular2/common';
-import {} from "angular2/core";
 
 @Component({
   selector: 'age-restriction',  // <home></home>
@@ -23,7 +22,7 @@ export class AgeRestrictionItem {
 
   @ViewChild('ageRestrictionContainer') container;
 
-  @HostBinding('tabindex') class:string = "-1";
+  @HostBinding('tabindex') class:string = '-1';
   @HostListener('blur')
   onLoseFocus() {
     console.log(`onLoseFocus`);

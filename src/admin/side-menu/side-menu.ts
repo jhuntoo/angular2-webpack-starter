@@ -3,7 +3,8 @@ import {MenuItem} from './directives/menu-item';
 import {MenuItemList} from './directives/menu-item-list';
 import {SubItem} from './directives/sub-item';
 
-import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import { ROUTER_DIRECTIVES} from 'angular2/router';
 import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 
@@ -13,7 +14,7 @@ import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
  */
 @Component({
   selector: 'side-menu',
-  directives: [ACCORDION_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
+  directives: [ACCORDION_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
   providers: [ ],
   pipes: [],
   //directives: [MenuItem, MenuItemList, SubItem],
