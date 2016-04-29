@@ -5,10 +5,10 @@ import * as browser from 'angular2/platform/browser';
 import * as ngCore from 'angular2/core';
 import {
   ROUTER_PROVIDERS,
-  ROUTER_DIRECTIVES,
-  LocationStrategy,
-  HashLocationStrategy
+  ROUTER_DIRECTIVES
 } from 'angular2/router';
+import {  LocationStrategy,
+  HashLocationStrategy}from 'angular2/platform/common';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {Config} from './config/config';

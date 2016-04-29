@@ -10,7 +10,8 @@ import {MockConnection} from 'angular2/src/http/backends/mock_backend';
 
 import {AppComponent} from '../app';
 import { RootRouter } from 'angular2/src/router/router';
-import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import {Location} from 'angular2/platform/common';
 import { SpyLocation } from 'angular2/src/mock/location_mock';
 
 import {BaseRequestOptions, Http, ResponseOptions, Response} from 'angular2/http';
@@ -252,7 +253,7 @@ describe('*** Authentication Service ****', () => {
       service.login('IRRELEVANT','PASSWORD' ).subscribe(() => {
         expect(service.isLoggedIn).toBeTruthy();
         router.navigate(['Profile']).then(() => {
-          expect(location.path()).toEqual('/profile',"did not navigate to /profile");
+          expect(location.path()).toEqual('/profile','did not navigate to /profile');
           service.logout().subscribe(() => {
             expect(location.path()).toEqual('');
           });

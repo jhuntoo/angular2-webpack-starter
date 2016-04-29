@@ -6,7 +6,7 @@
 
 
   It appears you've registered with the following social profiles
-  <strong *ngFor="#profile of alternativeProfiles; #isLast=last">{{profile}}{{isLast ? '' : ', '}}</strong>.
+  <strong *ngFor="let profile of alternativeProfiles; let isLast=last">{{profile}}{{isLast ? '' : ', '}}</strong>.
   <br>
   Try logging in via the social login buttons
 </modal>

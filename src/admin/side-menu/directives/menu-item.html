@@ -8,7 +8,7 @@
   </a>
 
   <ul [hidden]="isCollapsed" class="nav nav-sub dk" style="">
-    <li *ngFor="#subItem of subItems" class="active">
+    <li *ngFor="let subItem of subItems" class="active">
       <a (click)="subItem.navigate()">
         <span>{{subItem.title}}</span>
       </a>

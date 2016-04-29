@@ -1,7 +1,6 @@
 import {
   it,
   inject,
-  injectAsync,
   beforeEachProviders,
   beforeEach,
   TestComponentBuilder,
@@ -23,7 +22,8 @@ import {LoggingService,
   MockSeoService} from '../common/index';
 import {AppComponent} from '../app';
 import { RootRouter } from 'angular2/src/router/router';
-import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { Location } from 'angular2/platform/common';
 import { SpyLocation } from 'angular2/src/mock/location_mock';
 import {SocialLogin} from '../common/social-login';
 import {Config} from '../../config/config';

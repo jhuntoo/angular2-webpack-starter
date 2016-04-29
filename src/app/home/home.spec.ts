@@ -1,7 +1,6 @@
 import {
   it,
   inject,
-  injectAsync,
   describe,
   beforeEachProviders,
   TestComponentBuilder
@@ -12,7 +11,8 @@ import {BaseRequestOptions, Http} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
 import {AppComponent} from '../app';
 import { RootRouter } from 'angular2/src/router/router';
-import { Location, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
+import { Location } from 'angular2/platform/common';
 import { SpyLocation } from 'angular2/src/mock/location_mock';
 
 

@@ -30,7 +30,7 @@
             <p>Already Registered</p>
           </div>
           <div *ngIf="email.dirty && emailCheckResult != null && emailCheckResult.connectedProfiles.length > 0" class="alert mdi-alert-warning">
-            <p>Already Registered with social profiles <strong *ngFor="#profile of emailCheckResult.connectedProfiles; #isLast=last">{{profile}}{{isLast ? '' : ', '}}</strong>.</p>
+            <p>Already Registered with social profiles <strong *ngFor="let profile of emailCheckResult.connectedProfiles; let isLast=last">{{profile}}{{isLast ? '' : ', '}}</strong>.</p>
             <p>If you continue to register with an email and password, you will be able to login with both this email and your connected social profiles</p>
 
           </div>

@@ -1,7 +1,7 @@
 <div class="modal-center">
 
   <ul class="list-group no-borders pull-in m-b-none">
-    <li class="list-group-item" *ngFor="#event of events">
+    <li class="list-group-item" *ngFor="let event of events">
       <a class="h4 text-primary m-b-sm m-t-sm block">{{event.name}}</a>
       <p>{{event.description}}</p>
       <p><span class="label bg-primary pos-rlt m-r inline wrapper-xs"><i
