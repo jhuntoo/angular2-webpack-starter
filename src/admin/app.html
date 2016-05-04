@@ -1,30 +1,153 @@
+<div id="page-wrapper" [ngClass]="{'open': toggle}">
 
-<div (window:resize)="onResize($event)" class="app app-header-fixed app-aside-fixed" [ngClass]="{ 'app-aside-folded' : sideMenu.isMenuFolded}">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar">
+      <li class="sidebar-main">
+        <a (click)="toggleSidebar()">
+          Menu
+          <span class="menu-icon glyphicon glyphicon-transfer"></span>
+        </a>
+      </li>
+      <li class="sidebar-title"><span>NAVIGATION</span></li>
+      <li class="sidebar-list">
+        <a>Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+      </li>
+      <li class="sidebar-list">
+        <a [routerLink]="['Events']">Events <span class="menu-icon fa fa-calendar"></span></a>
+      </li>
+      <li class="sidebar-list">
+        <a [routerLink]="['Events']">Reports <span class="menu-icon fa fa-bar-chart-o"></span></a>
+      </li>
+      <li class="sidebar-list">
+        <a [routerLink]="['Events']">Organisations <span class="menu-icon fa fa-building"></span></a>
+      </li>
+      <li class="sidebar-list">
+        <a [routerLink]="['Events']">Settings <span class="menu-icon fa fa-wrench"></span></a>
+      </li>
+
+    </ul>
+    <div class="sidebar-footer">
+      <div class="col-xs-4">
+        <a href="https://github.com/ziyasal/rdash-angular2" target="_blank">
+          Github
+        </a>
+      </div>
+      <div class="col-xs-4">
+        <a href="https://github.com/ziyasal/rdash-angular2/blob/master/README.md" target="_blank">
+          About
+        </a>
+      </div>
+      <div class="col-xs-4">
+        <a href="javascript:void(0)">
+          Support
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- End Sidebar -->
+
+  <div id="content-wrapper">
+    <div class="page-content">
+
+      <!-- Header Bar -->
+      <div class="row header">
+        <div class="col-xs-12">
+          <div class="user pull-right">
+            <div class="item dropdown">
+              <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../assets/img/a0.jpg">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">
+                  Joe Bloggs
+                </li>
+                <li class="divider"></li>
+                <li class="link">
+                  <a href="javascript:void(0)">
+                    Profile
+                  </a>
+                </li>
+                <li class="link">
+                  <a href="javascript:void(0)">
+                    Menu Item
+                  </a>
+                </li>
+                <li class="link">
+                  <a href="javascript:void(0)">
+                    Menu Item
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li class="link">
+                  <a href="javascript:void(0)">
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="item dropdown" [ngClass]="{'open': menuOpen}" [offClick]="clickedOutside">
+              <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" (click)="onMenuClicked()">
+                <i class="fa fa-bell-o"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">
+                  Notifications
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="javascript:void(0)">Server Down!</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="meta">
+            <div class="page">
+              Dashboard
+            </div>
+            <div class="breadcrumb-links">
+              Home / Dashboard
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Header Bar -->
+
+      <!--&lt;!&ndash; Main Content &ndash;&gt;-->
+      <router-outlet></router-outlet>
+
+    </div><!-- End Page Content -->
+  </div><!-- End Content Wrapper -->
+</div><!-- End Page Wrapper -->
 
 
-  <!-- header -->
-  <admin-header #header></admin-header>
-  <!-- / header -->
+
+<!--<div (window:resize)="onResize($event)" class="app app-header-fixed app-aside-fixed" [ngClass]="{ 'app-aside-folded' : sideMenu.isMenuFolded}">-->
 
 
-  <!-- aside -->
-  <side-menu #sideMenu></side-menu>
-  <!-- / aside -->
-
-  <section class="main-container" [ngClass]="{sidebarPushRight: !sideMenu.isMenuFolded}">
-    <router-outlet></router-outlet>
-  </section>
-
-  <!-- content -->
-  <!--<div id="content" class="app-content fade-in-up" role="main">-->
-    <!--<div class="app-content-body" style="position: relative">-->
-        <!--<router-outlet></router-outlet>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!-- /content -->
+  <!--&lt;!&ndash; header &ndash;&gt;-->
+  <!--<admin-header #header></admin-header>-->
+  <!--&lt;!&ndash; / header &ndash;&gt;-->
 
 
+  <!--&lt;!&ndash; aside &ndash;&gt;-->
+  <!--<side-menu #sideMenu></side-menu>-->
+  <!--&lt;!&ndash; / aside &ndash;&gt;-->
+
+  <!--<section class="main-container" [ngClass]="{sidebarPushRight: !sideMenu.isMenuFolded}">-->
+    <!--<router-outlet></router-outlet>-->
+  <!--</section>-->
+
+  <!--&lt;!&ndash; content &ndash;&gt;-->
+  <!--&lt;!&ndash;<div id="content" class="app-content fade-in-up" role="main">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="app-content-body" style="position: relative">&ndash;&gt;-->
+        <!--&lt;!&ndash;<router-outlet></router-outlet>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--&lt;!&ndash; /content &ndash;&gt;-->
 
 
 
-</div>
+
+
+<!--</div>-->

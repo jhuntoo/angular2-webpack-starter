@@ -2,25 +2,62 @@
   <!--&#9776;-->
 <!--</button>-->
 <nav class="sidebar" [ngClass]="{sidebarPushRight: !isFolded}">
-  <ul class="list-group">
-    <a  class="list-group-item">
-      <i class="fa fa-fw fa-dashboard" aria-hidden="true"></i> Dashboard
-    </a>
-    <a [routerLink]="['Events']"   class="list-group-item">
-      <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Events
-    </a>
-    <a class="list-group-item">
-      <i class="fa fa-fw fa-bar-chart-o" aria-hidden="true"></i> Reports
-    </a>
-    <a class="list-group-item">
-      <i class="fa fa-fw fa-building" aria-hidden="true" ></i> Organisations
-    </a>
 
-    <a  class="list-group-item">
-      <i class="fa fa-fw fa-wrench" aria-hidden="true"></i> Settings
-    </a>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar">
+      <li class="sidebar-main">
+        <a (click)="toggleSidebar()">
+          Dashboard
+          <span class="menu-icon glyphicon glyphicon-transfer"></span>
+        </a>
+      </li>
+      <li class="sidebar-title"><span>NAVIGATION</span></li>
+      <li class="sidebar-list">
+        <a [routerLink]="['Dashboard']">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+      </li>
+      <li class="sidebar-list">
+        <a [routerLink]="['Tables']">Tables <span class="menu-icon fa fa-table"></span></a>
+      </li>
+    </ul>
+    <div class="sidebar-footer">
+      <div class="col-xs-4">
+        <a href="https://github.com/ziyasal/rdash-angular2" target="_blank">
+          Github
+        </a>
+      </div>
+      <div class="col-xs-4">
+        <a href="https://github.com/ziyasal/rdash-angular2/blob/master/README.md" target="_blank">
+          About
+        </a>
+      </div>
+      <div class="col-xs-4">
+        <a href="javascript:void(0)">
+          Support
+        </a>
+      </div>
+    </div>
+  </div>
 
-  </ul>
+  <!--<ul class="list-group">-->
+
+    <!--<a  class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-dashboard menu-icon" aria-hidden="true"></i> Dashboard-->
+    <!--</a>-->
+    <!--<a [routerLink]="['Events']"   class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Events-->
+    <!--</a>-->
+    <!--<a class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-bar-chart-o" aria-hidden="true"></i> Reports-->
+    <!--</a>-->
+    <!--<a class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-building" aria-hidden="true" ></i> Organisations-->
+    <!--</a>-->
+
+    <!--<a  class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-wrench" aria-hidden="true"></i> Settings-->
+    <!--</a>-->
+
+  <!--</ul>-->
 </nav>
 <!--<aside id="aside" class="app-aside hidden-xs bg-dark">-->
   <!--<div class="aside-wrap">-->

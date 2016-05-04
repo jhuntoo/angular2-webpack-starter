@@ -18,8 +18,7 @@ import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
   providers: [ ],
   pipes: [],
   //directives: [MenuItem, MenuItemList, SubItem],
-  template: require('./side-menu.html'),
-  styles: [require('./side-menu.scss').toString()]
+  template: require('./side-menu.html')
 
 })
 export class SideMenu {

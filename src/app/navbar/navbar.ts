@@ -4,7 +4,8 @@ import {
   CollapseDirective
 } from '../temp/collapse.directive';
 //import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
-import {OffClickDirective, LoggingService, Logger, AuthenticationService} from '../common/index';
+import { LoggingService, Logger, AuthenticationService} from '../common/index';
+import {OffClickDirective} from '../../common/off-click';
 import {Router} from '@angular/router-deprecated';
 import {ProfileService, Profile} from '../common/profile-service';
 

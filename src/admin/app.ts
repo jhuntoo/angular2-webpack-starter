@@ -9,6 +9,15 @@ import {AdminHeaderComponent} from './header/header';
 import {CreateEvent} from './create-event/create-event';
 import {EventsPageComponent} from './events/events';
 
+import {OffClickDirective} from '../common/off-click';
+
+import {Dashboard} from './components/dashboard/dashboard';
+import {Tables} from './components/tables/tables';
+import {ServerListService} from './services/server_list';
+import {UserListService} from './services/user_list';
+
+
+
 function getWindowSize() {
   return {
     height: window.innerHeight,
@@ -22,61 +31,73 @@ function getWindowSize() {
  */
 @Component({
   selector: 'admin-app',
-  providers: [ ],
-  directives: [SideMenu, AdminHeaderComponent],
+  providers: [ ServerListService, UserListService ],
+  directives: [SideMenu, AdminHeaderComponent, OffClickDirective],
   pipes: [],
   styles: [`
     :host {
       display: block;
       min-height: 100%;
     }
-  `, require('./app.scss').toString()],
+  `, require('./app.css').toString()],
   template: require('./app.html')
 
 })
 @RouteConfig([
-  { path: '/', component: HomeComponent, name: 'Index' },
+  { path: '/', component: Dashboard, name: 'Dashboard' },
   { path: '/events', component: EventsPageComponent, name: 'Events' },
-  { path: '/events/create', component: CreateEvent, name: 'CreateEvent' }
-
+  { path: '/events/create', component: CreateEvent, name: 'CreateEvent' },
+  {path: '/tables', component: Tables, name: 'Tables'}
 ])
-export class AdminAppComponent implements AfterViewInit {
-  public isMenuFolded:boolean = false;
-  @ViewChild('header') header: AdminHeaderComponent;
-  @ViewChild('sideMenu') sideMenu: SideMenu;
+export class AdminAppComponent {
+  mobileView:number = 992;
+  menuOpen:boolean = false;
+  toggle:boolean = false;
 
-  onResize(event) {
-    this.ngZone.run(() => {
-      if (getWindowSize().width > 768) {
-        this.handleToggleChanged(false);
+  constructor() {
+    this.attachEvents();
+    this.clickedOutside = this.clickedOutside.bind(this);
+  }
 
+  attachEvents() {
+    window.onresize = ()=> {
+      if (this.getWidth() >= this.mobileView) {
+        if (localStorage.getItem('toggle')) {
+          this.toggle = !localStorage.getItem('toggle') ? false : true;
+        } else {
+          this.toggle = true;
+        }
       } else {
-        this.handleToggleChanged(true);
+        this.toggle = false;
       }
-
-    });
-  }
-  constructor(private ngZone:NgZone) {
-
+    };
   }
 
-  ngAfterViewInit():any {
-    this.header.toggleChanged.subscribe((isFolded) => {this.handleToggleChanged(isFolded);});
-    this.sideMenu.isFoldedChanged.subscribe((isFolded) => {this.handleToggleChanged(isFolded);});
+  getWidth() {
+    return window.innerWidth;
   }
 
-  handleToggleChanged(isFolded : boolean) {
-    console.log(`handleToggleChanged: ${JSON.stringify(isFolded)}`);
-    this.isMenuFolded = isFolded;
-    this.header.isSideMenuCollapsed = isFolded;
-    this.sideMenu.isFolded = isFolded;
+  onMenuClicked() {
+    this.menuOpen = !this.menuOpen;
+  }
+  clickedOutside() {
+    console.log('clickedOutside');
+    this.menuOpen = false;
+  }
+
+  toggleSidebar() {
+    this.toggle = !this.toggle;
+    localStorage.setItem('toggle', this.toggle.toString());
   }
 }
 
-import './assets/css/font.css';
-//import './assets/css/cssparallax.css';
-//import './assets/css/reset.css';
-//import './assets/css/responsivemobile.css';
-//import './assets/css/style.css';
-import './assets/css/less/app.less';
+
+import './assets/less/app.less';
+
+//import './assets/css/font.css';
+////import './assets/css/cssparallax.css';
+////import './assets/css/reset.css';
+////import './assets/css/responsivemobile.css';
+////import './assets/css/style.css';
+//import './assets/css/less/app.less';
 
