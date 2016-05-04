@@ -4,13 +4,13 @@ import {
   beforeEachProviders,
   beforeEach,
   expect,
-} from 'angular2/testing';
+} from '@angular/core/testing';
 
-import {BaseRequestOptions, Http, ResponseOptions, Response} from 'angular2/http';
-import {MockBackend} from 'angular2/http/testing';
-import {MockConnection} from 'angular2/src/http/backends/mock_backend';
+import {BaseRequestOptions, Http, ResponseOptions, Response} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
+import {MockConnection} from '@angular/http/testing/mock_backend';
 
-import {Component, provide} from 'angular2/core';
+import {Component, provide} from '@angular/core';
 
 // Load the implementations that should be tested
 import {RegistrationService} from './registration.service';

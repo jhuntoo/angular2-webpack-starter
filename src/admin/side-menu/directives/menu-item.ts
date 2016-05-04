@@ -1,4 +1,4 @@
-import {Directive, Component, Input, ContentChildren, QueryList} from 'angular2/core';
+import {Directive, Component, Input, ContentChildren, QueryList} from '@angular/core';
 import {SubItem} from './sub-item';
 /*
  * Directive

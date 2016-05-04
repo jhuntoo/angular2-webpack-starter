@@ -1,4 +1,4 @@
-import {Directive, Component, Input} from 'angular2/core';
+import {Directive, Component, Input} from '@angular/core';
 /*
  * Directive
  * XLarge is a simple directive to show how one is made

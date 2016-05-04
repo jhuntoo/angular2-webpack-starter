@@ -1,6 +1,6 @@
-import {Injectable} from 'angular2/core';
-import {Title} from 'angular2/platform/browser';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+import {Injectable} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
 
 @Injectable()
 export class SeoService {
@@ -12,7 +12,7 @@ export class SeoService {
 
   constructor(titleService: Title) {
     this.titleService = titleService;
-    this.headElement = DOM.query('head');
+    this.headElement = getDOM().query('head');
     this.metaDescription = this.getOrCreateMetaElement('description');
     this.robots = this.getOrCreateMetaElement('robots');
   }
@@ -43,9 +43,9 @@ export class SeoService {
 
   private getOrCreateMetaElement(name: string): HTMLElement {
     let el: HTMLElement;
-    el = DOM.query('meta[name=' + name + ']');
+    el = getDOM().query('meta[name=' + name + ']');
     if (el === null) {
-      el = DOM.createElement('meta');
+      el = getDOM().createElement('meta');
       el.setAttribute('name', name);
       this.headElement.appendChild(el);
     }
@@ -90,9 +90,9 @@ export class MockSeoService {
 
   private getOrCreateMetaElement(name: string): HTMLElement {
     let el: HTMLElement;
-    el = DOM.query('meta[name=' + name + ']');
+    el = getDOM().query('meta[name=' + name + ']');
     if (el === null) {
-      el = DOM.createElement('meta');
+      el = getDOM().createElement('meta');
       el.setAttribute('name', name);
       this.headElement.appendChild(el);
     }

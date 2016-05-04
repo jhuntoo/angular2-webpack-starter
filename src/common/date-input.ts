@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter,OnInit,Directive, HostListener, HostBinding} from 'angular2/core';
-import {NgFor, NgModel} from 'angular2/common';
+import {Component, Input, Output, EventEmitter,OnInit,Directive, HostListener, HostBinding} from '@angular/core';
+import {NgFor, NgModel} from '@angular/common';
 /* tslint:disable */
 @Directive({
   selector: 'input[type=date]'

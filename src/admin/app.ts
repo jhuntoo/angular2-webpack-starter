@@ -1,9 +1,8 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, ViewChild, AfterViewInit, HostListener} from 'angular2/core';
-import {NgZone} from 'angular2/core';
-import {RouteConfig} from 'angular2/router';
+import {Component, ViewChild, AfterViewInit, HostListener, NgZone} from '@angular/core';
+import {RouteConfig} from '@angular/router-deprecated';
 import {HomeComponent} from './home/home';
 import {SideMenu} from './side-menu/side-menu';
 import {AdminHeaderComponent} from './header/header';

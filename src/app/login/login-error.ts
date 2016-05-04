@@ -1,10 +1,10 @@
-import {Component, HostBinding, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteParams, RouteConfig} from 'angular2/router';
+import {Component, HostBinding, OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES, RouteParams, RouteConfig} from '@angular/router-deprecated';
 import {Config} from '../../config/config';
 import {LoggingService} from '../common/log';
 import {Logger} from '../common/log';
 import {LocalStorage} from '../common/local-storage';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
 import {AuthenticationService} from '../common/index';
 import {SeoService} from '../common/seo-service';
 

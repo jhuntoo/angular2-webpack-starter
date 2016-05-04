@@ -1,5 +1,5 @@
-import {Directive, Component, Input} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Directive, Component, Input} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 /*
  * Directive
  * XLarge is a simple directive to show how one is made

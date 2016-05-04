@@ -1,7 +1,7 @@
-import {Component, HostBinding} from 'angular2/core';
+import {Component, HostBinding} from '@angular/core';
 import {AuthenticationService, LoggingService, Logger} from '../common/index';
-import {Router} from 'angular2/router';
-import {OnInit} from 'angular2/core';
+import {Router} from '@angular/router-deprecated';
+import {OnInit} from '@angular/core';
 import {ProfileService} from '../common/profile-service';
 import {Observable} from 'rxjs';
 import {Profile} from '../common/profile-service';

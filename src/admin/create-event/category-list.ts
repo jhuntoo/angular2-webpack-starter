@@ -1,5 +1,5 @@
-import {Component, Input, ChangeDetectionStrategy, ViewChild, ContentChild} from 'angular2/core';
-import {NgClass} from 'angular2/common';
+import {Component, Input, ChangeDetectionStrategy, ViewChild, ContentChild} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {EventCategory} from '../models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 import {CategoryItem} from './category-item';

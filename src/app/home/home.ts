@@ -1,9 +1,9 @@
-import {Component} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {Component} from '@angular/core';
+import {FORM_DIRECTIVES} from '@angular/common';
 
 import {Title} from './services/title';
 import {SearchBar} from '../searchbar/searchbar';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
 import {Footer} from '../footer/footer';
 import {Card} from './card';
 

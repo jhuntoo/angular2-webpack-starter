@@ -1,19 +1,19 @@
-import {Component, HostBinding} from 'angular2/core';
-import {Validators, FormBuilder, Control, ControlGroup} from 'angular2/common';
+import {Component, HostBinding} from '@angular/core';
+import {Validators, FormBuilder, Control, ControlGroup} from '@angular/common';
 import {ControlMessages} from '../control-messages/control-messages';
-import {AbstractControl} from 'angular2/common';
+import {AbstractControl} from '@angular/common';
 import {ValidationService} from '../validation/ValidationService';
 import {EmailCheckResult} from './models/EmailCheckResult';
 import {RegisterResponse} from './models/registerResponse';
-import {Http, HTTP_PROVIDERS} from 'angular2/http';
-import {Response} from 'angular2/http';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
+import {Response} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {RegistrationService} from './services/registration.service';
 import {Logger, LoggingService} from '../common/log';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
 import {LocalStorage, SocialLogin, AuthenticationService, SpinnerComponent} from '../common/index';
 import {Config} from '../../config/config';
 import {SeoService} from '../common/seo-service';

@@ -1,5 +1,5 @@
-import {Component, Input, Inject, HostBinding, Host, OnInit, Output, EventEmitter} from 'angular2/core';
-import {Control} from 'angular2/common';
+import {Component, Input, Inject, HostBinding, Host, OnInit, Output, EventEmitter} from '@angular/core';
+import {Control} from '@angular/common';
 import {EventCategory} from '../models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 //import {Select} from 'ng2-select/ng2-select';
@@ -11,7 +11,7 @@ import {Subject} from 'rxjs/Subject';
 import {Sport} from '../../common/sport/sport-service';
 import {TAB_DIRECTIVES, Tab} from '../../app/temp/tabs';
 import {Select} from '../../app/temp/select/select';
-import {ChangeDetectionStrategy} from 'angular2/core';
+import {ChangeDetectionStrategy} from '@angular/core';
 import {DateInputDirective} from '../../common/date-input';
 //import {TAB_DIRECTIVES, Tab,} from 'ng2-bootstrap/ng2-bootstrap';
 //import '../../../../ng2-select/components/css/ng2-select.css';
@@ -49,6 +49,7 @@ export class CategoryItem implements OnInit {
   }
 
   ngOnInit() {
+    this.log.debug(`ngOnInit`);
     this.sports = this.sportService.getSports();
     if (!this.model) throw 'No associated model';
     if (this.model.sportId) {

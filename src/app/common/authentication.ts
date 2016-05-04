@@ -1,19 +1,14 @@
-import {Injectable, provide} from 'angular2/core';
+import {Injectable, provide} from '@angular/core';
 import {Config} from '../../config/config';
 import {LocalStorage} from './local-storage';
-import {Http, Response} from 'angular2/http';
+import {Http, Response} from '@angular/http';
 import {Observable, Subject} from 'rxjs';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
 import {LoggingService, Logger} from './log';
 import {JwtHelper} from '../temp/angular2-jwt';
 
 
 export class SocialLoginResult {
-  constructor(public success: boolean,
-              public type: string,
-              public jwt?: string) {
-  }
-
   static success(jwt: string, type:string) : SocialLoginResult {
     return new SocialLoginResult(true, type, jwt);
   }
@@ -21,16 +16,13 @@ export class SocialLoginResult {
   static error() : SocialLoginResult {
     return new SocialLoginResult(false, null, null);
   }
+  constructor(public success: boolean,
+              public type: string,
+              public jwt?: string) {
+  }
 }
 
 export class LoginResult {
-  constructor(public success: boolean,
-              public error: boolean,
-              public jwt?: string,
-              public alternativeProfiles?: string[]) {
-
-  }
-
   static success(jwt: string) : LoginResult {
     return new LoginResult(true, false, jwt, null);
   }
@@ -41,6 +33,12 @@ export class LoginResult {
 
   static error() : LoginResult {
     return new LoginResult(false, true, null, null);
+  }
+  constructor(public success: boolean,
+              public error: boolean,
+              public jwt?: string,
+              public alternativeProfiles?: string[]) {
+
   }
 }
 

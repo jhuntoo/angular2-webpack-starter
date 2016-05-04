@@ -2,18 +2,18 @@ import {
   it,
   inject,
   describe,
-  beforeEachProviders,
-  TestComponentBuilder
-} from 'angular2/testing';
+  beforeEachProviders
+} from '@angular/core/testing';
 
-import {Component, provide} from 'angular2/core';
-import {BaseRequestOptions, Http} from 'angular2/http';
-import {MockBackend} from 'angular2/http/testing';
+import {TestComponentBuilder} from '@angular/compiler/testing';
+import {Component, provide} from '@angular/core';
+import {BaseRequestOptions, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 import {AppComponent} from '../app';
-import { RootRouter } from 'angular2/src/router/router';
-import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
-import { Location } from 'angular2/platform/common';
-import { SpyLocation } from 'angular2/src/mock/location_mock';
+import { RootRouter } from '@angular/router-deprecated/src/router';
+import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from '@angular/router-deprecated';
+import { Location } from '@angular/common';
+import { SpyLocation } from '@angular/common/testing';
 
 
 // Load the implementations that should be tested

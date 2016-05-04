@@ -1,5 +1,5 @@
 // <reference path="node_modules/typescript/lib/lib.d.ts" />
-import {Component, Input, OnDestroy} from 'angular2/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'spinner',

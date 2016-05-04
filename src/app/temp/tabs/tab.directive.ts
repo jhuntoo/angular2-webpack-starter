@@ -1,6 +1,6 @@
 import {
   Directive, OnDestroy, Input, Output, HostBinding, TemplateRef, EventEmitter
-} from 'angular2/core';
+} from '@angular/core';
 import {Tabset} from './tabset.component';
 import {Guid} from '../../../common/guid';
 
@@ -39,7 +39,7 @@ export class Tab implements OnDestroy {
 
   @HostBinding('class.tab-pane') public addClass:boolean = true;
 
-  public headingRef:TemplateRef;
+  public headingRef:TemplateRef<any>;
   public tabset:Tabset;
   public key: string;
   private _active:boolean;

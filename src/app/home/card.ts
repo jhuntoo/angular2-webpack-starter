@@ -1,5 +1,5 @@
-import {Component, Input, HostBinding} from 'angular2/core';
-import {ChangeDetectionStrategy} from 'angular2/core';
+import {Component, Input, HostBinding} from '@angular/core';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 
 @Component({

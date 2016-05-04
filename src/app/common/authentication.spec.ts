@@ -4,18 +4,18 @@ import {
   beforeEachProviders,
   beforeEach,
   expect,
-} from 'angular2/testing';
-import {MockBackend} from 'angular2/http/testing';
-import {MockConnection} from 'angular2/src/http/backends/mock_backend';
+} from '@angular/core/testing';
+import {MockBackend} from '@angular/http/testing';
+import {MockConnection} from '@angular/http/testing/mock_backend';
 
 import {AppComponent} from '../app';
-import { RootRouter } from 'angular2/src/router/router';
-import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
-import {Location} from 'angular2/platform/common';
-import { SpyLocation } from 'angular2/src/mock/location_mock';
+import { RootRouter } from '@angular/router-deprecated/src/router';
+import {RouteConfig, RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from '@angular/router-deprecated';
+import { Location } from '@angular/common';
+import { SpyLocation } from '@angular/common/testing';
 
-import {BaseRequestOptions, Http, ResponseOptions, Response} from 'angular2/http';
-import {Component, provide} from 'angular2/core';
+import {BaseRequestOptions, Http, ResponseOptions, Response} from '@angular/http';
+import {Component, provide} from '@angular/core';
 import {Config} from '../../config/config';
 import {LocalStorage, MockLocalStorage} from './local-storage';
 import {AuthenticationService, SocialLoginResult, LoginResult} from './authentication';

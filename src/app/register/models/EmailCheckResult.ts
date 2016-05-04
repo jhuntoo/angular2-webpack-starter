@@ -1,11 +1,4 @@
 export class EmailCheckResult {
-  constructor(public available:boolean,
-              public error:boolean,
-              public connectedProfiles) {
-    if (!connectedProfiles) {
-      this.connectedProfiles = [];
-    }
-  }
 
   static error():EmailCheckResult {
     return new EmailCheckResult(false, true, []);
@@ -18,5 +11,11 @@ export class EmailCheckResult {
   static available(connectedProfiles : string[] = []):EmailCheckResult {
     return new EmailCheckResult(true, false, connectedProfiles);
   }
-
+  constructor(public available:boolean,
+              public error:boolean,
+              public connectedProfiles) {
+    if (!connectedProfiles) {
+      this.connectedProfiles = [];
+    }
+  }
 }

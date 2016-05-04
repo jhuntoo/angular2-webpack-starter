@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Logger, LoggingService} from '../../app/common/log';
 import {Event} from '../models/Event';
 

@@ -1,10 +1,10 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Event} from '../models/Event';
 import {LoggingService, Logger} from '../../app/common/log';
 import {CategoryList} from './category-list';
 import {EventLocation} from './event-location';
 import {DateInputDirective} from '../../common/date-input';
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
+import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
 //import {DatePicker} from '../common/date-picker';
 //import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 

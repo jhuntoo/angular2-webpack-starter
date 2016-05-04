@@ -1,14 +1,14 @@
-import {Component, ViewChild, HostBinding, OnInit} from 'angular2/core';
-import {Validators, FormBuilder, Control, ControlGroup} from 'angular2/common';
+import {Component, ViewChild, HostBinding, OnInit} from '@angular/core';
+import {Validators, FormBuilder, Control, ControlGroup} from '@angular/common';
 import {ControlMessages} from '../control-messages/control-messages';
-import {AbstractControl} from 'angular2/common';
+import {AbstractControl} from '@angular/common';
 import {ValidationService} from '../validation/ValidationService';
-import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
+import {Http, HTTP_PROVIDERS, Response} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
 import {Config} from '../../config/config';
 import {SocialLogin, LocalStorage, Logger, LoggingService, SpinnerComponent, AuthenticationService, LoginResult, Modal} from '../common/index';
 import {SeoService} from '../common/seo-service';

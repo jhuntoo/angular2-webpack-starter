@@ -1,11 +1,11 @@
-import {Component, HostBinding, OnInit} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {Component, HostBinding, OnInit} from '@angular/core';
+import {FORM_DIRECTIVES} from '@angular/common';
 import {
   CollapseDirective
-} from 'ng2-bootstrap/ng2-bootstrap';
-import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
+} from '../temp/collapse.directive';
+//import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/components/dropdown';
 import {OffClickDirective, LoggingService, Logger, AuthenticationService} from '../common/index';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router-deprecated';
 import {ProfileService, Profile} from '../common/profile-service';
 
 @Component({
@@ -13,7 +13,7 @@ import {ProfileService, Profile} from '../common/profile-service';
   selector: 'navbar',
   directives: [
     CollapseDirective,
-    DROPDOWN_DIRECTIVES,
+    //DROPDOWN_DIRECTIVES,
     OffClickDirective,
   ],
   //host: {

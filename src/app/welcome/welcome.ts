@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Logger} from '../common/log';
 import {LoggingService} from '../common/log';
-import {RouteData} from 'angular2/router';
+import {RouteData} from '@angular/router-deprecated';
 
 
 @Component({

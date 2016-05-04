@@ -1,16 +1,16 @@
 /*
  * Providers provided by Angular
  */
-import * as browser from 'angular2/platform/browser';
-import * as ngCore from 'angular2/core';
+import * as ngCore from '@angular/core';
 import {
   ROUTER_PROVIDERS,
   ROUTER_DIRECTIVES
-} from 'angular2/router';
-import {  LocationStrategy,
-  HashLocationStrategy}from 'angular2/platform/common';
-import {FORM_PROVIDERS} from 'angular2/common';
-import {HTTP_PROVIDERS, Http} from 'angular2/http';
+} from '@angular/router-deprecated';
+import {COMPILER_PROVIDERS} from '@angular/compiler/src/compiler';
+import { Title, BROWSER_APP_COMMON_PROVIDERS } from '@angular/platform-browser';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {FORM_PROVIDERS, LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {HTTP_PROVIDERS, Http} from '@angular/http';
 import {Config} from './config/config';
 import {LoggingService, Level} from './app/common/log';
 import {AUTHENTICATION_PROVIDERS} from './app/common/authentication';
@@ -41,8 +41,10 @@ import {CURRENCY_PROVIDERS} from './common/currency/currency-service';
  */
 // application_providers: providers that are global through out the application
 const APPLICATION_PROVIDERS = [
+  ...BROWSER_APP_COMMON_PROVIDERS,
   ...HTTP_PROVIDERS,
   ...ROUTER_PROVIDERS,
+  ...COMPILER_PROVIDERS,
   ...FORM_PROVIDERS,
   ...LOCAL_STORAGE_PROVIDERS,
   ...AUTHENTICATION_PROVIDERS,
@@ -64,10 +66,8 @@ const APPLICATION_PIPES = [];
 if ('production' === ENV) {
   // Production
   ngCore.enableProdMode();
-  APPLICATION_PROVIDERS.push(browser.ELEMENT_PROBE_PROVIDERS_PROD_MODE);
 } else {
   // Development
-  APPLICATION_PROVIDERS.push(browser.ELEMENT_PROBE_PROVIDERS);
 }
 
 
@@ -78,24 +78,24 @@ if ('production' === ENV) {
 export function main() {
   let config = ('production' === ENV) ? require('./config/production.ts').config : require('./config/dev.ts').config;
   console.log(`config: ${JSON.stringify(config)}`);
-  return browser.bootstrap(RootComponent, [
+  return bootstrap(RootComponent, [
       ...APPLICATION_PROVIDERS,
       ...SPORT_PROVIDERS,
       ...CURRENCY_PROVIDERS,
-      browser.Title,
-      ngCore.provide(ngCore.PLATFORM_DIRECTIVES, {useValue: APPLICATION_DIRECTIVES, multi: true}),
-      ngCore.provide(ngCore.PLATFORM_PIPES, {useValue: APPLICATION_PIPES, multi: true}),
+      Title,
+      { provide: ngCore.PLATFORM_DIRECTIVES, useValue: APPLICATION_DIRECTIVES, multi: true},
+      { provide:ngCore.PLATFORM_PIPES, useValue: APPLICATION_PIPES, multi: true},
       //ngCore.provide(ToastOptions, { useValue: new ToastOptions(options)}),
-      ngCore.provide(Config, {useValue: config}),
-      ngCore.provide(LoggingService, {useValue: new LoggingService()}),
-      ngCore.provide(SeoService, { useClass: SeoService}),
-      ngCore.provide(AuthHttp, {
+      { provide: Config, useValue: config},
+      { provide: LoggingService, useValue: new LoggingService()},
+      { provide: SeoService,  useClass: SeoService},
+      { provide: AuthHttp,
         useFactory: (http) => {
           console.log(`useFactory`);
           return new AuthHttp(new AuthConfig({ tokenName: 'jwt', headerPrefix: 'JWT',}), http);
         },
         deps: [Http]
-      })
+      }
     ])
     .catch(err => console.error(err));
 }

@@ -3,13 +3,14 @@ import {
   inject,
   beforeEachProviders,
   beforeEach,
-  TestComponentBuilder,
-  expect,
-} from 'angular2/testing';
+  expect
+} from '@angular/core/testing';
 
-import {BaseRequestOptions, Http} from 'angular2/http';
-import {MockBackend} from 'angular2/http/testing';
-import {Component, provide, DynamicComponentLoader, ApplicationRef} from 'angular2/core';
+import {TestComponentBuilder} from '@angular/compiler/testing';
+import {BaseRequestOptions, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
+import {MockConnection} from '@angular/http/testing/mock_backend';
+import {Component, provide, DynamicComponentLoader, ApplicationRef} from '@angular/core';
 
 // Load the implementations that should be tested
 import {RegisterForm} from './register';
@@ -21,10 +22,12 @@ import {LoggingService,
   SeoService,
   MockSeoService} from '../common/index';
 import {AppComponent} from '../app';
-import { RootRouter } from 'angular2/src/router/router';
-import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT } from 'angular2/router';
-import { Location } from 'angular2/platform/common';
-import { SpyLocation } from 'angular2/src/mock/location_mock';
+
+import { RootRouter } from '@angular/router-deprecated/src/router';
+import { RouteParams, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from '@angular/router-deprecated';
+
+import { Location } from '@angular/common';
+import { SpyLocation } from '@angular/common/testing';
 import {SocialLogin} from '../common/social-login';
 import {Config} from '../../config/config';
 

@@ -1,12 +1,12 @@
-import {Component, Host} from 'angular2/core';
-import {NgFormModel} from 'angular2/common';
+import {Component, Host} from '@angular/core';
+import {NgFormModel} from '@angular/common';
 import {ValidationService} from '../validation/ValidationService';
-import {NgControlGroup} from 'angular2/common';
-import {ControlArray} from 'angular2/common';
-import {ControlGroup} from 'angular2/common';
-import {Control} from 'angular2/common';
-import {Input} from 'angular2/core';
-import {ChangeDetectionStrategy} from 'angular2/core';
+import {NgControlGroup} from '@angular/common';
+import {ControlArray} from '@angular/common';
+import {ControlGroup} from '@angular/common';
+import {Control} from '@angular/common';
+import {Input} from '@angular/core';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
   selector: 'control-messages',

@@ -2,11 +2,10 @@ import {
   it,
   inject,
   describe,
-  beforeEachProviders,
-  TestComponentBuilder
-} from 'angular2/testing';
-
-import {Component, provide} from 'angular2/core';
+  beforeEachProviders
+} from '@angular/core/testing';
+import {TestComponentBuilder} from '@angular/compiler/testing';
+import {Component, provide} from '@angular/core';
 
 // Load the implementations that should be tested
 import {About} from './about';

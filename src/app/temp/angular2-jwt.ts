@@ -1,5 +1,5 @@
-import {Injectable, Injector} from 'angular2/core';
-import {Http, HTTP_PROVIDERS, Headers, BaseRequestOptions, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response} from 'angular2/http';
+import {Injectable, Injector} from '@angular/core';
+import {Http, HTTP_PROVIDERS, Headers, BaseRequestOptions, Request, RequestOptions, RequestOptionsArgs, RequestMethod, Response} from '@angular/http';
 import {Observable} from 'rxjs';
 
 /* tslint:disable */

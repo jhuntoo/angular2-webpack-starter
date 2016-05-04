@@ -1,8 +1,8 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component} from 'angular2/core';
-import {RouteConfig, Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {AdminAppComponent} from './admin/app';
 import {AppComponent} from './app/app';

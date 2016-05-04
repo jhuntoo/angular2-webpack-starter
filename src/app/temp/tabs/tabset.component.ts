@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy, Input, HostBinding} from 'angular2/core';
-import {NgClass} from 'angular2/common';
+import {Component, OnInit, OnDestroy, Input, HostBinding} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {NgTransclude} from '../common';
 import {Tab} from './tab.directive';
 // todo: add active event to tab

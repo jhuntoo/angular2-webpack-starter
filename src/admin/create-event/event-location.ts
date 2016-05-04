@@ -1,11 +1,10 @@
-import {Component, Directive, Input, forwardRef, Provider} from 'angular2/core';
+import {Component, Directive, Input, forwardRef, Provider} from '@angular/core';
 import {Location} from '../models/Location';
 import {LoggingService, Logger} from '../../app/common/log';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MouseEvent} from 'angular2-google-maps/core';
 import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap/components/accordion';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
-import {HostListener} from 'angular2/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/common';
+import {HostListener} from '@angular/core';
 
 interface Marker {
   lat: number;

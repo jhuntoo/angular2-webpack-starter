@@ -2,7 +2,7 @@ import {
   it,
   inject,
   beforeEach
-} from 'angular2/testing';
+} from '@angular/core/testing';
 import {EmailCheckResult} from './EmailCheckResult';
 
 describe('EmailCheckResult', () => {

@@ -1,5 +1,5 @@
-import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from 'angular2/core';
-import {Validators, FormBuilder, AbstractControl, Control, ControlGroup} from 'angular2/common';
+import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {Validators, FormBuilder, AbstractControl, Control, ControlGroup} from '@angular/common';
 import {LoggingService, Logger} from '../../app/common/log';
 import {EventCategoryRegistrationType} from '../models/EventCategoryRegistrationType';
 //import {AgeRestrictionItem, AgeRestrictionItemValueAccessor} from './age-restriction';
@@ -7,7 +7,7 @@ import {BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {DateInputDirective} from '../../common/date-input';
 import {Select} from '../../app/temp/select/select';
 import {CurrencyService, Currency} from '../../common/currency/currency-service';
-import {StringMapWrapper} from 'angular2/src/facade/collection';
+import {StringMapWrapper} from '@angular/common/src/facade/collection';
 
 class Validation {
   public static isAgeRestrictionValid = (group: ControlGroup): any => {

@@ -1,6 +1,6 @@
 
-import {Component, HostBinding} from 'angular2/core';
-import {RouteConfig, Router} from 'angular2/router';
+import {Component, HostBinding} from '@angular/core';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {Home} from './home/home';
 import {Navbar} from './navbar/navbar';

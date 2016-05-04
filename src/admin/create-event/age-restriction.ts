@@ -1,10 +1,10 @@
-import {Component, Input, Output, HostBinding, HostListener, Directive, EventEmitter, forwardRef, Provider, ViewChild} from 'angular2/core';
+import {Component, Input, Output, HostBinding, HostListener, Directive, EventEmitter, forwardRef, Provider, ViewChild} from '@angular/core';
 import {EventCategory} from '../models/EventCategory';
 import {LoggingService, Logger} from '../../app/common/log';
 import {Select} from 'ng2-select/ng2-select';
 import {AgeRestriction} from '../models/AgeRestriction';
 import {DateInputDirective} from '../../common/date-input';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from 'angular2/common';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/common';
 
 @Component({
   selector: 'age-restriction',  // <home></home>

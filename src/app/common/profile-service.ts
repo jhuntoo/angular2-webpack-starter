@@ -1,6 +1,6 @@
-import {Injectable, provide, OnInit} from 'angular2/core';
+import {Injectable, provide, OnInit} from '@angular/core';
 import {Config} from '../../config/config';
-import {Response} from 'angular2/http';
+import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs';
 import {AuthHttp} from '../../app/temp/angular2-jwt';

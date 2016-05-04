@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteParams, RouteConfig, Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES, RouteParams, RouteConfig, Router} from '@angular/router-deprecated';
 import {AuthenticationService, LoggingService, Logger} from '../common/index';
 
 @Component({

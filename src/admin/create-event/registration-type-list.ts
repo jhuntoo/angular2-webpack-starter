@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ChangeDetectionStrategy, OnInit} from 'angular2/core';
+import {Component, Input, ViewChild, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import {LoggingService, Logger} from '../../app/common/log';
 import {EventCategoryRegistrationType} from '../models/EventCategoryRegistrationType';
 import {RegistrationTypeItem} from './registration-type-item';
