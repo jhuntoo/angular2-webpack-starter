@@ -61,6 +61,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "font-awesome": "^4.5.0",
     "font-awesome-webpack": "0.0.4",
+    "immutable": "^3.8.1",
     "json-stringify-safe": "^5.0.1",
     "less": "^2.6.0",
     "ng2-bootstrap": "1.0.15",

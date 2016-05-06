@@ -1,1 +1,12 @@
-Events page
+<div *ngIf="events.length === 0">
+  <div class="jumbotron">
+    <h3>You haven't created any events yet.</h3>
+    <p>Let's get started...</p>
+    <p><a role="button" class="btn btn-primary btn-lg" (click)="createNewEvent()">New Event</a>
+    </p>
+  </div>
+</div>
+<div *ngIf="events.length > 0">
+  You got events
+  <div *ngFor="let event of events">{{event.name}}</div>
+</div>

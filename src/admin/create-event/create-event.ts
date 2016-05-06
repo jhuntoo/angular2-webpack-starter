@@ -5,6 +5,9 @@ import {CategoryList} from './category-list';
 import {EventLocation} from './event-location';
 import {DateInputDirective} from '../../common/date-input';
 import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
+import {EventsService} from '../services/events-service';
+import { Router} from '@angular/router-deprecated';
+
 //import {DatePicker} from '../common/date-picker';
 //import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -31,7 +34,10 @@ export class CreateEvent {
   description: Control;
   location: Control;
   sponsorshipEnabled: Control;
-  constructor(logginService: LoggingService, private fb:FormBuilder) {
+  constructor(logginService: LoggingService,
+              private fb:FormBuilder,
+              private eventsService: EventsService,
+              private router: Router) {
     this.log = logginService.getLogger('CreateEvent');
 
     this.name = new Control('', Validators.required);
@@ -59,6 +65,8 @@ export class CreateEvent {
 
   save() {
       this.log.debug(`Save event: ${JSON.stringify(this.event)}`);
+      this.eventsService.save(this.event);
+      this.router.navigate(['Events']);
   }
 
 

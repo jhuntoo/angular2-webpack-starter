@@ -15,6 +15,8 @@ import {Dashboard} from './components/dashboard/dashboard';
 import {Tables} from './components/tables/tables';
 import {ServerListService} from './services/server_list';
 import {UserListService} from './services/user_list';
+import {EVENT_PROVIDERS} from './services/events-service';
+
 
 
 
@@ -31,7 +33,7 @@ function getWindowSize() {
  */
 @Component({
   selector: 'admin-app',
-  providers: [ ServerListService, UserListService ],
+  providers: [ ServerListService, UserListService, EVENT_PROVIDERS ],
   directives: [SideMenu, AdminHeaderComponent, OffClickDirective],
   pipes: [],
   styles: [`
@@ -46,7 +48,7 @@ function getWindowSize() {
 @RouteConfig([
   { path: '/', component: Dashboard, name: 'Dashboard' },
   { path: '/events', component: EventsPageComponent, name: 'Events' },
-  { path: '/events/create', component: CreateEvent, name: 'CreateEvent' },
+  { path: '/events/new', component: CreateEvent, name: 'NewEvent' },
   {path: '/tables', component: Tables, name: 'Tables'}
 ])
 export class AdminAppComponent {
