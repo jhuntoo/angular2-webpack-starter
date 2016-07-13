@@ -10,9 +10,9 @@ import { List } from 'immutable';
   styles: [require('./events.scss').toString()],
   template: require('./events.html')
 })
-export class EventsPageComponent implements OnChanges{
+export class EventsPageComponent implements OnChanges {
 
-  public events: List<Event> = new List<Event>;
+  public events: List<Event> = new List<Event>();
   log:Logger;
 
   constructor(logginService: LoggingService,
