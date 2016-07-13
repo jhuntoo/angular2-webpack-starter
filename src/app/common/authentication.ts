@@ -1,7 +1,7 @@
 import {Injectable, provide} from '@angular/core';
 import {Config} from '../../config/config';
 import {LocalStorage} from './local-storage';
-import {Http, Response} from '@angular/http';
+import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router-deprecated';
 import {LoggingService, Logger} from './log';
@@ -44,8 +44,14 @@ export class LoginResult {
 
 export class TokenExpiryChecker {
   isExpired(jwt: string) : boolean {
-    let jwtHelper = new JwtHelper();
-    return jwtHelper.isTokenExpired(jwt);
+    try {
+      let jwtHelper = new JwtHelper();
+      return jwtHelper.isTokenExpired(jwt);
+    } catch (err) {
+      console.error('Error parsing JWT', err);
+      return true;
+    }
+
   }
 }
 export class MockTokenExpiryChecker {
@@ -72,7 +78,9 @@ export class AuthenticationService {
   }
 
   completeSocialLogin(loginCompletionId: string) {
-    return this.http.post(`${this.config.apiBaseUrl}/auth/login/complete`, JSON.stringify({ id : loginCompletionId}))
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this.config.apiBaseUrl}/auth/login/complete`, JSON.stringify({ id : loginCompletionId}), { headers: headers})
       .timeout(10000, '/auth/login/complete timed out')
       .map((response:Response) => this.toSocialLoginResult(response))
       .do((result: SocialLoginResult) => this.updateWithSocialLogin(result));

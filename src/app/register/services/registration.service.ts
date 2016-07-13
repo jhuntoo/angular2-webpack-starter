@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {Config} from '../../../config/config';
 import {Subject} from 'rxjs/Subject';
 import {Response} from '@angular/http';
@@ -27,7 +27,9 @@ export class RegistrationService {
 
   public register(email :string, password :string):Observable<RegisterResponse> {
     let request = {email: email, password: password};
-    return this.http.post(`${this.config.apiBaseUrl}/auth/register`, JSON.stringify(request))
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this.config.apiBaseUrl}/auth/register`, JSON.stringify(request), { headers: headers} )
       //.timeout(5000, '/register timed out')
       //.retry(3)
       .map((res:Response): RegisterResponse => {

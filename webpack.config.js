@@ -15,7 +15,7 @@ var metadata = {
   title: 'MustRace',
   baseUrl: '/',
   host: 'localhost',
-  port: 3000,
+  port: 3001,
   ENV: ENV,
   HMR: HMR
 };
