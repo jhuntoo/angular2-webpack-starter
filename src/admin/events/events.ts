@@ -3,7 +3,6 @@ import {Logger, LoggingService} from '../../app/common/log';
 import {Event} from '../models/Event';
 import {EventsService} from '../services/events-service';
 import {Router} from '@angular/router-deprecated';
-import { List } from 'immutable';
 
 @Component({
   selector: 'events-page',  // <home></home>
@@ -12,8 +11,8 @@ import { List } from 'immutable';
 })
 export class EventsPageComponent implements OnChanges {
 
-  public events: List<Event> = new List<Event>();
   log:Logger;
+  events: Event[];
 
   constructor(logginService: LoggingService,
               private eventsService: EventsService,
@@ -21,7 +20,7 @@ export class EventsPageComponent implements OnChanges {
     this.log = logginService.getLogger('EventsPageComponent');
     this.eventsService.eventsChanged.subscribe((events) =>this.setEvents(events));
   }
-  setEvents(events: List<Event>) {
+  setEvents(events: Event[]) {
     this.log.debug(`setEvents: ${JSON.stringify(events)}`);
     this.events = events;
   }
